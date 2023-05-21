@@ -1,0 +1,637 @@
+:: StoryTitle
+Common Ground Template
+
+
+:: StoryData
+{
+	"ifid": "F9E39354-F641-4070-8B45-C310A3FDC8C2",
+	"format": "SugarCube",
+	"format-version": "2.36.1",
+	"start": "landing",
+	"zoom": 1
+}
+
+
+:: Story Stylesheet [stylesheet]
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600&display=swap");
+@import url("styles/generics.css");
+@import url("styles/styles.css");
+
+:: Story JavaScript [script]
+$('#ui-bar').remove();
+$(document.head).find('#style-ui-bar').remove();
+
+!function() {
+    postrender.typewriter = function (b) {
+        if (this.tags) {
+            var r = new RegExp("t8n.typewriter.([0-9]+)(?:[^0-9]|$)","g");
+            var t = r.exec(this.tags.toString());
+            if (t) {
+                typeout(b, t[1]+0);
+            }
+        }
+        return b;
+    };
+    var typeout = function(c,t) {
+        var Furl = function(current) {
+            this.n = current;
+            this.out = false;
+            this.data = current.nodeValue;
+            current.nodeValue = "";
+            this.kids = [];
+            var cn = current.childNodes;
+            if (current.style && current.style.display=="none") {
+                return;
+            }
+            while (cn.length>0) {
+                var f = new Furl(cn[0]);
+                current.removeChild(cn[0]);
+                f.out = true;this.kids.push(f);
+            }
+        };
+        var nodes = new Furl(c);
+        var unfurl = function(furled,d) {
+            var n = furled.n;
+            if (furled.out) {
+                d.appendChild(n);
+                furled.out = false;
+            }
+            if (furled.data) {
+                n.nodeValue += furled.data[0];
+                furled.data = furled.data.slice(1);
+                return true;
+            }
+            for (var j=0; j<furled.kids.length; j++) {
+                var ret = unfurl(furled.kids[j],n);
+                if (ret) {
+                    return true;
+                }
+            }
+            return false;
+        };
+        var title = passage();
+        var intr = setInterval (
+            function() {
+                if (passage() == title && unfurl(nodes,null)) {
+                    return;
+                }
+                clearInterval(intr);
+            }
+        ,t);
+    };
+}();
+
+setup.handleFileUpload = () => {
+  const input = document.getElementById('inputImg');
+
+  input.onchange = () => {
+    const file = input.files[0];
+
+    // Create a Cloudinary upload preset URL
+    const uploadPreset = 'viggkmmj';
+    const cloudinaryURL = 'https://api.cloudinary.com/v1_1/dcwl3hold/image/upload';
+
+    // Prepare the form data
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', uploadPreset);
+
+    // Send the file to Cloudinary using Fetch API
+    fetch(cloudinaryURL, {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Get the URL of the uploaded image from the Cloudinary response
+      const imageURL = data.url;
+console.log(imageURL)
+      // Display the uploaded image
+      // const imgElement = document.createElement('img');
+      // imgElement.src = imageURL;
+      // document.body.appendChild(imgElement);
+    })
+    .catch(error => console.error(error));
+  };
+
+  input.click();
+}
+
+:: StoryInit
+<<cacheaudio "badjoke" "https://youhavefoundconey.net/CG/what/assets/audio/badjoke.mp3">>
+
+<<waitforaudio>>
+
+
+:: landing {"position":"425,75","size":"100,100"}
+<main>
+<div class="landing-wrapper">
+    
+          <<button "Start">><<goto "Backpack">><</button>>
+</div>
+</main>     
+      
+
+
+
+
+:: Backpack [nobr] {"position":"425,450","size":"100,100"}
+<main class="main-section">
+/* <div class="house-wrapper"><img src="./assets/img/house.png" class="housemap">
+<a data-passage="fieldRecording" class="garden"><div class="garden"></div></a>
+<a data-passage="codebreaking" class="dining"><div class="dining"></div></a>
+<a data-passage="spottingGame" class="bedroom"><div class="bedroom"></div></a>
+</div> */
+<h2>Nature Corridor Protectors Portal</h2>
+<div class="backpack-item">
+    <<button "HARDINGS PIT / RECORDING">><<goto "fieldRecording">><</button>>
+     <<if hasVisited("fieldRecording")>>Complete!<</if>>
+</div>
+<div class="backpack-item">
+    <<button "THE WASH / THE COMPASS">><<goto "codebreaking">><</button>>
+     <<if hasVisited("codebreaking")>>Complete!<</if>>
+</div>
+<div class="backpack-item">
+    <<button "THE PASSAGEWAY / SPOTTING GAME">><<goto "spottingGame1">><</button>>
+ <<if hasVisited("codebreaking")>>Complete!<</if>>
+</div>
+<div class="backpack-item">
+    <<button "MINSTERS COURTYARD / BUG BNB">><<goto "leaveAReview1">><</button>>
+    <<if hasVisited("leaveAReview1")>>Complete!<</if>>
+</div>
+<div class="backpack-item">
+<<if hasVisited("fieldRecording", "codebreaking", "spottingGame1", "leaveAReview1")>>
+   <<button "UPLOAD PICTURE">><<goto "finalChallenge">><</button>>
+    <span>New!</span> 
+<</if>>
+</div>
+</main>
+
+
+
+:: HouseEnd {"position":"425,450","size":"100,100"}
+<main class="main-section">
+<img src="./assets/img/housebasement.png" class="housemap codeword">
+
+
+The end
+
+<<button "Back to the Start">><<goto "Map">><</button>>
+</main>
+
+:: fieldRecording 
+<main class="main-section">
+We need you to send through Field Recordings of the sounds here at Harding’s Pit. They’ll be birds, bees and bugs that you can find but I want you to send through the sound you love! 
+
+You can upload the sound here and it will go straight through to Jude
+
+*Need to log in and create a new widget
+<iframe src="https://www.speakpipe.com/widget/inline/4d1vwtvjbqw9hsolngp8xt3et529oaq8" allow="microphone" width="100%" height="200" frameborder="0"></iframe>
+<<button "I've submitted my sounds">> <<goto "fieldRecordingoutro">><</button>>
+</main>
+
+
+:: fieldRecordingoutro 
+<main class="main-section">
+Sound Sent
+
+Send me the word SOUNDS. 
+
+<<button "Next">> <<goto "Backpack">><</button>>
+</main>
+
+
+:: codebreaking  
+<main class="main-section">
+Enter the code:
+
+<div id="coderesult"></div>
+ /% CODEWORD FEEDBACK %/
+   <div id="resultbutton">
+/% CODEWORD INPUT %/
+<div class="css-input code-input">
+<<textbox "$code" "">></div>
+<<button "Enter">>
+</div>
+ /% PASSWORD CODE %/
+<<set $code to $code.toUpperCase()>>
+/% CODEWORD CORRECT %/
+<<if $code isnot "" and $code is "SALTY">>
+<<replace "#coderesult">>CORRECT<</replace>>
+<<timed 3s>><<goto "codebreakingoutro">><</timed>>
+<</if>>
+/% CODEWORD INCORRECT %/
+<<if $code isnot "" and $code is not "SALTY">>
+<<replace "#coderesult">>Thats not right.<</replace>>
+<<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
+<</if>><</button>>
+</div>
+
+</main>
+
+
+:: codebreakingoutro  
+<main class="main-section">
+You did it! Text the word "SALTY" to me.
+<<button "Next">> <<goto "Backpack">><</button>>
+
+</main>
+
+
+
+:: spottingGame1
+<main class="main-section">
+<h2>Hedgehog Highway Spot Check</h2>
+<h3>Can you spot any holes in the fence or gaps that mean Hedgehogs can move easily? </h3>
+<p>One of the best things you can do for hedgehogs is to allow them access to your garden. If you get together with your neighbours, you can create 'hedgehog highways', allowing hedgehogs to roam greater distances.</p>
+
+<<checkbox "$hhholes" false true autocheck>> 
+
+<<button "Next">> <<goto "spottingGame2">><</button>>
+</main>
+
+
+:: spottingGame2
+<main class="main-section">
+<h2>Hedgehog Highway Spot Check</h2>
+<h3>Can you spot any hedges? </h3>
+<p>A hedge is the perfect garden habitat, allowing easy access between gardens, and room for piles of leaves to accumulate beneath, where hedgehogs can forage, hibernate and raise their young. </p>
+
+<<checkbox "$hhhedges" false true autocheck>> 
+
+<<button "Next">> <<goto "spottingGame3">><</button>>
+</main>
+
+:: spottingGame3
+<main class="main-section">
+<h2>Hedgehog Highway Spot Check</h2>
+<h3>Can you hear any water nearby? </h3>
+<p>A pond is great for hedgehogs – but not ones with a steep side – hedgehogs can swim but they need some help to get out sometimes. </p>
+
+<<checkbox "$hhwater" false true autocheck>> 
+
+<<button "Next">> <<goto "spottingGame4">><</button>>
+</main>
+
+:: spottingGame4
+<main class="main-section">
+<h2>Hedgehog Highway Spot Check</h2>
+<h3>Can you see any slugs? </h3>
+<p>Hedgehogs are slug predators, so taking steps to boosting hedgehog numbers will help control the slug population in your garden.</p>
+
+<<checkbox "$hhslugs" false true autocheck>> 
+
+<<button "Next">> <<goto "spottingGame5">><</button>>
+</main>
+
+:: spottingGame5
+<main class="main-section">
+<h2>Hedgehog Highway Spot Check</h2>
+<h3>Is there a Compost Heap nearby? </h3>
+<p>A compost Heap makes the perfect hedgehog habitat, providing a warm, dry and secluded place for them to nest in and hibernate. Plus, slugs, centipedes and beetles, will also take shelter here, providing food for hungry hedgehogs.</p>
+
+<<checkbox "$hhcompost" false true autocheck>> 
+
+<<button "Next">> <<goto "spottingGame6">><</button>>
+</main>
+
+:: spottingGame6
+<main class="main-section">
+<h2>Hedgehog Highway Spot Check</h2>
+<h3>Can you see a hedgehog house? </h3>
+<p>Hedgehogs need a dry, safe place to raise young and hibernate, and a hedgehog house is the perfect habitat.</p>
+
+<<checkbox "$hhhouse" false true autocheck>> 
+
+<<button "Next">> <<goto "spottingGameEmitter">><</button>>
+</main>
+
+:: spottingGameRoundup
+/* <<set $items to [$item1,$item2,$item3]>> */
+  /* <<for _i to 0; _i lt $items.length; _i++>>
+  <<if $items[_i] is true>>
+       <<print _i + 1>>. $items[_i]
+  <</if>>
+<</for>> */
+
+<main class="main-section">
+<<if $item1 is true>>
+You saw Item 1
+<</if>>
+<<if $item2 is true>>
+You saw Item 2
+<</if>>
+<<if $item3 is true>>
+You saw Item 3
+<</if>>
+<<button "Next">> <<goto "Backpack">><</button>>
+<<back>>
+</main>
+
+
+
+:: spottingGameEmitter
+
+<main class="main-section">
+<h3>Yes!</h3>
+<p>You’ve activated the Hedgehog Sound Emitter – let’s see if we can hear Pointer.</p>
+ <div class = "detector">
+  <<set $spinning to false>>
+<<link "<img src = './assets/img/radarbutton.png'>" >>
+	<<if $spinning>>
+    	<<set $spinning to false>>
+        /* <<audio ":all" stop>> */
+		<<removeclass ".detector" "spinning">>
+    <<else>>
+   		<<set $spinning to true>>
+        /* <<audio "badjoke" play>> */
+   	    <<addclass ".detector" "spinning">>
+    <</if>>
+<</link>> 
+</div>
+ 
+<<button "Next">> <<goto "spottingGameOutro">><</button>>
+</main>
+
+:: spottingGameOutro
+
+<main class="main-section">
+<h3>Yes!</h3>
+<p>There was Pointer</p>
+<p>Text the word Pointer and I’ll call. </p>
+ 
+<<button "Next">> <<goto "Backpack">><</button>>
+
+</main>
+
+
+
+:: leaveAReview1 [nobr]
+<main class="main-section">
+<h2>BUG BnB</h2>
+<p>Thank you for loading the BugBnb Review Page</p>
+<p>Are you ready to review? </p>
+
+<div class="menu-wrapper">
+    <<button "Yes">><<goto "leaveAReviewroof">><</button>>
+    <<button "No">><<goto "leaveAReview2">><</button>>
+</div>
+
+</main>
+
+:: leaveAReview2 [nobr]
+<main class="main-section">
+<p>Go on...</p>
+
+<<button "Okay...">><<goto "leaveAReview1">><</button>>
+
+</main>
+
+:: leaveAReview3 [nobr]
+<main class="main-section">
+<<set $roof to false>>
+<<set $holes to false>>
+<<set $webs to false>>
+<<set $materials to false>>
+<<set $quiet to false>>
+<<set $rating to 3>>
+<<set $ratingreason to "">>
+<p>Great!</p>
+<p>Answer the following questions...</p>
+
+<<button "Next">><<goto "leaveAReviewroof">><</button>>
+</main>
+
+:: leaveAReviewroof [nobr]
+<main class="main-section reviewq">
+
+[img[./assets/img/roof.png]]
+ 
+<p>Does it have a roof?</p>
+
+<div class="menu-wrapper">
+    <<button "Yes">><<set $roof to true>><<goto "leaveAReviewholes">><</button>>
+    <<button "No">><<set $roof to false>><<goto "leaveAReviewholes">><</button>>
+</div>
+</main>
+
+:: leaveAReviewholes [nobr]
+<main class="main-section reviewq">
+
+[img[./assets/img/holes.png]]
+
+<p>Does it have different size holes for different creatures?</p>
+
+
+<div class="menu-wrapper">
+    <<button "Yes">><<set $holes to true>><<goto "leaveAReviewspiders">><</button>>
+    <<button "No">><<set $holes to false>><<goto "leaveAReviewspiders">><</button>>
+</div>
+
+</main>
+
+:: leaveAReviewspiders [nobr]
+<main class="main-section reviewq">
+
+[img[./assets/img/web.png]]
+
+<p>Any spiders webs? </p>
+
+<div class="menu-wrapper">
+    <<button "Yes">><<set $spiders to true>><<goto "leaveAReviewmaterials">><</button>>
+    <<button "No">><<set $spiders to false>><<goto "leaveAReviewmaterials">><</button>>
+</div>
+
+</main>
+
+:: leaveAReviewmaterials [nobr]
+<main class="main-section reviewq">
+
+[img[./assets/img/recycling.png]]
+
+<p>Does it use different sustainable materials?  </p>
+
+<div class="menu-wrapper">
+    <<button "Yes">><<set $materials to true>><<goto "leaveAReviewquiet">><</button>>
+    <<button "No">><<set $materials to false>><<goto "leaveAReviewquiet">><</button>>
+</div>
+</main>
+
+:: leaveAReviewquiet [nobr]
+<main class="main-section reviewq">
+
+[img[./assets/img/quiet.png]]
+
+<p>Is it quiet?</p>
+
+<div class="menu-wrapper">
+    <<button "Yes">><<set $quiet to true>><<goto "leaveAReviewrating">><</button>>
+    <<button "No">><<set $quiet to false>><<goto "leaveAReviewrating">><</button>>
+</div>
+
+</main>
+
+:: leaveAReviewrating [nobr]
+<main class="main-section">
+
+<p>What rating out of 5 would you give it? </p>
+
+<div class="radio-options">
+    <label>1<<radiobutton "$rating" "1" autocheck>></label>
+    <label>2<<radiobutton "$rating" "2" autocheck>></label>
+    <label>3<<radiobutton "$rating" "3" checked >></label>
+    <label>4<<radiobutton "$rating" "4" autocheck>></label>
+    <label>5<<radiobutton "$rating" "5" autocheck>></label>
+</div>
+<br>
+
+<p>Why?</p>
+
+<<textarea "$ratingreason""">>
+<br>
+<<button "Submit">><<goto "reviewSubmitted">><</button>>
+
+</main>
+
+:: reviewSubmitted  [nobr]
+<main class="main-section">
+<h2>Bug BNB</h2>
+<div class="review-container">
+<div class="avatar-icon">[img[./assets/img/user.png]]</div>
+/* print star rating  */
+<div class="rating-container">
+    <<for _i to 0; _i lt $rating; _i++>>
+        <div class="rating-item">
+         [img[./assets/img/star.png]]
+        </div>
+    <</for>>
+ 
+</div>
+    <p>This bug hotel offers:</p>
+    <div class="amenities-container">
+        <<if $roof is true>> 
+            <div class="amenities-item"><p>Roof</p> [img[./assets/img/roof.png]]
+            </div>
+        <</if>>
+        <<if $holes is true>> 
+            <div class="amenities-item"><p>Holes</p> [img[./assets/img/holes.png]]
+            </div>
+        <</if>>
+        <<if $spiders is true>> 
+            <div class="amenities-item"><p>Spiders </p>[img[./assets/img/web.png]]
+            </div>
+        <</if>>
+         <<if $materials is true>> 
+            <div class="amenities-item"><p>Materials</p> [img[./assets/img/recycling.png]]
+            </div>
+        <</if>>
+         <<if $quiet is true>> 
+            <div class="amenities-item"><p>Quiet</p> [img[./assets/img/quiet.png]]
+            </div>
+        <</if>>
+     
+    </div>    
+   <em> "$ratingreason"</em>
+ 
+   <div class="confirmation" id="confirmation"><<type 60ms>>Submitting...<</type>></div>
+</div>
+
+<<button "Next">> <<goto "Backpack">><</button>>
+
+</main>
+
+<<silently>>
+    <<timed 4s>>
+        <<replace "#confirmation">>Review submitted!<</replace>>
+    <</timed>>
+<</silently>>
+
+:: leaveAReviewoutro [nobr]
+<main class="main-section">
+WOW – I just saw your review – thanks so much I hope he’ll see it and take notice. 
+
+Bug Hotels are really important as they help give protection to all of the little critters and a base for all pollinators like bees too. We once knew a bee name John Buzzle Boy who liked Beetube, Beecraft & WWBee who was frightened of being alone. And that’s why places where they could meet others was important – like at an AirBeenBee – see what we did there! 
+
+Without bees, we wouldn’t have some of our important fruits like strawberries. 
+And without strawberries, Jude and I couldn’t eat our favourite desert – Strawberry Trifle. 
+I love the surprise of each layer – YUM. 
+Sorry I got distracted. 
+
+Right, where to <<button "next">><<goto "Backpack">><</button>>? 
+
+</main>
+
+:: enterFinalChallenge
+ <main class="main-section">
+Enter the code to get to the final challenge:
+
+<div id="coderesult"></div>
+ /% CODEWORD FEEDBACK %/
+   <div id="resultbutton">
+/% CODEWORD INPUT %/
+<div class="css-input code-input">
+<<textbox "$code" "">></div>
+<<button "Enter">>
+</div>
+ /% PASSWORD CODE %/
+<<set $code to $code.toUpperCase()>>
+/% CODEWORD CORRECT %/
+<<if $code isnot "" and $code is "CODE">>
+<<replace "#coderesult">>CORRECT<</replace>>
+<<timed 3s>><<goto "finalChallenge">><</timed>>
+<</if>>
+/% CODEWORD INCORRECT %/
+<<if $code isnot "" and $code is not "CODE">>
+<<replace "#coderesult">>Thats not right.<</replace>>
+<<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
+<</if>><</button>>
+</div>
+</main> 
+
+
+:: finalChallengeIntro
+Hello, it’s Jude. 
+I don’t know who this is but can we chat? 
+Text me the word PROTECTOR so I know it is you. 
+<<button "Next (after phone call)">> <<goto "finalChallenge">><</button>>
+
+
+:: finalChallenge
+ <main class="main-section">
+<input type="file" accept="image/*" capture="camera" id="inputImg" class="hide">
+You can upload an image of a tree here:
+<br>
+<<button "Upload Image">>
+  <<set $e to setup.handleFileUpload()>><</button>>
+
+  <br>
+  <br>
+   <<button "Done!">><<goto "Backpack">><</button>>
+</main> 
+
+
+
+
+:: UserUploadImage
+You can upload an image here:
+[[Upload Image]]
+
+:: Upload Image
+
+<input type="file" accept="image/*" capture="camera" id="inputImg">
+Please select an image to upload:
+<<button "Upload Image">>
+  <<set $e to setup.handleFileUpload()>><</button>>
+
+[[UserUploadImage]]
+
+
+
+:: checkVisits
+
+
+
+
+
+
+
