@@ -82,40 +82,76 @@ $(document.head).find('#style-ui-bar').remove();
 }();
 
 setup.handleFileUpload = () => {
-  const input = document.getElementById('inputImg');
+//   const input = document.getElementById('inputImg');
 
-  input.onchange = () => {
-    const file = input.files[0];
+//   input.onchange = () => {
+//     const file = input.files[0];
 
     // Create a Cloudinary upload preset URL
+   
+
+//     // Prepare the form data
+//     const formData = new FormData();
+//     formData.append('file', file);
+//     formData.append('upload_preset', uploadPreset);
+
+//     // Send the file to Cloudinary using Fetch API
+//     fetch(cloudinaryURL, {
+//       method: 'POST',
+//       body: formData
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//       // Get the URL of the uploaded image from the Cloudinary response
+//       const imageURL = data.url;
+// console.log(data)
+//       // Display the uploaded image
+//       // const imgElement = document.createElement('img');
+//       // imgElement.src = imageURL;
+//       // document.body.appendChild(imgElement);
+//     })
+//     .catch(error => console.error(error));
+async function uploadImage(file) {
     const uploadPreset = 'viggkmmj';
     const cloudinaryURL = 'https://api.cloudinary.com/v1_1/dcwl3hold/image/upload';
-
-    // Prepare the form data
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', uploadPreset);
-
-    // Send the file to Cloudinary using Fetch API
-    fetch(cloudinaryURL, {
+    const errorMount = document.getElementById("error")
+    const successMount = document.getElementById("success")
+  
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('upload_preset', uploadPreset);
+console.log("trying")
+  try {
+    const response = await fetch(`${cloudinaryURL}`, {
       method: 'POST',
       body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-      // Get the URL of the uploaded image from the Cloudinary response
-      const imageURL = data.url;
-console.log(imageURL)
-      // Display the uploaded image
-      // const imgElement = document.createElement('img');
-      // imgElement.src = imageURL;
-      // document.body.appendChild(imgElement);
-    })
-    .catch(error => console.error(error));
-  };
+    });
+    if (!response.ok) {
+      throw new Error('Image upload failed');
+ errorMount.innerText = "Image upload failed"
+      
+    }
 
-  input.click();
+    const data = await response.json();
+    console.log('Image uploaded successfully:', data);
+    errorMount.innerText = "Image uploaded"
+  } catch (error) {
+    console.error('Error uploading image:', error.message);
+    errorMount.innerText = "Image upload failed"
+  }
 }
+// Example usage
+const inputElement = document.getElementById('inputImg');
+console.log(inputElement)
+inputElement.addEventListener('change', (event) => {
+  const file = event.target.files[0];
+  uploadImage(file);
+});
+  inputElement.click();
+};
+
+
+// }
 
 :: StoryInit
 <<cacheaudio "badjoke" "https://youhavefoundconey.net/CG/what/assets/audio/badjoke.mp3">>
@@ -137,33 +173,43 @@ console.log(imageURL)
 
 :: Backpack [nobr] {"position":"425,450","size":"100,100"}
 <main class="main-section">
-/* <div class="house-wrapper"><img src="./assets/img/house.png" class="housemap">
-<a data-passage="fieldRecording" class="garden"><div class="garden"></div></a>
-<a data-passage="codebreaking" class="dining"><div class="dining"></div></a>
-<a data-passage="spottingGame" class="bedroom"><div class="bedroom"></div></a>
-</div> */
+
 <h2>Nature Corridor Protectors Portal</h2>
-<div class="backpack-item">
-    <<button "HARDINGS PIT / RECORDING">><<goto "fieldRecording">><</button>>
-     <<if hasVisited("fieldRecording")>>Complete!<</if>>
-</div>
-<div class="backpack-item">
-    <<button "THE WASH / THE COMPASS">><<goto "codebreaking">><</button>>
-     <<if hasVisited("codebreaking")>>Complete!<</if>>
-</div>
-<div class="backpack-item">
-    <<button "THE PASSAGEWAY / SPOTTING GAME">><<goto "spottingGame1">><</button>>
- <<if hasVisited("codebreaking")>>Complete!<</if>>
-</div>
-<div class="backpack-item">
-    <<button "MINSTERS COURTYARD / BUG BNB">><<goto "leaveAReview1">><</button>>
-    <<if hasVisited("leaveAReview1")>>Complete!<</if>>
-</div>
-<div class="backpack-item">
-<<if hasVisited("fieldRecording", "codebreaking", "spottingGame1", "leaveAReview1")>>
-   <<button "UPLOAD PICTURE">><<goto "finalChallenge">><</button>>
-    <span>New!</span> 
-<</if>>
+<div class="backpack-container">
+    <div class="backpack-item">
+        <<button "LOAD THE PIT CHALLENGE">><<goto "fieldRecording">><</button>>
+         <<if hasVisited("fieldRecording")>><span class="complete">Complete!</span><</if>>
+    </div>
+    <div class="backpack-item">
+        <<button "THE WASH / THE COMPASS">><<goto "codebreaking">><</button>>
+         <<if hasVisited("codebreaking")>><span class="complete">Complete!</span><</if>>
+    </div>
+    <div class="backpack-item">
+        <<button "THE PASSAGEWAY / SPOTTING GAME">><<goto "spottingGame1">><</button>>
+     <<if hasVisited("spottingGame1")>><span class="complete">Complete!</span><</if>>
+    </div>
+    <div class="backpack-item">
+        <<button "MINSTERS COURTYARD / BUG BNB">><<goto "leaveAReview1">><</button>>
+        <<if hasVisited("leaveAReview1")>><span class="complete">Complete!</span><</if>>
+    </div>
+    <div class="backpack-item">
+    <<if hasVisited("fieldRecording", "codebreaking", "spottingGame1", "leaveAReview1")>>
+        <<if not hasVisited("finalChallengeIntro")>>…
+           <<goto "finalChallengeIntro">>
+        <</if>>
+        <<if hasVisited("finalChallengeIntro")>>
+            <<if not hasVisited("finalChallenge")>>…
+                <<button "UPLOAD PICTURE">><<goto "finalChallenge">><</button>>
+                    <span class="new">New!</span> 
+            <</if>>
+        <</if>>
+        <<if hasVisited("finalChallenge")>>
+            <<button "UPLOAD PICTURE">><<goto "finalChallenge">><</button>>
+                <span class="complete">Complete!</span> 
+        <</if>>
+    <</if>>
+     
+    </div>
 </div>
 </main>
 
@@ -330,23 +376,29 @@ You saw Item 3
 
 
 
-:: spottingGameEmitter
-
-<main class="main-section">
-<h3>Yes!</h3>
-<p>You’ve activated the Hedgehog Sound Emitter – let’s see if we can hear Pointer.</p>
- <div class = "detector">
+:: spottingGameEmitter[nobr]
   <<set $spinning to false>>
+<main class="main-section">
+<div id="mount">
+    <h3>Yes!</h3>
+    <p>You’ve activated the Hedgehog Sound Emitter – let’s see if we can hear Pointer.</p>
+    <p>Click on the Emitter to turn it on.</p>
+</div>
+ <div class = "detector">
+
 <<link "<img src = './assets/img/radarbutton.png'>" >>
-	<<if $spinning>>
-    	<<set $spinning to false>>
-        /* <<audio ":all" stop>> */
-		<<removeclass ".detector" "spinning">>
-    <<else>>
-   		<<set $spinning to true>>
+ <<timed 0.5s>>
+    <<set $spinning to true>>
         /* <<audio "badjoke" play>> */
    	    <<addclass ".detector" "spinning">>
-    <</if>>
+        <<replace "#mount">>Searching...<</replace>>
+  <</timed>>
+  <<timed 6.5s>>
+      	<<set $spinning to false>>
+        /* <<audio ":all" stop>> */
+		<<removeclass ".detector" "spinning">>
+          <<replace "#mount">>Hedgehog found!<</replace>>
+  <</timed>>
 <</link>> 
 </div>
  
@@ -536,7 +588,7 @@ You saw Item 3
    <div class="confirmation" id="confirmation"><<type 60ms>>Submitting...<</type>></div>
 </div>
 
-<<button "Next">> <<goto "Backpack">><</button>>
+<<button "Next">> <<goto "leaveAReviewoutro">><</button>>
 
 </main>
 
@@ -547,17 +599,10 @@ You saw Item 3
 <</silently>>
 
 :: leaveAReviewoutro [nobr]
+/* think this is a call  */
 <main class="main-section">
-WOW – I just saw your review – thanks so much I hope he’ll see it and take notice. 
-
-Bug Hotels are really important as they help give protection to all of the little critters and a base for all pollinators like bees too. We once knew a bee name John Buzzle Boy who liked Beetube, Beecraft & WWBee who was frightened of being alone. And that’s why places where they could meet others was important – like at an AirBeenBee – see what we did there! 
-
-Without bees, we wouldn’t have some of our important fruits like strawberries. 
-And without strawberries, Jude and I couldn’t eat our favourite desert – Strawberry Trifle. 
-I love the surprise of each layer – YUM. 
-Sorry I got distracted. 
-
-Right, where to <<button "next">><<goto "Backpack">><</button>>? 
+Text BUGBNB to Judy to update her. 
+<<button "Next">><<goto "Backpack">><</button>>
 
 </main>
 
@@ -590,44 +635,37 @@ Enter the code to get to the final challenge:
 
 
 :: finalChallengeIntro
+ <main class="main-section">
 Hello, it’s Jude. 
 I don’t know who this is but can we chat? 
 Text me the word PROTECTOR so I know it is you. 
-<<button "Next (after phone call)">> <<goto "finalChallenge">><</button>>
-
+<br/>
+<<button "Next (after phone call)">> <<goto "Backpack">><</button>>
+</main>
 
 :: finalChallenge
  <main class="main-section">
 <input type="file" accept="image/*" capture="camera" id="inputImg" class="hide">
 You can upload an image of a tree here:
 <br>
+<div id="success">
 <<button "Upload Image">>
   <<set $e to setup.handleFileUpload()>><</button>>
+</div>
+  <br>
+  <br>
+  <div id="error"></div>
+   <<button "Done!">><<goto "Backpack">><</button>>
+</main> 
 
-  <br>
-  <br>
+:: finalChallengeOutro
+ <main class="main-section">
+<p>I’ll call you – text me the word TREE when you are ready. </p>
    <<button "Done!">><<goto "Backpack">><</button>>
 </main> 
 
 
 
-
-:: UserUploadImage
-You can upload an image here:
-[[Upload Image]]
-
-:: Upload Image
-
-<input type="file" accept="image/*" capture="camera" id="inputImg">
-Please select an image to upload:
-<<button "Upload Image">>
-  <<set $e to setup.handleFileUpload()>><</button>>
-
-[[UserUploadImage]]
-
-
-
-:: checkVisits
 
 
 
