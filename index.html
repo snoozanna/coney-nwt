@@ -163,36 +163,16 @@ $(document.head).find('#style-ui-bar').remove();
     };
 }();
 
+// setup.test = () =>{
+//     console.log(document.head)
+//     document.head.append('<link id="font-awesome-stylesheet" rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"; />');
+//     console.log(document.head)
+// };
+
+// setup.test()
+
 setup.handleFileUpload = () => {
-//   const input = document.getElementById('inputImg');
 
-//   input.onchange = () => {
-//     const file = input.files[0];
-
-    // Create a Cloudinary upload preset URL
-   
-
-//     // Prepare the form data
-//     const formData = new FormData();
-//     formData.append('file', file);
-//     formData.append('upload_preset', uploadPreset);
-
-//     // Send the file to Cloudinary using Fetch API
-//     fetch(cloudinaryURL, {
-//       method: 'POST',
-//       body: formData
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//       // Get the URL of the uploaded image from the Cloudinary response
-//       const imageURL = data.url;
-// console.log(data)
-//       // Display the uploaded image
-//       // const imgElement = document.createElement('img');
-//       // imgElement.src = imageURL;
-//       // document.body.appendChild(imgElement);
-//     })
-//     .catch(error => console.error(error));
 async function uploadImage(file) {
     const uploadPreset = 'f4uwtwnx';
     const cloudinaryURL = 'https://api.cloudinary.com/v1_1/dzutg2kf2/image/upload';
@@ -233,32 +213,58 @@ inputElement.addEventListener('change', (event) => {
 };
 
 
-// }</script><tw-passagedata pid="1" name="StoryInit" tags="" position="100,100" size="100,100">&lt;&lt;cacheaudio &quot;badjoke&quot; &quot;https://youhavefoundconey.net/CG/what/assets/audio/badjoke.mp3&quot;&gt;&gt;
+// }</script><tw-passagedata pid="1" name="StoryInit" tags="" position="100,100" size="100,100">&lt;&lt;cacheaudio &quot;ping1&quot; &quot;assets/audio/ping1.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;keep1&quot; &quot;assets/audio/keep1.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;keep2&quot; &quot;assets/audio/keep2.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;uploadcomplete&quot; &quot;assets/audio/uploadcomplete.mp3&quot;&gt;&gt;
 
 &lt;&lt;waitforaudio&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="landing" tags="" position="425,75" size="100,100">&lt;main&gt;
 &lt;div class=&quot;landing-wrapper&quot;&gt;
     
           &lt;&lt;button &quot;Start&quot;&gt;&gt;&lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="3" name="Backpack" tags="nobr" position="425,450" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="3" name="Backpack" tags="nobr" position="425,450" size="100,100">&lt;&lt;if hasVisited(&quot;Backpack&quot;)&gt;&gt;
+&lt;&lt;audio &quot;keep2&quot; &quot;play&quot;&gt;&gt;
+&lt;&lt;else&gt;&gt;
+&lt;&lt;audio &quot;keep1&quot; &quot;play&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;header class=&quot;backpack&quot;&gt;
+&lt;h2&gt;&lt;span&gt;Nature Corridor&lt;/span&gt;&lt;span&gt;Protectors Portal&lt;/span&gt;&lt;/h2&gt;
+&lt;div class=&quot;avatar-icon&quot;&gt;[img[./assets/img/user.png]]
+&lt;span&gt;Logged in&lt;/span&gt;&lt;/div&gt;
+&lt;/header&gt;
 
-&lt;h2&gt;Nature Corridor Protectors Portal&lt;/h2&gt;
+&lt;main class=&quot;main-section backpack&quot;&gt;
+
+
+
 &lt;div class=&quot;backpack-container&quot;&gt;
     &lt;div class=&quot;backpack-item&quot;&gt;
         &lt;&lt;button &quot;LOAD THE PIT CHALLENGE&quot;&gt;&gt;&lt;&lt;goto &quot;fieldRecording&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-         &lt;&lt;if hasVisited(&quot;fieldRecording&quot;)&gt;&gt;&lt;span class=&quot;complete&quot;&gt;Complete!&lt;/span&gt;&lt;&lt;/if&gt;&gt;
+         &lt;&lt;if hasVisited(&quot;fieldRecording&quot;)&gt;&gt;&lt;span class=&quot;complete&quot;&gt;Complete!&lt;/span&gt;
+         &lt;&lt;else&gt;&gt;
+         &lt;span class=&quot;todo&quot;&gt;To do&lt;/span&gt;
+         &lt;&lt;/if&gt;&gt;
     &lt;/div&gt;
     &lt;div class=&quot;backpack-item&quot;&gt;
-        &lt;&lt;button &quot;THE WASH / THE COMPASS&quot;&gt;&gt;&lt;&lt;goto &quot;codebreaking&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-         &lt;&lt;if hasVisited(&quot;codebreaking&quot;)&gt;&gt;&lt;span class=&quot;complete&quot;&gt;Complete!&lt;/span&gt;&lt;&lt;/if&gt;&gt;
+        &lt;&lt;button &quot;THE COMPASS&quot;&gt;&gt;&lt;&lt;goto &quot;codebreaking&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+         &lt;&lt;if hasVisited(&quot;codebreaking&quot;)&gt;&gt;&lt;span class=&quot;complete&quot;&gt;Complete!&lt;/span&gt;
+         &lt;&lt;else&gt;&gt;
+         &lt;span class=&quot;todo&quot;&gt;To do&lt;/span&gt;
+         &lt;&lt;/if&gt;&gt;
     &lt;/div&gt;
     &lt;div class=&quot;backpack-item&quot;&gt;
-        &lt;&lt;button &quot;THE PASSAGEWAY / SPOTTING GAME&quot;&gt;&gt;&lt;&lt;goto &quot;spottingGame1&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-     &lt;&lt;if hasVisited(&quot;spottingGame1&quot;)&gt;&gt;&lt;span class=&quot;complete&quot;&gt;Complete!&lt;/span&gt;&lt;&lt;/if&gt;&gt;
+        &lt;&lt;button &quot;SPOTTING GAME&quot;&gt;&gt;&lt;&lt;goto &quot;spottingGame1&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+     &lt;&lt;if hasVisited(&quot;spottingGame1&quot;)&gt;&gt;&lt;span class=&quot;complete&quot;&gt;Complete!&lt;/span&gt;
+     &lt;&lt;else&gt;&gt;
+         &lt;span class=&quot;todo&quot;&gt;To do&lt;/span&gt;
+    &lt;&lt;/if&gt;&gt;
     &lt;/div&gt;
     &lt;div class=&quot;backpack-item&quot;&gt;
-        &lt;&lt;button &quot;MINSTERS COURTYARD / BUG BNB&quot;&gt;&gt;&lt;&lt;goto &quot;leaveAReview1&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-        &lt;&lt;if hasVisited(&quot;leaveAReview1&quot;)&gt;&gt;&lt;span class=&quot;complete&quot;&gt;Complete!&lt;/span&gt;&lt;&lt;/if&gt;&gt;
+        &lt;&lt;button &quot;BUG BNB&quot;&gt;&gt;&lt;&lt;goto &quot;leaveAReview1&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+        &lt;&lt;if hasVisited(&quot;leaveAReview1&quot;)&gt;&gt;&lt;span class=&quot;complete&quot;&gt;Complete!&lt;/span&gt;
+    &lt;&lt;else&gt;&gt;
+         &lt;span class=&quot;todo&quot;&gt;To do&lt;/span&gt;&lt;&lt;/if&gt;&gt;
     &lt;/div&gt;
     &lt;div class=&quot;backpack-item&quot;&gt;
     &lt;&lt;if hasVisited(&quot;fieldRecording&quot;, &quot;codebreaking&quot;, &quot;spottingGame1&quot;, &quot;leaveAReview1&quot;)&gt;&gt;
@@ -279,128 +285,470 @@ inputElement.addEventListener('change', (event) => {
      
     &lt;/div&gt;
 &lt;/div&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="4" name="HouseEnd" tags="" position="425,450" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
+&lt;/main&gt;
+&lt;footer&gt;&lt;&lt;button &quot;Show map&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/footer&gt;</tw-passagedata><tw-passagedata pid="4" name="headerhedge" tags="" position="475,100" size="100,100">&lt;header class=&quot;hedgehog&quot;&gt;&lt;h2&gt;&lt;span&gt;Hedgehog Highway &lt;/span&gt;&lt;span&gt;Spot Check&lt;/span&gt;&lt;/h2&gt;&lt;div&gt;&lt;/div&gt;&lt;/header&gt;</tw-passagedata><tw-passagedata pid="5" name="footer" tags="" position="600,100" size="100,100">&lt;footer&gt;&lt;&lt;button &quot;Back&quot;&gt;&gt;&lt;&lt;goto $prevpass&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/footer&gt;</tw-passagedata><tw-passagedata pid="6" name="footernext" tags="" position="725,100" size="100,100">&lt;footer&gt;&lt;&lt;button &quot;Back&quot;&gt;&gt;&lt;&lt;goto $prevpass&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;Next&quot;&gt;&gt;&lt;&lt;goto $nextpass&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/footer&gt;</tw-passagedata><tw-passagedata pid="7" name="footerfield" tags="" position="850,100" size="100,100">&lt;footer&gt;&lt;&lt;button &quot;Back&quot;&gt;&gt;&lt;&lt;goto $prevpass&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;I&#39;ve submitted my sounds&quot;&gt;&gt; &lt;&lt;goto &quot;fieldRecordingoutro&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/footer&gt;</tw-passagedata><tw-passagedata pid="8" name="HouseEnd" tags="" position="425,450" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
 &lt;img src=&quot;./assets/img/housebasement.png&quot; class=&quot;housemap codeword&quot;&gt;
 
 
 The end
 
-&lt;&lt;button &quot;Back to the Start&quot;&gt;&gt;&lt;&lt;goto &quot;Map&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="5" name="fieldRecording" tags="" position="600,100" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
+&lt;&lt;button &quot;Back to the Start&quot;&gt;&gt;&lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="9" name="fieldRecording" tags="nobr" position="1100,100" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;fieldRecording&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;Backpack&quot;&gt;&gt;
+&lt;main class=&quot;main-section&quot;&gt;
 We need you to send through Field Recordings of the sounds here at Harding’s Pit. They’ll be birds, bees and bugs that you can find but I want you to send through the sound you love! 
-
+&lt;br&gt;&lt;br&gt;
 You can upload the sound here and it will go straight through to Jude
+&lt;br&gt;&lt;br&gt;
+&lt;iframe src=&quot;https://www.speakpipe.com/widget/inline/kp6xzmubni8enwhrhvqo1sx5cbst92iy&quot; allow=&quot;microphone&quot; width=&quot;100%&quot; height=&quot;200&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+&lt;br&gt;&lt;br&gt;
 
-*Need to log in and create a new widget
-&lt;iframe src=&quot;https://www.speakpipe.com/widget/inline/4d1vwtvjbqw9hsolngp8xt3et529oaq8&quot; allow=&quot;microphone&quot; width=&quot;100%&quot; height=&quot;200&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
-&lt;&lt;button &quot;I&#39;ve submitted my sounds&quot;&gt;&gt; &lt;&lt;goto &quot;fieldRecordingoutro&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="6" name="fieldRecordingoutro" tags="" position="725,100" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
-Sound Sent
+&lt;/main&gt;
+&lt;&lt;include &quot;footerfield&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="fieldRecordingoutro" tags="nobr" position="1225,100" size="100,100">&lt;&lt;set $prevpass to &quot;fieldRecording&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;fieldRecordingoutro&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;Backpack&quot;&gt;&gt;
+&lt;main class=&quot;main-section message&quot;&gt;
+&lt;div id=&quot;msgMount&quot;&gt;&lt;/div&gt;
+  &lt;&lt;audio &quot;uploadcomplete&quot; &quot;play&quot;&gt;&gt;
+&lt;&lt;timed 2s&gt;&gt;
+    &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+    &lt;p&gt;Sound Sent!&lt;/p&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
 
-Send me the word SOUNDS. 
+&lt;&lt;timed 4s&gt;&gt;
+  &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+    &lt;p class=&quot;final&quot;&gt;Send me the word SOUNDS.  &lt;/p&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
 
-&lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="7" name="codebreaking" tags="" position="850,100" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
-Enter the code:
+&lt;&lt;timed 5s&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+  &lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="11" name="checkcorrectans" tags="" position="100,225" size="100,100">&lt;&lt;if $correctans.includesAll(&quot;S&quot;, &quot;A&quot;, &quot;L&quot;, &quot;T&quot;, &quot;Y&quot;)&gt;&gt;
+&lt;&lt;timed 2s&gt;&gt;
+&lt;&lt;goto &quot;codebreakingoutro&quot;&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="codebreaking" tags="nobr" position="225,225" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;codebreaking&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;Backpack&quot;&gt;&gt;
+&lt;&lt;set $correctans to []&gt;&gt;
+&lt;header id=&quot;header&quot;&gt;&lt;h3&gt;Enter the code:&lt;/h3&gt;&lt;/header&gt;
+&lt;main class=&quot;main-section&quot; id=&quot;mainMount&quot;&gt;
 
-&lt;div id=&quot;coderesult&quot;&gt;&lt;/div&gt;
- /% CODEWORD FEEDBACK %/
-   &lt;div id=&quot;resultbutton&quot;&gt;
-/% CODEWORD INPUT %/
-&lt;div class=&quot;css-input code-input&quot;&gt;
-&lt;&lt;textbox &quot;$code&quot; &quot;&quot;&gt;&gt;&lt;/div&gt;
-&lt;&lt;button &quot;Enter&quot;&gt;&gt;
+
+
+
+&lt;div id=&quot;inputMount&quot;&gt;&lt;/div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;div class=&quot;wordcontainer&quot;&gt;
+&lt;&lt;set $current to &quot;&quot;&gt;&gt;
+/* Letter S  */
+&lt;div class=&quot;letter-item s&quot; id=&quot;letterItemS&quot;&gt;
+  &lt;&lt;link &quot;&quot;&gt;&gt;
+   /* &lt;&lt;textbox &quot;$s&quot; &quot;&quot;&gt;&gt; */
+   /* &lt;&lt;toggleclass $current &quot;current&quot;&gt;&gt; */
+   &lt;&lt;set $current to &quot;s&quot;&gt;&gt;
+    &lt;&lt;if $current is &quot;s&quot;&gt;&gt; 
+    &lt;&lt;replace &quot;#clueMount&quot;&gt;&gt;
+        /* Make box gold, turn off any other gold boxes */
+         &lt;&lt;addclass &quot;#letterItemS&quot; &quot;current&quot;&gt;&gt; 
+        &lt;&lt;removeclass &quot;#letterItemA&quot; &quot;current&quot;&gt;&gt;   
+        &lt;&lt;removeclass &quot;#letterItemL&quot; &quot;current&quot;&gt;&gt;   
+        &lt;&lt;removeclass &quot;#letterItemT&quot; &quot;current&quot;&gt;&gt;   
+        &lt;&lt;removeclass &quot;#letterItemY&quot; &quot;current&quot;&gt;&gt;   
+        &lt;span&gt;WEST&lt;/span&gt;
+        &lt;span&gt;FIRST NAME&lt;/span&gt;
+        &lt;span&gt;FIRST LETTER&lt;/span&gt;
+
+    &lt;&lt;/replace&gt;&gt;
+    &lt;&lt;replace &quot;#inputMount&quot;&gt;&gt;
+        &lt;div id=&quot;coderesult&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;code-input&quot;&gt;&lt;&lt;textbox &quot;$s&quot; &quot;&quot;&gt;&gt;&lt;/div&gt;
+        &lt;&lt;button &quot;Enter&quot;&gt;&gt;
+       
+        /% PASSWORD CODE %/
+        &lt;&lt;set $s to $s.toUpperCase()&gt;&gt;
+        /% CODEWORD CORRECT %/
+        &lt;&lt;if $s isnot &quot;&quot; and $s is &quot;S&quot;&gt;&gt;
+        &lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;div class=&quot;confirmation&quot; id=&quot;confirmation&quot;&gt;Correct!&lt;/div&gt;&lt;&lt;/replace&gt;&gt;
+        &lt;&lt;timed 1s&gt;&gt;
+            &lt;&lt;run $correctans.push(&quot;S&quot;)&gt;&gt;
+            &lt;&lt;include &quot;checkcorrectans&quot;&gt;&gt;
+            &lt;&lt;replace &quot;#letterItemS&quot;&gt;&gt;&lt;div class=&quot;correct-letter&quot;&gt;S&lt;/div&gt;
+            &lt;&lt;/replace&gt;&gt;
+            &lt;&lt;replace &quot;#inputMount&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
+             &lt;&lt;replace &quot;#clueMount&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
+        &lt;&lt;/timed&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
+        /% CODEWORD INCORRECT %/
+        &lt;&lt;if $s isnot &quot;&quot; and $s is not &quot;S&quot;&gt;&gt;
+        &lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;div class=&quot;confirmation&quot; id=&quot;confirmation&quot;&gt;That&#39;s not right...&lt;/div&gt;&lt;&lt;/replace&gt;&gt;
+        &lt;&lt;timed 1.5s&gt;&gt;&lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/timed&gt;&gt;
+        &lt;&lt;/if&gt;&gt;&lt;&lt;/button&gt;&gt;
+    &lt;&lt;/replace&gt;&gt;
+   &lt;&lt;/if&gt;&gt;   
+
+  &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
- /% PASSWORD CODE %/
-&lt;&lt;set $code to $code.toUpperCase()&gt;&gt;
-/% CODEWORD CORRECT %/
-&lt;&lt;if $code isnot &quot;&quot; and $code is &quot;SALTY&quot;&gt;&gt;
-&lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;CORRECT&lt;&lt;/replace&gt;&gt;
-&lt;&lt;timed 3s&gt;&gt;&lt;&lt;goto &quot;codebreakingoutro&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-/% CODEWORD INCORRECT %/
-&lt;&lt;if $code isnot &quot;&quot; and $code is not &quot;SALTY&quot;&gt;&gt;
-&lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;Thats not right.&lt;&lt;/replace&gt;&gt;
-&lt;&lt;timed 1.5s&gt;&gt;&lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/timed&gt;&gt;
-&lt;&lt;/if&gt;&gt;&lt;&lt;/button&gt;&gt;
+/* Letter A  */
+&lt;div class=&quot;letter-item a&quot; id=&quot;letterItemA&quot;&gt;
+  &lt;&lt;link &quot;&quot;&gt;&gt;
+
+   &lt;&lt;set $current to &quot;a&quot;&gt;&gt;
+    &lt;&lt;if $current is &quot;a&quot;&gt;&gt; 
+    &lt;&lt;replace &quot;#clueMount&quot;&gt;&gt;
+        /* Make box gold, turn off any other gold boxes */
+         &lt;&lt;removeclass &quot;#letterItemS&quot; &quot;current&quot;&gt;&gt; 
+        &lt;&lt;addclass &quot;#letterItemA&quot; &quot;current&quot;&gt;&gt;   
+        &lt;&lt;removeclass &quot;#letterItemL&quot; &quot;current&quot;&gt;&gt;   
+        &lt;&lt;removeclass &quot;#letterItemT&quot; &quot;current&quot;&gt;&gt;   
+        &lt;&lt;removeclass &quot;#letterItemY&quot; &quot;current&quot;&gt;&gt;   
+        &lt;span&gt;SOUTH&lt;/span&gt;
+        &lt;span&gt;FIRST WORD&lt;/span&gt;
+        &lt;span&gt;FIRST LETTER&lt;/span&gt;
+    &lt;&lt;/replace&gt;&gt;
+    &lt;&lt;replace &quot;#inputMount&quot;&gt;&gt;
+        &lt;div id=&quot;coderesult&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;code-input&quot;&gt;&lt;&lt;textbox &quot;$a&quot; &quot;&quot;&gt;&gt;&lt;/div&gt;
+        &lt;&lt;button &quot;Enter&quot;&gt;&gt;
+       
+        /% PASSWORD CODE %/
+        &lt;&lt;set $a to $a.toUpperCase()&gt;&gt;
+        /% CODEWORD CORRECT %/
+        &lt;&lt;if $a isnot &quot;&quot; and $a is &quot;A&quot;&gt;&gt;
+        &lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;div class=&quot;confirmation&quot; id=&quot;confirmation&quot;&gt;Correct!&lt;/div&gt;&lt;&lt;/replace&gt;&gt;
+        &lt;&lt;run $correctans.push(&quot;A&quot;)&gt;&gt;
+            &lt;&lt;include &quot;checkcorrectans&quot;&gt;&gt;
+        &lt;&lt;timed 1s&gt;&gt;
+            &lt;&lt;replace &quot;#letterItemA&quot;&gt;&gt;&lt;div class=&quot;correct-letter&quot;&gt;A&lt;/div&gt;
+            &lt;&lt;/replace&gt;&gt;
+            &lt;&lt;replace &quot;#inputMount&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
+             &lt;&lt;replace &quot;#clueMount&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
+        &lt;&lt;/timed&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
+        /% CODEWORD INCORRECT %/
+        &lt;&lt;if $a isnot &quot;&quot; and $a is not &quot;A&quot;&gt;&gt;
+        &lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;div class=&quot;confirmation&quot; id=&quot;confirmation&quot;&gt;That&#39;s not right...&lt;/div&gt;&lt;&lt;/replace&gt;&gt;
+        &lt;&lt;timed 1.5s&gt;&gt;&lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/timed&gt;&gt;
+        &lt;&lt;/if&gt;&gt;&lt;&lt;/button&gt;&gt;
+    &lt;&lt;/replace&gt;&gt;
+   &lt;&lt;/if&gt;&gt;   
+   /* &lt;&lt;toggleclass &quot;#sclue&quot; &quot;hide&quot;&gt;&gt; */
+  &lt;&lt;/link&gt;&gt;
+&lt;/div&gt;
+/* Letter L  */
+&lt;div class=&quot;letter-item l&quot; id=&quot;letterItemL&quot;&gt;
+  &lt;&lt;link &quot;&quot;&gt;&gt;
+   /* &lt;&lt;textbox &quot;$s&quot; &quot;&quot;&gt;&gt; */
+   /* &lt;&lt;toggleclass $current &quot;current&quot;&gt;&gt; */
+   &lt;&lt;set $current to &quot;l&quot;&gt;&gt;
+    &lt;&lt;if $current is &quot;l&quot;&gt;&gt; 
+    &lt;&lt;replace &quot;#clueMount&quot;&gt;&gt;
+        /* Make box gold, turn off any other gold boxes */
+         &lt;&lt;removeclass &quot;#letterItemS&quot; &quot;current&quot;&gt;&gt; 
+        &lt;&lt;removeclass &quot;#letterItemA&quot; &quot;current&quot;&gt;&gt;   
+        &lt;&lt;addclass &quot;#letterItemL&quot; &quot;current&quot;&gt;&gt;   
+        &lt;&lt;removeclass &quot;#letterItemT&quot; &quot;current&quot;&gt;&gt;   
+        &lt;&lt;removeclass &quot;#letterItemY&quot; &quot;current&quot;&gt;&gt;   
+        &lt;span&gt;EAST&lt;/span&gt;
+        &lt;span&gt;FIRST WORD&lt;/span&gt;
+        &lt;span&gt;LAST LETTER&lt;/span&gt;
+    &lt;&lt;/replace&gt;&gt;
+    &lt;&lt;replace &quot;#inputMount&quot;&gt;&gt;
+        &lt;div id=&quot;coderesult&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;code-input&quot;&gt;&lt;&lt;textbox &quot;$l&quot; &quot;&quot;&gt;&gt;&lt;/div&gt;
+        &lt;&lt;button &quot;Enter&quot;&gt;&gt;
+       
+        /% PASSWORD CODE %/
+        &lt;&lt;set $l to $l.toUpperCase()&gt;&gt;
+        /% CODEWORD CORRECT %/
+        &lt;&lt;if $l isnot &quot;&quot; and $l is &quot;L&quot;&gt;&gt;
+        &lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;div class=&quot;confirmation&quot; id=&quot;confirmation&quot;&gt;Correct!&lt;/div&gt;&lt;&lt;/replace&gt;&gt;
+        &lt;&lt;timed 1s&gt;&gt;
+            &lt;&lt;run $correctans.push(&quot;L&quot;)&gt;&gt;
+            &lt;&lt;include &quot;checkcorrectans&quot;&gt;&gt;
+            &lt;&lt;replace &quot;#letterItemL&quot;&gt;&gt;&lt;div class=&quot;correct-letter&quot;&gt;L&lt;/div&gt;
+            &lt;&lt;/replace&gt;&gt;
+            &lt;&lt;replace &quot;#inputMount&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
+             &lt;&lt;replace &quot;#clueMount&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
+        &lt;&lt;/timed&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
+        /% CODEWORD INCORRECT %/
+        &lt;&lt;if $l isnot &quot;&quot; and $l is not &quot;L&quot;&gt;&gt;
+        &lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;div class=&quot;confirmation&quot; id=&quot;confirmation&quot;&gt;That&#39;s not right...&lt;/div&gt;&lt;&lt;/replace&gt;&gt;
+        &lt;&lt;timed 1.5s&gt;&gt;&lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/timed&gt;&gt;
+        &lt;&lt;/if&gt;&gt;&lt;&lt;/button&gt;&gt;
+    &lt;&lt;/replace&gt;&gt;
+   &lt;&lt;/if&gt;&gt;   
+   /* &lt;&lt;toggleclass &quot;#sclue&quot; &quot;hide&quot;&gt;&gt; */
+  &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="8" name="codebreakingoutro" tags="" position="975,100" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
-You did it! Text the word &quot;SALTY&quot; to me.
-&lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+/* Letter T  */
+&lt;div class=&quot;letter-item t&quot; id=&quot;letterItemT&quot;&gt;
+  &lt;&lt;link &quot;&quot;&gt;&gt;
+   /* &lt;&lt;textbox &quot;$s&quot; &quot;&quot;&gt;&gt; */
+   /* &lt;&lt;toggleclass $current &quot;current&quot;&gt;&gt; */
+   &lt;&lt;set $current to &quot;t&quot;&gt;&gt;
+    &lt;&lt;if $current is &quot;t&quot;&gt;&gt; 
+    &lt;&lt;replace &quot;#clueMount&quot;&gt;&gt;
+        /* Make box gold, turn off any other gold boxes */
+         &lt;&lt;removeclass &quot;#letterItemS&quot; &quot;current&quot;&gt;&gt; 
+        &lt;&lt;removeclass &quot;#letterItemA&quot; &quot;current&quot;&gt;&gt;   
+        &lt;&lt;removeclass &quot;#letterItemL&quot; &quot;current&quot;&gt;&gt;   
+        &lt;&lt;addclass &quot;#letterItemT&quot; &quot;current&quot;&gt;&gt;   
+        &lt;&lt;removeclass &quot;#letterItemY&quot; &quot;current&quot;&gt;&gt;   
+        &lt;span&gt;NORTH&lt;/span&gt;
+        &lt;span&gt;FIRST WORD&lt;/span&gt;
+        &lt;span&gt;FOURTH LETTER&lt;/span&gt;
+    &lt;&lt;/replace&gt;&gt;
+    &lt;&lt;replace &quot;#inputMount&quot;&gt;&gt;
+        &lt;div id=&quot;coderesult&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;code-input&quot;&gt;&lt;&lt;textbox &quot;$t&quot; &quot;&quot;&gt;&gt;&lt;/div&gt;
+        &lt;&lt;button &quot;Enter&quot;&gt;&gt;
+       
+        /% PASSWORD CODE %/
+        &lt;&lt;set $t to $t.toUpperCase()&gt;&gt;
+        /% CODEWORD CORRECT %/
+        &lt;&lt;if $t isnot &quot;&quot; and $t is &quot;T&quot;&gt;&gt;
+        &lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;div class=&quot;confirmation&quot; id=&quot;confirmation&quot;&gt;Correct!&lt;/div&gt;&lt;&lt;/replace&gt;&gt;
+        &lt;&lt;timed 1s&gt;&gt;
+        &lt;&lt;run $correctans.push(&quot;T&quot;)&gt;&gt;
+            &lt;&lt;include &quot;checkcorrectans&quot;&gt;&gt;
+            &lt;&lt;replace &quot;#letterItemT&quot;&gt;&gt;&lt;div class=&quot;correct-letter&quot;&gt;T&lt;/div&gt;
+            &lt;&lt;/replace&gt;&gt;
+            &lt;&lt;replace &quot;#inputMount&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
+             &lt;&lt;replace &quot;#clueMount&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
+        &lt;&lt;/timed&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
+        /% CODEWORD INCORRECT %/
+        &lt;&lt;if $t isnot &quot;&quot; and $t is not &quot;T&quot;&gt;&gt;
+        &lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;div class=&quot;confirmation&quot; id=&quot;confirmation&quot;&gt;That&#39;s not right...&lt;/div&gt;&lt;&lt;/replace&gt;&gt;
+        &lt;&lt;timed 1.5s&gt;&gt;&lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/timed&gt;&gt;
+        &lt;&lt;/if&gt;&gt;&lt;&lt;/button&gt;&gt;
+    &lt;&lt;/replace&gt;&gt;
+   &lt;&lt;/if&gt;&gt;   
+   /* &lt;&lt;toggleclass &quot;#sclue&quot; &quot;hide&quot;&gt;&gt; */
+  &lt;&lt;/link&gt;&gt;
+&lt;/div&gt;
 
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="9" name="spottingGame1" tags="" position="1100,100" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
-&lt;h2&gt;Hedgehog Highway Spot Check&lt;/h2&gt;
+/* Letter Y  */
+&lt;div class=&quot;letter-item y&quot; id=&quot;letterItemY&quot;&gt;
+  &lt;&lt;link &quot;&quot;&gt;&gt;
+   /* &lt;&lt;textbox &quot;$s&quot; &quot;&quot;&gt;&gt; */
+   /* &lt;&lt;toggleclass $current &quot;current&quot;&gt;&gt; */
+   &lt;&lt;set $current to &quot;y&quot;&gt;&gt;
+    &lt;&lt;if $current is &quot;y&quot;&gt;&gt; 
+    &lt;&lt;replace &quot;#clueMount&quot;&gt;&gt;
+        /* Make box gold, turn off any other gold boxes */
+         &lt;&lt;removeclass &quot;#letterItemS&quot; &quot;current&quot;&gt;&gt; 
+        &lt;&lt;removeclass &quot;#letterItemA&quot; &quot;current&quot;&gt;&gt;   
+        &lt;&lt;removeclass &quot;#letterItemL&quot; &quot;current&quot;&gt;&gt;   
+        &lt;&lt;removeclass &quot;#letterItemT&quot; &quot;current&quot;&gt;&gt;   
+        &lt;&lt;addclass &quot;#letterItemY&quot; &quot;current&quot;&gt;&gt;   
+        &lt;span&gt;NORTH-WEST&lt;/span&gt;
+        &lt;span&gt;LAST NAME&lt;/span&gt;
+        &lt;span&gt;LAST LETTER&lt;/span&gt;
+    &lt;&lt;/replace&gt;&gt;
+    &lt;&lt;replace &quot;#inputMount&quot;&gt;&gt;
+        &lt;div id=&quot;coderesult&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;code-input&quot;&gt;&lt;&lt;textbox &quot;$y&quot; &quot;&quot;&gt;&gt;&lt;/div&gt;
+        &lt;&lt;button &quot;Enter&quot;&gt;&gt;
+       
+        /% PASSWORD CODE %/
+        &lt;&lt;set $y to $y.toUpperCase()&gt;&gt;
+        /% CODEWORD CORRECT %/
+        &lt;&lt;if $y isnot &quot;&quot; and $y is &quot;Y&quot;&gt;&gt;
+        &lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;div class=&quot;confirmation&quot; id=&quot;confirmation&quot;&gt;Correct!&lt;/div&gt;&lt;&lt;/replace&gt;&gt;
+        &lt;&lt;timed 1s&gt;&gt;
+            &lt;&lt;run $correctans.push(&quot;Y&quot;)&gt;&gt;
+            &lt;&lt;include &quot;checkcorrectans&quot;&gt;&gt;
+            &lt;&lt;replace &quot;#letterItemY&quot;&gt;&gt;&lt;div class=&quot;correct-letter&quot;&gt;Y&lt;/div&gt;
+            &lt;&lt;/replace&gt;&gt;
+            &lt;&lt;replace &quot;#inputMount&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
+             &lt;&lt;replace &quot;#clueMount&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
+        &lt;&lt;/timed&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
+        /% CODEWORD INCORRECT %/
+        &lt;&lt;if $y isnot &quot;&quot; and $y is not &quot;Y&quot;&gt;&gt;
+        &lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;div class=&quot;confirmation&quot; id=&quot;confirmation&quot;&gt;That&#39;s not right...&lt;/div&gt;&lt;&lt;/replace&gt;&gt;
+        &lt;&lt;timed 1.5s&gt;&gt;&lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/timed&gt;&gt;
+        &lt;&lt;/if&gt;&gt;&lt;&lt;/button&gt;&gt;
+    &lt;&lt;/replace&gt;&gt;
+   &lt;&lt;/if&gt;&gt;   
+
+  &lt;&lt;/link&gt;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;div id=&quot;clueMount&quot;&gt;
+
+&lt;/div&gt;
+
+&lt;/main&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="codebreakingoutro" tags="nobr" position="350,225" size="100,100">&lt;&lt;set $prevpass to &quot;codebreaking&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;codebreakingoutro&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;Backpack&quot;&gt;&gt;
+&lt;main class=&quot;main-section message&quot;&gt;
+&lt;div id=&quot;msgMount&quot;&gt;&lt;/div&gt;
+  &lt;&lt;audio &quot;uploadcomplete&quot; &quot;play&quot;&gt;&gt;
+&lt;&lt;timed 2s&gt;&gt;
+  &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+    &lt;p&gt;You did it!&lt;/p&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 4s&gt;&gt;
+  &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+    &lt;p class=&quot;final&quot;&gt; Text the word &quot;SALTY&quot; to me.  &lt;/p&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 5s&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+  &lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="14" name="spottingGame1" tags="nobr" position="475,225" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;spottingGame1&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;spottingGame2&quot;&gt;&gt;
+&lt;&lt;include &quot;headerhedge&quot;&gt;&gt;
+&lt;main class=&quot;main-section spotting&quot;&gt;
+
 &lt;h3&gt;Can you spot any holes in the fence or gaps that mean Hedgehogs can move easily? &lt;/h3&gt;
+&lt;br&gt;
 &lt;p&gt;One of the best things you can do for hedgehogs is to allow them access to your garden. If you get together with your neighbours, you can create &#39;hedgehog highways&#39;, allowing hedgehogs to roam greater distances.&lt;/p&gt;
 
-&lt;&lt;checkbox &quot;$hhholes&quot; false true autocheck&gt;&gt; 
+&lt;div class=&quot;hedgehog-input-container&quot;&gt;
+    &lt;label class=&quot;container&quot;&gt;
+        &lt;&lt;checkbox &quot;$hhholes&quot; false true autocheck&gt;&gt; 
+        &lt;span class=&quot;checkmark&quot;&gt;&lt;/span&gt;
+    &lt;/label&gt;
+&lt;/div&gt;
+&lt;/main&gt;
 
-&lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;spottingGame2&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="10" name="spottingGame2" tags="" position="1225,100" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
-&lt;h2&gt;Hedgehog Highway Spot Check&lt;/h2&gt;
+&lt;&lt;include &quot;footernext&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="spottingGame2" tags="nobr" position="600,225" size="100,100">&lt;&lt;set $prevpass to &quot;spottingGame1&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;spottingGame2&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;spottingGame3&quot;&gt;&gt;
+&lt;&lt;include &quot;headerhedge&quot;&gt;&gt;
+&lt;main class=&quot;main-section spotting&quot;&gt;
+
 &lt;h3&gt;Can you spot any hedges? &lt;/h3&gt;
+&lt;br&gt;
 &lt;p&gt;A hedge is the perfect garden habitat, allowing easy access between gardens, and room for piles of leaves to accumulate beneath, where hedgehogs can forage, hibernate and raise their young. &lt;/p&gt;
 
-&lt;&lt;checkbox &quot;$hhhedges&quot; false true autocheck&gt;&gt; 
+&lt;div class=&quot;hedgehog-input-container&quot;&gt;
+    &lt;label class=&quot;container&quot;&gt;
+        &lt;&lt;checkbox &quot;$hhhedges&quot; false true autocheck&gt;&gt; 
+        &lt;span class=&quot;checkmark&quot;&gt;&lt;/span&gt;
+    &lt;/label&gt;
+&lt;/div&gt;
 
-&lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;spottingGame3&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="11" name="spottingGame3" tags="" position="100,225" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
-&lt;h2&gt;Hedgehog Highway Spot Check&lt;/h2&gt;
+
+
+&lt;/main&gt;
+&lt;&lt;include &quot;footernext&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="spottingGame3" tags="nobr" position="725,225" size="100,100">&lt;&lt;set $prevpass to &quot;spottingGame2&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;spottingGame3&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;spottingGame4&quot;&gt;&gt;
+&lt;&lt;include &quot;headerhedge&quot;&gt;&gt;
+&lt;main class=&quot;main-section spotting&quot;&gt;
+
 &lt;h3&gt;Can you hear any water nearby? &lt;/h3&gt;
+&lt;br&gt;
 &lt;p&gt;A pond is great for hedgehogs – but not ones with a steep side – hedgehogs can swim but they need some help to get out sometimes. &lt;/p&gt;
 
-&lt;&lt;checkbox &quot;$hhwater&quot; false true autocheck&gt;&gt; 
 
-&lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;spottingGame4&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="12" name="spottingGame4" tags="" position="225,225" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
-&lt;h2&gt;Hedgehog Highway Spot Check&lt;/h2&gt;
+&lt;div class=&quot;hedgehog-input-container&quot;&gt;
+    &lt;label class=&quot;container&quot;&gt;
+        &lt;&lt;checkbox &quot;$hhwater&quot; false true autocheck&gt;&gt; 
+        &lt;span class=&quot;checkmark&quot;&gt;&lt;/span&gt;
+    &lt;/label&gt;
+&lt;/div&gt;
+
+&lt;/main&gt;
+&lt;&lt;include &quot;footernext&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="spottingGame4" tags="nobr" position="850,225" size="100,100">&lt;&lt;set $prevpass to &quot;spottingGame3&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;spottingGame4&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;spottingGame5&quot;&gt;&gt;
+&lt;&lt;include &quot;headerhedge&quot;&gt;&gt;
+&lt;main class=&quot;main-section spotting&quot;&gt;
+
 &lt;h3&gt;Can you see any slugs? &lt;/h3&gt;
+&lt;br&gt;
 &lt;p&gt;Hedgehogs are slug predators, so taking steps to boosting hedgehog numbers will help control the slug population in your garden.&lt;/p&gt;
 
-&lt;&lt;checkbox &quot;$hhslugs&quot; false true autocheck&gt;&gt; 
 
-&lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;spottingGame5&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="13" name="spottingGame5" tags="" position="350,225" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
-&lt;h2&gt;Hedgehog Highway Spot Check&lt;/h2&gt;
+&lt;div class=&quot;hedgehog-input-container&quot;&gt;
+    &lt;label class=&quot;container&quot;&gt;
+        &lt;&lt;checkbox &quot;$hhslugs&quot; false true autocheck&gt;&gt; 
+        &lt;span class=&quot;checkmark&quot;&gt;&lt;/span&gt;
+    &lt;/label&gt;
+&lt;/div&gt;
+
+
+&lt;/main&gt;
+&lt;&lt;include &quot;footernext&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="spottingGame5" tags="nobr" position="975,225" size="100,100">&lt;&lt;set $prevpass to &quot;spottingGame4&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;spottingGame5&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;spottingGame6&quot;&gt;&gt;
+&lt;&lt;include &quot;headerhedge&quot;&gt;&gt;
+&lt;main class=&quot;main-section spotting&quot;&gt;
+
 &lt;h3&gt;Is there a Compost Heap nearby? &lt;/h3&gt;
+&lt;br&gt;
 &lt;p&gt;A compost Heap makes the perfect hedgehog habitat, providing a warm, dry and secluded place for them to nest in and hibernate. Plus, slugs, centipedes and beetles, will also take shelter here, providing food for hungry hedgehogs.&lt;/p&gt;
 
-&lt;&lt;checkbox &quot;$hhcompost&quot; false true autocheck&gt;&gt; 
 
-&lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;spottingGame6&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="14" name="spottingGame6" tags="" position="475,225" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
-&lt;h2&gt;Hedgehog Highway Spot Check&lt;/h2&gt;
+&lt;div class=&quot;hedgehog-input-container&quot;&gt;
+    &lt;label class=&quot;container&quot;&gt;
+        &lt;&lt;checkbox &quot;$hhcompost&quot; false true autocheck&gt;&gt; 
+        &lt;span class=&quot;checkmark&quot;&gt;&lt;/span&gt;
+    &lt;/label&gt;
+&lt;/div&gt;
+
+
+&lt;/main&gt;
+&lt;&lt;include &quot;footernext&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="spottingGame6" tags="nobr" position="1100,225" size="100,100">&lt;&lt;set $prevpass to &quot;spottingGame5&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;spottingGame6&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;spottingGameEmitter&quot;&gt;&gt;
+&lt;&lt;include &quot;headerhedge&quot;&gt;&gt;
+&lt;main class=&quot;main-section spotting&quot;&gt;
+
 &lt;h3&gt;Can you see a hedgehog house? &lt;/h3&gt;
+&lt;br&gt;
 &lt;p&gt;Hedgehogs need a dry, safe place to raise young and hibernate, and a hedgehog house is the perfect habitat.&lt;/p&gt;
 
-&lt;&lt;checkbox &quot;$hhhouse&quot; false true autocheck&gt;&gt; 
 
-&lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;spottingGameEmitter&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="15" name="spottingGameRoundup" tags="" position="600,225" size="100,100">/* &lt;&lt;set $items to [$item1,$item2,$item3]&gt;&gt; */
-  /* &lt;&lt;for _i to 0; _i lt $items.length; _i++&gt;&gt;
-  &lt;&lt;if $items[_i] is true&gt;&gt;
-       &lt;&lt;print _i + 1&gt;&gt;. $items[_i]
-  &lt;&lt;/if&gt;&gt;
-&lt;&lt;/for&gt;&gt; */
+&lt;div class=&quot;hedgehog-input-container&quot;&gt;
+    &lt;label class=&quot;container&quot;&gt;
+        &lt;&lt;checkbox &quot;$hhhouse&quot; false true autocheck&gt;&gt; 
+        &lt;span class=&quot;checkmark&quot;&gt;   
+        /* &lt;img src=&quot;assets/img/tick.png&quot; alt=&quot;tick&quot;/&gt; */
+        &lt;/span&gt;
+    &lt;/label&gt;
+&lt;/div&gt;
 
-&lt;main class=&quot;main-section&quot;&gt;
-&lt;&lt;if $item1 is true&gt;&gt;
-You saw Item 1
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;if $item2 is true&gt;&gt;
-You saw Item 2
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;if $item3 is true&gt;&gt;
-You saw Item 3
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;&lt;back&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="16" name="spottingGameEmitter" tags="nobr" position="725,225" size="100,100">&lt;&lt;set $spinning to false&gt;&gt;
-&lt;main class=&quot;main-section&quot;&gt;
+
+
+&lt;/main&gt;
+&lt;&lt;include &quot;footernext&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="spottingGameEmitter" tags="nobr" position="1225,225" size="100,100">&lt;&lt;set $prevpass to &quot;spottingGame6&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;spottingGameEmitter&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;spottingGameOutro&quot;&gt;&gt;
+  &lt;&lt;set $spinning to false&gt;&gt;
+&lt;main class=&quot;main-section emitter&quot;&gt;
 &lt;div id=&quot;mount&quot;&gt;
     &lt;h3&gt;Yes!&lt;/h3&gt;
-    &lt;p&gt;You’ve activated the Hedgehog Sound Emitter – let’s see if we can hear Pointer.&lt;/p&gt;
+    &lt;p&gt;You’ve activated the Hedgehog Sound Emitter&lt;/p&gt;
+    &lt;p&gt;Let’s see if we can hear Pointer.&lt;/p&gt;
     &lt;p&gt;Click on the Emitter to turn it on.&lt;/p&gt;
 &lt;/div&gt;
  &lt;div class = &quot;detector&quot;&gt;
@@ -421,30 +769,61 @@ You saw Item 3
 &lt;&lt;/link&gt;&gt; 
 &lt;/div&gt;
  
-&lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;spottingGameOutro&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="17" name="spottingGameOutro" tags="" position="850,225" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
-&lt;h3&gt;Yes!&lt;/h3&gt;
-&lt;p&gt;There was Pointer&lt;/p&gt;
-&lt;p&gt;Text the word Pointer and I’ll call. &lt;/p&gt;
- 
-&lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="18" name="leaveAReview1" tags="nobr" position="975,225" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
+&lt;/main&gt;
+&lt;&lt;include &quot;footernext&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="spottingGameOutro" tags="nobr" position="100,350" size="100,100">&lt;&lt;set $prevpass to &quot;spottingGameEmitter&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;spottingGameOutro&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;Backpack&quot;&gt;&gt;
+&lt;main class=&quot;main-section message&quot;&gt;
+&lt;div id=&quot;msgMount&quot;&gt;&lt;/div&gt;
+&lt;&lt;timed 1s&gt;&gt;
+  &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+    &lt;p&gt;Yes! There was Pointer&lt;/p&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 3s&gt;&gt;
+  &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+    &lt;p class=&quot;final&quot;&gt;Text the word POINTER and I’ll call. &lt;/p&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 5s&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+  &lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="22" name="leaveAReview1" tags="nobr" position="225,350" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;leaveAReview1&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;leaveAReview3&quot;&gt;&gt;
+&lt;main class=&quot;main-section reviewq&quot;&gt;
+
+&lt;p&gt;Thank you for loading the&lt;/p&gt;
 &lt;h2&gt;BUG BnB&lt;/h2&gt;
-&lt;p&gt;Thank you for loading the BugBnb Review Page&lt;/p&gt;
+&lt;p&gt;Review Page&lt;/p&gt;
 &lt;p&gt;Are you ready to review? &lt;/p&gt;
 
 &lt;div class=&quot;menu-wrapper&quot;&gt;
-    &lt;&lt;button &quot;Yes&quot;&gt;&gt;&lt;&lt;goto &quot;leaveAReviewroof&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+    &lt;&lt;button &quot;Yes&quot;&gt;&gt;&lt;&lt;goto &quot;leaveAReview3&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
     &lt;&lt;button &quot;No&quot;&gt;&gt;&lt;&lt;goto &quot;leaveAReview2&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
 
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="19" name="leaveAReview2" tags="nobr" position="1100,225" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
+&lt;/main&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="leaveAReview2" tags="nobr" position="350,350" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReview1&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;leaveAReview2&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;leaveAReview3&quot;&gt;&gt;
+&lt;main class=&quot;main-section reviewq&quot;&gt;
 &lt;p&gt;Go on...&lt;/p&gt;
 
 &lt;&lt;button &quot;Okay...&quot;&gt;&gt;&lt;&lt;goto &quot;leaveAReview1&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="20" name="leaveAReview3" tags="nobr" position="1225,225" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
+&lt;/main&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="leaveAReview3" tags="nobr" position="475,350" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReview2&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;leaveAReview3&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;leaveAReviewroof&quot;&gt;&gt;
+&lt;main class=&quot;main-section reviewq&quot;&gt;
 &lt;&lt;set $roof to false&gt;&gt;
 &lt;&lt;set $holes to false&gt;&gt;
 &lt;&lt;set $webs to false&gt;&gt;
@@ -452,11 +831,17 @@ You saw Item 3
 &lt;&lt;set $quiet to false&gt;&gt;
 &lt;&lt;set $rating to 3&gt;&gt;
 &lt;&lt;set $ratingreason to &quot;&quot;&gt;&gt;
+
+
 &lt;p&gt;Great!&lt;/p&gt;
 &lt;p&gt;Answer the following questions...&lt;/p&gt;
 
 &lt;&lt;button &quot;Next&quot;&gt;&gt;&lt;&lt;goto &quot;leaveAReviewroof&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="21" name="leaveAReviewroof" tags="nobr" position="100,350" size="100,100">&lt;main class=&quot;main-section reviewq&quot;&gt;
+&lt;/main&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="leaveAReviewroof" tags="nobr" position="600,350" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReview3&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;leaveAReviewroof&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;leaveAReviewholes&quot;&gt;&gt;
+&lt;main class=&quot;main-section reviewq&quot;&gt;
 
 [img[./assets/img/roof.png]]
  
@@ -466,7 +851,11 @@ You saw Item 3
     &lt;&lt;button &quot;Yes&quot;&gt;&gt;&lt;&lt;set $roof to true&gt;&gt;&lt;&lt;goto &quot;leaveAReviewholes&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
     &lt;&lt;button &quot;No&quot;&gt;&gt;&lt;&lt;set $roof to false&gt;&gt;&lt;&lt;goto &quot;leaveAReviewholes&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="22" name="leaveAReviewholes" tags="nobr" position="225,350" size="100,100">&lt;main class=&quot;main-section reviewq&quot;&gt;
+&lt;/main&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="leaveAReviewholes" tags="nobr" position="725,350" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewroof&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;leaveAReviewholes&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;leaveAReviewspiders&quot;&gt;&gt;
+&lt;main class=&quot;main-section reviewq&quot;&gt;
 
 [img[./assets/img/holes.png]]
 
@@ -478,7 +867,11 @@ You saw Item 3
     &lt;&lt;button &quot;No&quot;&gt;&gt;&lt;&lt;set $holes to false&gt;&gt;&lt;&lt;goto &quot;leaveAReviewspiders&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
 
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="23" name="leaveAReviewspiders" tags="nobr" position="350,350" size="100,100">&lt;main class=&quot;main-section reviewq&quot;&gt;
+&lt;/main&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="leaveAReviewspiders" tags="nobr" position="850,350" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewholes&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;leaveAReviewspiders&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;leaveAReviewmaterials&quot;&gt;&gt;
+&lt;main class=&quot;main-section reviewq&quot;&gt;
 
 [img[./assets/img/web.png]]
 
@@ -489,7 +882,11 @@ You saw Item 3
     &lt;&lt;button &quot;No&quot;&gt;&gt;&lt;&lt;set $spiders to false&gt;&gt;&lt;&lt;goto &quot;leaveAReviewmaterials&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
 
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="24" name="leaveAReviewmaterials" tags="nobr" position="475,350" size="100,100">&lt;main class=&quot;main-section reviewq&quot;&gt;
+&lt;/main&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="leaveAReviewmaterials" tags="nobr" position="975,350" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewspiders&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;leaveAReviewmaterials&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;leaveAReviewquiet&quot;&gt;&gt;
+&lt;main class=&quot;main-section reviewq&quot;&gt;
 
 [img[./assets/img/recycling.png]]
 
@@ -499,7 +896,11 @@ You saw Item 3
     &lt;&lt;button &quot;Yes&quot;&gt;&gt;&lt;&lt;set $materials to true&gt;&gt;&lt;&lt;goto &quot;leaveAReviewquiet&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
     &lt;&lt;button &quot;No&quot;&gt;&gt;&lt;&lt;set $materials to false&gt;&gt;&lt;&lt;goto &quot;leaveAReviewquiet&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="25" name="leaveAReviewquiet" tags="nobr" position="600,350" size="100,100">&lt;main class=&quot;main-section reviewq&quot;&gt;
+&lt;/main&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="leaveAReviewquiet" tags="nobr" position="1100,350" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewmaterials&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;leaveAReviewquiet&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;leaveAReviewrating&quot;&gt;&gt;
+&lt;main class=&quot;main-section reviewq&quot;&gt;
 
 [img[./assets/img/quiet.png]]
 
@@ -510,7 +911,11 @@ You saw Item 3
     &lt;&lt;button &quot;No&quot;&gt;&gt;&lt;&lt;set $quiet to false&gt;&gt;&lt;&lt;goto &quot;leaveAReviewrating&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
 
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="26" name="leaveAReviewrating" tags="nobr" position="725,350" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
+&lt;/main&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="leaveAReviewrating" tags="nobr" position="1225,350" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewquiet&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;leaveAReviewrating&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;reviewSubmitted&quot;&gt;&gt;
+&lt;main class=&quot;main-section&quot;&gt;
 
 &lt;p&gt;What rating out of 5 would you give it? &lt;/p&gt;
 
@@ -528,8 +933,11 @@ You saw Item 3
 &lt;&lt;textarea &quot;$ratingreason&quot;&quot;&quot;&gt;&gt;
 &lt;br&gt;
 &lt;&lt;button &quot;Submit&quot;&gt;&gt;&lt;&lt;goto &quot;reviewSubmitted&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="27" name="reviewSubmitted" tags="nobr" position="850,350" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
+&lt;/main&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="reviewSubmitted" tags="nobr" position="100,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewrating&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;reviewSubmitted&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;leaveAReviewoutro&quot;&gt;&gt;
+&lt;main class=&quot;main-section&quot;&gt;
 &lt;h2&gt;Bug BNB&lt;/h2&gt;
 &lt;div class=&quot;review-container&quot;&gt;
 &lt;div class=&quot;avatar-icon&quot;&gt;[img[./assets/img/user.png]]&lt;/div&gt;
@@ -571,20 +979,35 @@ You saw Item 3
    &lt;div class=&quot;confirmation&quot; id=&quot;confirmation&quot;&gt;&lt;&lt;type 60ms&gt;&gt;Submitting...&lt;&lt;/type&gt;&gt;&lt;/div&gt;
 &lt;/div&gt;
 
-&lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;leaveAReviewoutro&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
 &lt;/main&gt;
 
-&lt;&lt;silently&gt;&gt;
-    &lt;&lt;timed 4s&gt;&gt;
-        &lt;&lt;replace &quot;#confirmation&quot;&gt;&gt;Review submitted!&lt;&lt;/replace&gt;&gt;
-    &lt;&lt;/timed&gt;&gt;
-&lt;&lt;/silently&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="leaveAReviewoutro" tags="nobr" position="975,350" size="100,100">/* think this is a call  */
-&lt;main class=&quot;main-section&quot;&gt;
-Text BUGBNB to Judy to update her. 
-&lt;&lt;button &quot;Next&quot;&gt;&gt;&lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;timed 4s&gt;&gt;
+   &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
+   &lt;&lt;replace &quot;#confirmation&quot;&gt;&gt;Review submitted!&lt;&lt;/replace&gt;&gt;
+   &lt;&lt;include &quot;footernext&quot;&gt;&gt;
+ &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="leaveAReviewoutro" tags="nobr" position="225,475" size="100,100">&lt;&lt;set $prevpass to &quot;reviewSubmitted&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;leaveAReviewoutro&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;Backpack&quot;&gt;&gt;
+&lt;main class=&quot;main-section message&quot;&gt;
+&lt;div id=&quot;msgMount&quot;&gt;&lt;/div&gt;
+&lt;&lt;timed 1s&gt;&gt;
+  &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+    &lt;p class=&quot;final&quot;&gt;Text BUGBNB to Judy to update her. &lt;/p&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
 
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="29" name="enterFinalChallenge" tags="" position="1100,350" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
+&lt;&lt;timed 3s&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+  &lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+&lt;/main&gt;
+
+/* template_8rbm75p
+service_hqggznf
+I5fGiJYF5iD8WzMJl */</tw-passagedata><tw-passagedata pid="33" name="enterFinalChallenge" tags="" position="350,475" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
 Enter the code to get to the final challenge:
 
 &lt;div id=&quot;coderesult&quot;&gt;&lt;/div&gt;
@@ -608,13 +1031,13 @@ Enter the code to get to the final challenge:
 &lt;&lt;timed 1.5s&gt;&gt;&lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/timed&gt;&gt;
 &lt;&lt;/if&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="30" name="finalChallengeIntro" tags="" position="1225,350" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="34" name="finalChallengeIntro" tags="" position="475,475" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
 Hello, it’s Jude. 
 I don’t know who this is but can we chat? 
 Text me the word PROTECTOR so I know it is you. 
 &lt;br/&gt;
 &lt;&lt;button &quot;Next (after phone call)&quot;&gt;&gt; &lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="31" name="finalChallenge" tags="" position="100,475" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="35" name="finalChallenge" tags="" position="600,475" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
 &lt;input type=&quot;file&quot; accept=&quot;image/*&quot; capture=&quot;camera&quot; id=&quot;inputImg&quot; class=&quot;hide&quot;&gt;
 You can upload an image of a tree here:
 &lt;br&gt;
@@ -626,7 +1049,7 @@ You can upload an image of a tree here:
   &lt;br&gt;
   &lt;div id=&quot;error&quot;&gt;&lt;/div&gt;
    &lt;&lt;button &quot;Done!&quot;&gt;&gt;&lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="32" name="finalChallengeOutro" tags="" position="225,475" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="36" name="finalChallengeOutro" tags="" position="725,475" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
 &lt;p&gt;I’ll call you – text me the word TREE when you are ready. &lt;/p&gt;
    &lt;&lt;button &quot;Done!&quot;&gt;&gt;&lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/main&gt;</tw-passagedata></tw-storydata>

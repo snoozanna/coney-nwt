@@ -81,36 +81,16 @@ $(document.head).find('#style-ui-bar').remove();
     };
 }();
 
+// setup.test = () =>{
+//     console.log(document.head)
+//     document.head.append('<link id="font-awesome-stylesheet" rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"; />');
+//     console.log(document.head)
+// };
+
+// setup.test()
+
 setup.handleFileUpload = () => {
-//   const input = document.getElementById('inputImg');
 
-//   input.onchange = () => {
-//     const file = input.files[0];
-
-    // Create a Cloudinary upload preset URL
-   
-
-//     // Prepare the form data
-//     const formData = new FormData();
-//     formData.append('file', file);
-//     formData.append('upload_preset', uploadPreset);
-
-//     // Send the file to Cloudinary using Fetch API
-//     fetch(cloudinaryURL, {
-//       method: 'POST',
-//       body: formData
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//       // Get the URL of the uploaded image from the Cloudinary response
-//       const imageURL = data.url;
-// console.log(data)
-//       // Display the uploaded image
-//       // const imgElement = document.createElement('img');
-//       // imgElement.src = imageURL;
-//       // document.body.appendChild(imgElement);
-//     })
-//     .catch(error => console.error(error));
 async function uploadImage(file) {
     const uploadPreset = 'f4uwtwnx';
     const cloudinaryURL = 'https://api.cloudinary.com/v1_1/dzutg2kf2/image/upload';
@@ -154,7 +134,10 @@ inputElement.addEventListener('change', (event) => {
 // }
 
 :: StoryInit
-<<cacheaudio "badjoke" "https://youhavefoundconey.net/CG/what/assets/audio/badjoke.mp3">>
+<<cacheaudio "ping1" "assets/audio/ping1.mp3">>
+<<cacheaudio "keep1" "assets/audio/keep1.mp3">>
+<<cacheaudio "keep2" "assets/audio/keep2.mp3">>
+<<cacheaudio "uploadcomplete" "assets/audio/uploadcomplete.mp3">>
 
 <<waitforaudio>>
 
@@ -172,25 +155,48 @@ inputElement.addEventListener('change', (event) => {
 
 
 :: Backpack [nobr] {"position":"425,450","size":"100,100"}
-<main class="main-section">
+<<if hasVisited("Backpack")>>
+<<audio "keep2" "play">>
+<<else>>
+<<audio "keep1" "play">>
+<</if>>
+<header class="backpack">
+<h2><span>Nature Corridor</span><span>Protectors Portal</span></h2>
+<div class="avatar-icon">[img[./assets/img/user.png]]
+<span>Logged in</span></div>
+</header>
 
-<h2>Nature Corridor Protectors Portal</h2>
+<main class="main-section backpack">
+
+
+
 <div class="backpack-container">
     <div class="backpack-item">
         <<button "LOAD THE PIT CHALLENGE">><<goto "fieldRecording">><</button>>
-         <<if hasVisited("fieldRecording")>><span class="complete">Complete!</span><</if>>
+         <<if hasVisited("fieldRecording")>><span class="complete">Complete!</span>
+         <<else>>
+         <span class="todo">To do</span>
+         <</if>>
     </div>
     <div class="backpack-item">
-        <<button "THE WASH / THE COMPASS">><<goto "codebreaking">><</button>>
-         <<if hasVisited("codebreaking")>><span class="complete">Complete!</span><</if>>
+        <<button "THE COMPASS">><<goto "codebreaking">><</button>>
+         <<if hasVisited("codebreaking")>><span class="complete">Complete!</span>
+         <<else>>
+         <span class="todo">To do</span>
+         <</if>>
     </div>
     <div class="backpack-item">
-        <<button "THE PASSAGEWAY / SPOTTING GAME">><<goto "spottingGame1">><</button>>
-     <<if hasVisited("spottingGame1")>><span class="complete">Complete!</span><</if>>
+        <<button "SPOTTING GAME">><<goto "spottingGame1">><</button>>
+     <<if hasVisited("spottingGame1")>><span class="complete">Complete!</span>
+     <<else>>
+         <span class="todo">To do</span>
+    <</if>>
     </div>
     <div class="backpack-item">
-        <<button "MINSTERS COURTYARD / BUG BNB">><<goto "leaveAReview1">><</button>>
-        <<if hasVisited("leaveAReview1")>><span class="complete">Complete!</span><</if>>
+        <<button "BUG BNB">><<goto "leaveAReview1">><</button>>
+        <<if hasVisited("leaveAReview1")>><span class="complete">Complete!</span>
+    <<else>>
+         <span class="todo">To do</span><</if>>
     </div>
     <div class="backpack-item">
     <<if hasVisited("fieldRecording", "codebreaking", "spottingGame1", "leaveAReview1")>>
@@ -212,7 +218,22 @@ inputElement.addEventListener('change', (event) => {
     </div>
 </div>
 </main>
+<footer><<button "Show map">><</button>></footer>
 
+:: headerhedge
+<header class="hedgehog"><h2><span>Hedgehog Highway </span><span>Spot Check</span></h2><div></div></header>
+
+
+
+:: footer
+<footer><<button "Back">><<goto $prevpass>><</button>></footer>
+
+
+:: footernext
+<footer><<button "Back">><<goto $prevpass>><</button>><<button "Next">><<goto $nextpass>><</button>></footer>
+
+:: footerfield
+<footer><<button "Back">><<goto $prevpass>><</button>><<button "I've submitted my sounds">> <<goto "fieldRecordingoutro">><</button>></footer>
 
 
 :: HouseEnd {"position":"425,450","size":"100,100"}
@@ -222,166 +243,503 @@ inputElement.addEventListener('change', (event) => {
 
 The end
 
-<<button "Back to the Start">><<goto "Map">><</button>>
+<<button "Back to the Start">><<goto "Backpack">><</button>>
 </main>
 
-:: fieldRecording 
+:: fieldRecording [nobr]
+<<set $prevpass to "Backpack">>
+<<set $pass to "fieldRecording">>
+<<set $nextpass to "Backpack">>
 <main class="main-section">
 We need you to send through Field Recordings of the sounds here at Harding’s Pit. They’ll be birds, bees and bugs that you can find but I want you to send through the sound you love! 
-
+<br><br>
 You can upload the sound here and it will go straight through to Jude
+<br><br>
+<iframe src="https://www.speakpipe.com/widget/inline/kp6xzmubni8enwhrhvqo1sx5cbst92iy" allow="microphone" width="100%" height="200" frameborder="0"></iframe>
+<br><br>
 
-*Need to log in and create a new widget
-<iframe src="https://www.speakpipe.com/widget/inline/4d1vwtvjbqw9hsolngp8xt3et529oaq8" allow="microphone" width="100%" height="200" frameborder="0"></iframe>
-<<button "I've submitted my sounds">> <<goto "fieldRecordingoutro">><</button>>
+</main>
+<<include "footerfield">>
+
+:: fieldRecordingoutro [nobr]
+<<set $prevpass to "fieldRecording">>
+<<set $pass to "fieldRecordingoutro">>
+<<set $nextpass to "Backpack">>
+<main class="main-section message">
+<div id="msgMount"></div>
+  <<audio "uploadcomplete" "play">>
+<<timed 2s>>
+    <<audio "ping1" "play">>
+    <<append "#msgMount">>
+    <p>Sound Sent!</p>
+    <</append>>
+<</timed>>
+
+<<timed 4s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+    <p class="final">Send me the word SOUNDS.  </p>
+    <</append>>
+<</timed>>
+
+<<timed 5s>>
+    <<append "#msgMount">>
+  <<button "Next">> <<goto "Backpack">><</button>>
+    <</append>>
+<</timed>>
 </main>
 
+:: checkcorrectans
 
-:: fieldRecordingoutro 
-<main class="main-section">
-Sound Sent
-
-Send me the word SOUNDS. 
-
-<<button "Next">> <<goto "Backpack">><</button>>
-</main>
-
-
-:: codebreaking  
-<main class="main-section">
-Enter the code:
-
-<div id="coderesult"></div>
- /% CODEWORD FEEDBACK %/
-   <div id="resultbutton">
-/% CODEWORD INPUT %/
-<div class="css-input code-input">
-<<textbox "$code" "">></div>
-<<button "Enter">>
-</div>
- /% PASSWORD CODE %/
-<<set $code to $code.toUpperCase()>>
-/% CODEWORD CORRECT %/
-<<if $code isnot "" and $code is "SALTY">>
-<<replace "#coderesult">>CORRECT<</replace>>
-<<timed 3s>><<goto "codebreakingoutro">><</timed>>
+<<if $correctans.includesAll("S", "A", "L", "T", "Y")>>
+<<timed 2s>>
+<<goto "codebreakingoutro">>
+<</timed>>
 <</if>>
-/% CODEWORD INCORRECT %/
-<<if $code isnot "" and $code is not "SALTY">>
-<<replace "#coderesult">>Thats not right.<</replace>>
-<<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
-<</if>><</button>>
+
+:: codebreaking [nobr]
+<<set $prevpass to "Backpack">>
+<<set $pass to "codebreaking">>
+<<set $nextpass to "Backpack">>
+<<set $correctans to []>>
+<header id="header"><h3>Enter the code:</h3></header>
+<main class="main-section" id="mainMount">
+
+
+
+
+<div id="inputMount"></div>
+<br>
+<br>
+<div class="wordcontainer">
+<<set $current to "">>
+/* Letter S  */
+<div class="letter-item s" id="letterItemS">
+  <<link "">>
+   /* <<textbox "$s" "">> */
+   /* <<toggleclass $current "current">> */
+   <<set $current to "s">>
+    <<if $current is "s">> 
+    <<replace "#clueMount">>
+        /* Make box gold, turn off any other gold boxes */
+         <<addclass "#letterItemS" "current">> 
+        <<removeclass "#letterItemA" "current">>   
+        <<removeclass "#letterItemL" "current">>   
+        <<removeclass "#letterItemT" "current">>   
+        <<removeclass "#letterItemY" "current">>   
+        <span>WEST</span>
+        <span>FIRST NAME</span>
+        <span>FIRST LETTER</span>
+
+    <</replace>>
+    <<replace "#inputMount">>
+        <div id="coderesult"></div>
+        <div class="code-input"><<textbox "$s" "">></div>
+        <<button "Enter">>
+       
+        /% PASSWORD CODE %/
+        <<set $s to $s.toUpperCase()>>
+        /% CODEWORD CORRECT %/
+        <<if $s isnot "" and $s is "S">>
+        <<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
+        <<timed 1s>>
+            <<run $correctans.push("S")>>
+            <<include "checkcorrectans">>
+            <<replace "#letterItemS">><div class="correct-letter">S</div>
+            <</replace>>
+            <<replace "#inputMount">><</replace>>
+             <<replace "#clueMount">><</replace>>
+        <</timed>>
+        <</if>>
+        /% CODEWORD INCORRECT %/
+        <<if $s isnot "" and $s is not "S">>
+        <<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
+        <<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
+        <</if>><</button>>
+    <</replace>>
+   <</if>>   
+
+  <</link>>
+</div>
+/* Letter A  */
+<div class="letter-item a" id="letterItemA">
+  <<link "">>
+
+   <<set $current to "a">>
+    <<if $current is "a">> 
+    <<replace "#clueMount">>
+        /* Make box gold, turn off any other gold boxes */
+         <<removeclass "#letterItemS" "current">> 
+        <<addclass "#letterItemA" "current">>   
+        <<removeclass "#letterItemL" "current">>   
+        <<removeclass "#letterItemT" "current">>   
+        <<removeclass "#letterItemY" "current">>   
+        <span>SOUTH</span>
+        <span>FIRST WORD</span>
+        <span>FIRST LETTER</span>
+    <</replace>>
+    <<replace "#inputMount">>
+        <div id="coderesult"></div>
+        <div class="code-input"><<textbox "$a" "">></div>
+        <<button "Enter">>
+       
+        /% PASSWORD CODE %/
+        <<set $a to $a.toUpperCase()>>
+        /% CODEWORD CORRECT %/
+        <<if $a isnot "" and $a is "A">>
+        <<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
+        <<run $correctans.push("A")>>
+            <<include "checkcorrectans">>
+        <<timed 1s>>
+            <<replace "#letterItemA">><div class="correct-letter">A</div>
+            <</replace>>
+            <<replace "#inputMount">><</replace>>
+             <<replace "#clueMount">><</replace>>
+        <</timed>>
+        <</if>>
+        /% CODEWORD INCORRECT %/
+        <<if $a isnot "" and $a is not "A">>
+        <<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
+        <<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
+        <</if>><</button>>
+    <</replace>>
+   <</if>>   
+   /* <<toggleclass "#sclue" "hide">> */
+  <</link>>
+</div>
+/* Letter L  */
+<div class="letter-item l" id="letterItemL">
+  <<link "">>
+   /* <<textbox "$s" "">> */
+   /* <<toggleclass $current "current">> */
+   <<set $current to "l">>
+    <<if $current is "l">> 
+    <<replace "#clueMount">>
+        /* Make box gold, turn off any other gold boxes */
+         <<removeclass "#letterItemS" "current">> 
+        <<removeclass "#letterItemA" "current">>   
+        <<addclass "#letterItemL" "current">>   
+        <<removeclass "#letterItemT" "current">>   
+        <<removeclass "#letterItemY" "current">>   
+        <span>EAST</span>
+        <span>FIRST WORD</span>
+        <span>LAST LETTER</span>
+    <</replace>>
+    <<replace "#inputMount">>
+        <div id="coderesult"></div>
+        <div class="code-input"><<textbox "$l" "">></div>
+        <<button "Enter">>
+       
+        /% PASSWORD CODE %/
+        <<set $l to $l.toUpperCase()>>
+        /% CODEWORD CORRECT %/
+        <<if $l isnot "" and $l is "L">>
+        <<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
+        <<timed 1s>>
+            <<run $correctans.push("L")>>
+            <<include "checkcorrectans">>
+            <<replace "#letterItemL">><div class="correct-letter">L</div>
+            <</replace>>
+            <<replace "#inputMount">><</replace>>
+             <<replace "#clueMount">><</replace>>
+        <</timed>>
+        <</if>>
+        /% CODEWORD INCORRECT %/
+        <<if $l isnot "" and $l is not "L">>
+        <<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
+        <<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
+        <</if>><</button>>
+    <</replace>>
+   <</if>>   
+   /* <<toggleclass "#sclue" "hide">> */
+  <</link>>
+</div>
+
+/* Letter T  */
+<div class="letter-item t" id="letterItemT">
+  <<link "">>
+   /* <<textbox "$s" "">> */
+   /* <<toggleclass $current "current">> */
+   <<set $current to "t">>
+    <<if $current is "t">> 
+    <<replace "#clueMount">>
+        /* Make box gold, turn off any other gold boxes */
+         <<removeclass "#letterItemS" "current">> 
+        <<removeclass "#letterItemA" "current">>   
+        <<removeclass "#letterItemL" "current">>   
+        <<addclass "#letterItemT" "current">>   
+        <<removeclass "#letterItemY" "current">>   
+        <span>NORTH</span>
+        <span>FIRST WORD</span>
+        <span>FOURTH LETTER</span>
+    <</replace>>
+    <<replace "#inputMount">>
+        <div id="coderesult"></div>
+        <div class="code-input"><<textbox "$t" "">></div>
+        <<button "Enter">>
+       
+        /% PASSWORD CODE %/
+        <<set $t to $t.toUpperCase()>>
+        /% CODEWORD CORRECT %/
+        <<if $t isnot "" and $t is "T">>
+        <<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
+        <<timed 1s>>
+        <<run $correctans.push("T")>>
+            <<include "checkcorrectans">>
+            <<replace "#letterItemT">><div class="correct-letter">T</div>
+            <</replace>>
+            <<replace "#inputMount">><</replace>>
+             <<replace "#clueMount">><</replace>>
+        <</timed>>
+        <</if>>
+        /% CODEWORD INCORRECT %/
+        <<if $t isnot "" and $t is not "T">>
+        <<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
+        <<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
+        <</if>><</button>>
+    <</replace>>
+   <</if>>   
+   /* <<toggleclass "#sclue" "hide">> */
+  <</link>>
+</div>
+
+/* Letter Y  */
+<div class="letter-item y" id="letterItemY">
+  <<link "">>
+   /* <<textbox "$s" "">> */
+   /* <<toggleclass $current "current">> */
+   <<set $current to "y">>
+    <<if $current is "y">> 
+    <<replace "#clueMount">>
+        /* Make box gold, turn off any other gold boxes */
+         <<removeclass "#letterItemS" "current">> 
+        <<removeclass "#letterItemA" "current">>   
+        <<removeclass "#letterItemL" "current">>   
+        <<removeclass "#letterItemT" "current">>   
+        <<addclass "#letterItemY" "current">>   
+        <span>NORTH-WEST</span>
+        <span>LAST NAME</span>
+        <span>LAST LETTER</span>
+    <</replace>>
+    <<replace "#inputMount">>
+        <div id="coderesult"></div>
+        <div class="code-input"><<textbox "$y" "">></div>
+        <<button "Enter">>
+       
+        /% PASSWORD CODE %/
+        <<set $y to $y.toUpperCase()>>
+        /% CODEWORD CORRECT %/
+        <<if $y isnot "" and $y is "Y">>
+        <<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
+        <<timed 1s>>
+            <<run $correctans.push("Y")>>
+            <<include "checkcorrectans">>
+            <<replace "#letterItemY">><div class="correct-letter">Y</div>
+            <</replace>>
+            <<replace "#inputMount">><</replace>>
+             <<replace "#clueMount">><</replace>>
+        <</timed>>
+        <</if>>
+        /% CODEWORD INCORRECT %/
+        <<if $y isnot "" and $y is not "Y">>
+        <<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
+        <<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
+        <</if>><</button>>
+    <</replace>>
+   <</if>>   
+
+  <</link>>
+</div>
+</div>
+
+<br>
+<br>
+<div id="clueMount">
+
 </div>
 
 </main>
+<<include "footer">>
 
+:: codebreakingoutro [nobr]
+<<set $prevpass to "codebreaking">>
+<<set $pass to "codebreakingoutro">>
+<<set $nextpass to "Backpack">>
+<main class="main-section message">
+<div id="msgMount"></div>
+  <<audio "uploadcomplete" "play">>
+<<timed 2s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+    <p>You did it!</p>
+    <</append>>
+<</timed>>
 
-:: codebreakingoutro  
-<main class="main-section">
-You did it! Text the word "SALTY" to me.
-<<button "Next">> <<goto "Backpack">><</button>>
+<<timed 4s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+    <p class="final"> Text the word "SALTY" to me.  </p>
+    <</append>>
+<</timed>>
 
+<<timed 5s>>
+    <<append "#msgMount">>
+  <<button "Next">> <<goto "Backpack">><</button>>
+    <</append>>
+<</timed>>
 </main>
 
 
+:: spottingGame1 [nobr]
+<<set $prevpass to "Backpack">>
+<<set $pass to "spottingGame1">>
+<<set $nextpass to "spottingGame2">>
+<<include "headerhedge">>
+<main class="main-section spotting">
 
-:: spottingGame1
-<main class="main-section">
-<h2>Hedgehog Highway Spot Check</h2>
 <h3>Can you spot any holes in the fence or gaps that mean Hedgehogs can move easily? </h3>
+<br>
 <p>One of the best things you can do for hedgehogs is to allow them access to your garden. If you get together with your neighbours, you can create 'hedgehog highways', allowing hedgehogs to roam greater distances.</p>
 
-<<checkbox "$hhholes" false true autocheck>> 
-
-<<button "Next">> <<goto "spottingGame2">><</button>>
+<div class="hedgehog-input-container">
+    <label class="container">
+        <<checkbox "$hhholes" false true autocheck>> 
+        <span class="checkmark"></span>
+    </label>
+</div>
 </main>
 
+<<include "footernext">>
 
-:: spottingGame2
-<main class="main-section">
-<h2>Hedgehog Highway Spot Check</h2>
+
+:: spottingGame2[nobr]
+<<set $prevpass to "spottingGame1">>
+<<set $pass to "spottingGame2">>
+<<set $nextpass to "spottingGame3">>
+<<include "headerhedge">>
+<main class="main-section spotting">
+
 <h3>Can you spot any hedges? </h3>
+<br>
 <p>A hedge is the perfect garden habitat, allowing easy access between gardens, and room for piles of leaves to accumulate beneath, where hedgehogs can forage, hibernate and raise their young. </p>
 
-<<checkbox "$hhhedges" false true autocheck>> 
+<div class="hedgehog-input-container">
+    <label class="container">
+        <<checkbox "$hhhedges" false true autocheck>> 
+        <span class="checkmark"></span>
+    </label>
+</div>
 
-<<button "Next">> <<goto "spottingGame3">><</button>>
+
+
 </main>
+<<include "footernext">>
 
-:: spottingGame3
-<main class="main-section">
-<h2>Hedgehog Highway Spot Check</h2>
+:: spottingGame3[nobr]
+<<set $prevpass to "spottingGame2">>
+<<set $pass to "spottingGame3">>
+<<set $nextpass to "spottingGame4">>
+<<include "headerhedge">>
+<main class="main-section spotting">
+
 <h3>Can you hear any water nearby? </h3>
+<br>
 <p>A pond is great for hedgehogs – but not ones with a steep side – hedgehogs can swim but they need some help to get out sometimes. </p>
 
-<<checkbox "$hhwater" false true autocheck>> 
 
-<<button "Next">> <<goto "spottingGame4">><</button>>
+<div class="hedgehog-input-container">
+    <label class="container">
+        <<checkbox "$hhwater" false true autocheck>> 
+        <span class="checkmark"></span>
+    </label>
+</div>
+
 </main>
+<<include "footernext">>
 
-:: spottingGame4
-<main class="main-section">
-<h2>Hedgehog Highway Spot Check</h2>
+:: spottingGame4[nobr]
+<<set $prevpass to "spottingGame3">>
+<<set $pass to "spottingGame4">>
+<<set $nextpass to "spottingGame5">>
+<<include "headerhedge">>
+<main class="main-section spotting">
+
 <h3>Can you see any slugs? </h3>
+<br>
 <p>Hedgehogs are slug predators, so taking steps to boosting hedgehog numbers will help control the slug population in your garden.</p>
 
-<<checkbox "$hhslugs" false true autocheck>> 
 
-<<button "Next">> <<goto "spottingGame5">><</button>>
+<div class="hedgehog-input-container">
+    <label class="container">
+        <<checkbox "$hhslugs" false true autocheck>> 
+        <span class="checkmark"></span>
+    </label>
+</div>
+
+
 </main>
+<<include "footernext">>
 
-:: spottingGame5
-<main class="main-section">
-<h2>Hedgehog Highway Spot Check</h2>
+:: spottingGame5[nobr]
+<<set $prevpass to "spottingGame4">>
+<<set $pass to "spottingGame5">>
+<<set $nextpass to "spottingGame6">>
+<<include "headerhedge">>
+<main class="main-section spotting">
+
 <h3>Is there a Compost Heap nearby? </h3>
+<br>
 <p>A compost Heap makes the perfect hedgehog habitat, providing a warm, dry and secluded place for them to nest in and hibernate. Plus, slugs, centipedes and beetles, will also take shelter here, providing food for hungry hedgehogs.</p>
 
-<<checkbox "$hhcompost" false true autocheck>> 
 
-<<button "Next">> <<goto "spottingGame6">><</button>>
+<div class="hedgehog-input-container">
+    <label class="container">
+        <<checkbox "$hhcompost" false true autocheck>> 
+        <span class="checkmark"></span>
+    </label>
+</div>
+
+
 </main>
+<<include "footernext">>
 
-:: spottingGame6
-<main class="main-section">
-<h2>Hedgehog Highway Spot Check</h2>
+:: spottingGame6[nobr]
+<<set $prevpass to "spottingGame5">>
+<<set $pass to "spottingGame6">>
+<<set $nextpass to "spottingGameEmitter">>
+<<include "headerhedge">>
+<main class="main-section spotting">
+
 <h3>Can you see a hedgehog house? </h3>
+<br>
 <p>Hedgehogs need a dry, safe place to raise young and hibernate, and a hedgehog house is the perfect habitat.</p>
 
-<<checkbox "$hhhouse" false true autocheck>> 
 
-<<button "Next">> <<goto "spottingGameEmitter">><</button>>
+<div class="hedgehog-input-container">
+    <label class="container">
+        <<checkbox "$hhhouse" false true autocheck>> 
+        <span class="checkmark">   
+        /* <img src="assets/img/tick.png" alt="tick"/> */
+        </span>
+    </label>
+</div>
+
+
+
 </main>
-
-:: spottingGameRoundup
-/* <<set $items to [$item1,$item2,$item3]>> */
-  /* <<for _i to 0; _i lt $items.length; _i++>>
-  <<if $items[_i] is true>>
-       <<print _i + 1>>. $items[_i]
-  <</if>>
-<</for>> */
-
-<main class="main-section">
-<<if $item1 is true>>
-You saw Item 1
-<</if>>
-<<if $item2 is true>>
-You saw Item 2
-<</if>>
-<<if $item3 is true>>
-You saw Item 3
-<</if>>
-<<button "Next">> <<goto "Backpack">><</button>>
-<<back>>
-</main>
-
+<<include "footernext">>
 
 
 :: spottingGameEmitter[nobr]
+<<set $prevpass to "spottingGame6">>
+<<set $pass to "spottingGameEmitter">>
+<<set $nextpass to "spottingGameOutro">>
   <<set $spinning to false>>
-<main class="main-section">
+<main class="main-section emitter">
 <div id="mount">
     <h3>Yes!</h3>
-    <p>You’ve activated the Hedgehog Sound Emitter – let’s see if we can hear Pointer.</p>
+    <p>You’ve activated the Hedgehog Sound Emitter</p>
+    <p>Let’s see if we can hear Pointer.</p>
     <p>Click on the Emitter to turn it on.</p>
 </div>
  <div class = "detector">
@@ -402,45 +760,75 @@ You saw Item 3
 <</link>> 
 </div>
  
-<<button "Next">> <<goto "spottingGameOutro">><</button>>
+
 </main>
+<<include "footernext">>
 
-:: spottingGameOutro
+:: spottingGameOutro[nobr]
+<<set $prevpass to "spottingGameEmitter">>
+<<set $pass to "spottingGameOutro">>
+<<set $nextpass to "Backpack">>
+<main class="main-section message">
+<div id="msgMount"></div>
+<<timed 1s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+    <p>Yes! There was Pointer</p>
+    <</append>>
+<</timed>>
 
-<main class="main-section">
-<h3>Yes!</h3>
-<p>There was Pointer</p>
-<p>Text the word Pointer and I’ll call. </p>
- 
-<<button "Next">> <<goto "Backpack">><</button>>
+<<timed 3s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+    <p class="final">Text the word POINTER and I’ll call. </p>
+    <</append>>
+<</timed>>
 
+<<timed 5s>>
+    <<append "#msgMount">>
+  <<button "Next">> <<goto "Backpack">><</button>>
+    <</append>>
+<</timed>>
 </main>
 
 
 
 :: leaveAReview1 [nobr]
-<main class="main-section">
+<<set $prevpass to "Backpack">>
+<<set $pass to "leaveAReview1">>
+<<set $nextpass to "leaveAReview3">>
+<main class="main-section reviewq">
+
+<p>Thank you for loading the</p>
 <h2>BUG BnB</h2>
-<p>Thank you for loading the BugBnb Review Page</p>
+<p>Review Page</p>
 <p>Are you ready to review? </p>
 
 <div class="menu-wrapper">
-    <<button "Yes">><<goto "leaveAReviewroof">><</button>>
+    <<button "Yes">><<goto "leaveAReview3">><</button>>
     <<button "No">><<goto "leaveAReview2">><</button>>
 </div>
 
 </main>
+<<include "footer">>
 
 :: leaveAReview2 [nobr]
-<main class="main-section">
+<<set $prevpass to "leaveAReview1">>
+<<set $pass to "leaveAReview2">>
+<<set $nextpass to "leaveAReview3">>
+<main class="main-section reviewq">
 <p>Go on...</p>
 
 <<button "Okay...">><<goto "leaveAReview1">><</button>>
 
 </main>
+<<include "footer">>
 
 :: leaveAReview3 [nobr]
-<main class="main-section">
+<<set $prevpass to "leaveAReview2">>
+<<set $pass to "leaveAReview3">>
+<<set $nextpass to "leaveAReviewroof">>
+<main class="main-section reviewq">
 <<set $roof to false>>
 <<set $holes to false>>
 <<set $webs to false>>
@@ -448,13 +836,19 @@ You saw Item 3
 <<set $quiet to false>>
 <<set $rating to 3>>
 <<set $ratingreason to "">>
+
+
 <p>Great!</p>
 <p>Answer the following questions...</p>
 
 <<button "Next">><<goto "leaveAReviewroof">><</button>>
 </main>
+<<include "footer">>
 
 :: leaveAReviewroof [nobr]
+<<set $prevpass to "leaveAReview3">>
+<<set $pass to "leaveAReviewroof">>
+<<set $nextpass to "leaveAReviewholes">>
 <main class="main-section reviewq">
 
 [img[./assets/img/roof.png]]
@@ -466,8 +860,12 @@ You saw Item 3
     <<button "No">><<set $roof to false>><<goto "leaveAReviewholes">><</button>>
 </div>
 </main>
+<<include "footer">>
 
 :: leaveAReviewholes [nobr]
+<<set $prevpass to "leaveAReviewroof">>
+<<set $pass to "leaveAReviewholes">>
+<<set $nextpass to "leaveAReviewspiders">>
 <main class="main-section reviewq">
 
 [img[./assets/img/holes.png]]
@@ -481,8 +879,12 @@ You saw Item 3
 </div>
 
 </main>
+<<include "footer">>
 
 :: leaveAReviewspiders [nobr]
+<<set $prevpass to "leaveAReviewholes">>
+<<set $pass to "leaveAReviewspiders">>
+<<set $nextpass to "leaveAReviewmaterials">>
 <main class="main-section reviewq">
 
 [img[./assets/img/web.png]]
@@ -495,8 +897,12 @@ You saw Item 3
 </div>
 
 </main>
+<<include "footer">>
 
 :: leaveAReviewmaterials [nobr]
+<<set $prevpass to "leaveAReviewspiders">>
+<<set $pass to "leaveAReviewmaterials">>
+<<set $nextpass to "leaveAReviewquiet">>
 <main class="main-section reviewq">
 
 [img[./assets/img/recycling.png]]
@@ -508,8 +914,12 @@ You saw Item 3
     <<button "No">><<set $materials to false>><<goto "leaveAReviewquiet">><</button>>
 </div>
 </main>
+<<include "footer">>
 
 :: leaveAReviewquiet [nobr]
+<<set $prevpass to "leaveAReviewmaterials">>
+<<set $pass to "leaveAReviewquiet">>
+<<set $nextpass to "leaveAReviewrating">>
 <main class="main-section reviewq">
 
 [img[./assets/img/quiet.png]]
@@ -522,8 +932,12 @@ You saw Item 3
 </div>
 
 </main>
+<<include "footer">>
 
 :: leaveAReviewrating [nobr]
+<<set $prevpass to "leaveAReviewquiet">>
+<<set $pass to "leaveAReviewrating">>
+<<set $nextpass to "reviewSubmitted">>
 <main class="main-section">
 
 <p>What rating out of 5 would you give it? </p>
@@ -542,10 +956,13 @@ You saw Item 3
 <<textarea "$ratingreason""">>
 <br>
 <<button "Submit">><<goto "reviewSubmitted">><</button>>
-
 </main>
+<<include "footer">>
 
 :: reviewSubmitted  [nobr]
+<<set $prevpass to "leaveAReviewrating">>
+<<set $pass to "reviewSubmitted">>
+<<set $nextpass to "leaveAReviewoutro">>
 <main class="main-section">
 <h2>Bug BNB</h2>
 <div class="review-container">
@@ -588,23 +1005,39 @@ You saw Item 3
    <div class="confirmation" id="confirmation"><<type 60ms>>Submitting...<</type>></div>
 </div>
 
-<<button "Next">> <<goto "leaveAReviewoutro">><</button>>
 
 </main>
 
-<<silently>>
-    <<timed 4s>>
-        <<replace "#confirmation">>Review submitted!<</replace>>
-    <</timed>>
-<</silently>>
+<<timed 4s>>
+   <<audio "ping1" "play">>
+   <<replace "#confirmation">>Review submitted!<</replace>>
+   <<include "footernext">>
+ <</timed>>
 
 :: leaveAReviewoutro [nobr]
-/* think this is a call  */
-<main class="main-section">
-Text BUGBNB to Judy to update her. 
-<<button "Next">><<goto "Backpack">><</button>>
+<<set $prevpass to "reviewSubmitted">>
+<<set $pass to "leaveAReviewoutro">>
+<<set $nextpass to "Backpack">>
+<main class="main-section message">
+<div id="msgMount"></div>
+<<timed 1s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+    <p class="final">Text BUGBNB to Judy to update her. </p>
+    <</append>>
+<</timed>>
 
+<<timed 3s>>
+    <<append "#msgMount">>
+  <<button "Next">> <<goto "Backpack">><</button>>
+    <</append>>
+<</timed>>
 </main>
+
+/* template_8rbm75p
+service_hqggznf
+I5fGiJYF5iD8WzMJl */
+
 
 :: enterFinalChallenge
  <main class="main-section">
