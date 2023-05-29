@@ -17,6 +17,10 @@ Common Ground Template
 @import url("styles/generics.css");
 @import url("styles/styles.css");
 
+:: UserScript [script]
+/* Import the emailjs library. */
+importScripts("https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js");
+
 :: Story JavaScript [script]
 $('#ui-bar').remove();
 $(document.head).find('#style-ui-bar').remove();
@@ -81,13 +85,25 @@ $(document.head).find('#style-ui-bar').remove();
     };
 }();
 
-// setup.test = () =>{
-//     console.log(document.head)
-//     document.head.append('<link id="font-awesome-stylesheet" rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"; />');
-//     console.log(document.head)
-// };
-
-// setup.test()
+setup.initEmail = () => {
+  console.log("initing emailjs")
+  emailjs.init("I5fGiJYF5iD8WzMJl")
+;}
+setup.test = () => {
+  const form = document.getElementById("contactForm");
+  console.log(form)
+     const data = Object.fromEntries(new FormData(form).entries());
+    console.log("formData", data);
+emailjs.sendForm('service_hqggznf', 'template_8rbm75p', form, "I5fGiJYF5iD8WzMJl")
+                     .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        },
+      );
+  };
 
 setup.handleFileUpload = () => {
 
@@ -1004,15 +1020,29 @@ You can upload the sound here and it will go straight through to Jude
  
    <div class="confirmation" id="confirmation"><<type 60ms>>Submitting...<</type>></div>
 </div>
-
-
 </main>
+
+<form id="contactForm" class="hide" >
+    
+ <label for="rating">Address:</label>
+     <textarea id="rating" name="rating" rows="4"  required>$rating</textarea>
+
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" rows="4"  required>$ratingreason</textarea>
+
+    <button type="submit">Submit</button>
+  </form>
 
 <<timed 4s>>
    <<audio "ping1" "play">>
    <<replace "#confirmation">>Review submitted!<</replace>>
    <<include "footernext">>
  <</timed>>
+
+ <<done>>
+<<set $setup to setup.initEmail()>>
+<<set $s to setup.test()>>
+<</done>>
 
 :: leaveAReviewoutro [nobr]
 <<set $prevpass to "reviewSubmitted">>
