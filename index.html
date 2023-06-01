@@ -233,7 +233,9 @@ inputElement.addEventListener('change', (event) => {
 &lt;&lt;cacheaudio &quot;keep1&quot; &quot;assets/audio/keep1.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;keep2&quot; &quot;assets/audio/keep2.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;hedgehog&quot; &quot;assets/audio/hedgehog.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;chimechime&quot; &quot;assets/audio/chimechime.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;uploadcomplete&quot; &quot;assets/audio/uploadcomplete.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;uploading&quot; &quot;assets/audio/uploading.mp3&quot;&gt;&gt;
 
 &lt;&lt;waitforaudio&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="landing" tags="" position="425,75" size="100,100">&lt;main&gt;
 
@@ -344,7 +346,7 @@ inputElement.addEventListener('change', (event) => {
 &lt;/footer&gt;
 &lt;&lt;timed 12s&gt;&gt;
     &lt;&lt;append &quot;#footerField&quot;&gt;&gt;
-  &lt;&lt;button &quot;I&#39;ve uploaded my image&quot;&gt;&gt; &lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+  &lt;&lt;button &quot;I&#39;ve uploaded my image&quot;&gt;&gt; &lt;&lt;goto $nextpass&gt;&gt;&lt;&lt;/button&gt;&gt;
     &lt;&lt;/append&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="footercode" tags="" position="225,225" size="100,100">&lt;footer class=&quot;codebreaking&quot;&gt;&lt;&lt;button &quot;Back&quot;&gt;&gt;&lt;&lt;goto $prevpass&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/footer&gt;</tw-passagedata><tw-passagedata pid="13" name="loading" tags="nobr t8n.typewriter.4" position="350,225" size="100,100">&lt;main class=&quot;main-section loading&quot;&gt;
 
 &lt;div class=&quot;loading-img-wrapper&quot;&gt;
@@ -1493,6 +1495,7 @@ Enter the code to get to the final challenge:
 &lt;main class=&quot;main-section message jude&quot;&gt;
 &lt;div id=&#39;audio&#39;&gt;&lt;/div&gt;
 &lt;div id=&quot;msgMount&quot;&gt;&lt;/div&gt;
+  &lt;&lt;audio &quot;uploading&quot; &quot;play&quot;&gt;&gt;
   &lt;&lt;audio &quot;uploadcomplete&quot; &quot;play&quot;&gt;&gt;
 &lt;&lt;timed 2s&gt;&gt;
   &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
@@ -1521,6 +1524,7 @@ Enter the code to get to the final challenge:
 
  &lt;div class=&quot;voicenote&quot;&gt;
 &lt;&lt;link &quot;&lt;img src = &#39;assets/img/call.png&#39;&gt;&quot; &gt;&gt;
+&lt;&lt;audio &quot;:all&quot; &quot;stop&quot;&gt;&gt;
  &lt;&lt;replace &quot;#audio&quot;&gt;&gt;
   &lt;audio autoplay &gt;
   &lt;source src=&quot;https://www.youhavefoundconey.net/nwt/callaudio/Call_6_Jude_With_Sound_checked.mp3&quot;&gt;
@@ -1571,7 +1575,7 @@ Enter the code to get to the final challenge:
 &lt;&lt;set $pass to &quot;call7Jude&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;finalChallengeIntro&quot;&gt;&gt;
 &lt;&lt;include &quot;headermessage&quot;&gt;&gt;
-&lt;main class=&quot;main-section message&quot;&gt;
+&lt;main class=&quot;main-section message jude&quot;&gt;
 &lt;div id=&#39;audio&#39;&gt;&lt;/div&gt;
 &lt;div id=&quot;msgMount&quot;&gt;&lt;/div&gt;
 &lt;&lt;timed 1s&gt;&gt;
@@ -1641,7 +1645,7 @@ Enter the code to get to the final challenge:
   &lt;div id=&quot;error&quot;&gt;&lt;/div&gt;
 
 &lt;/main&gt; 
-&lt;&lt;include &quot;footerupload&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="56" name="finalChallengeOutro" tags="" position="725,725" size="100,100">&lt;&lt;set $prevpass to &quot;finalChallenge&quot;&gt;&gt;
+&lt;&lt;include &quot;footerupload&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="56" name="finalChallengeOutro" tags="nobr" position="725,725" size="100,100">&lt;&lt;set $prevpass to &quot;finalChallenge&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;finalChallengeOutro&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;Backpack&quot;&gt;&gt;
 &lt;&lt;include &quot;headermessage&quot;&gt;&gt;
@@ -1675,6 +1679,7 @@ Enter the code to get to the final challenge:
   &lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
     &lt;&lt;/append&gt;&gt;
 &lt;&lt;/timed&gt;&gt;
+
 &lt;/main&gt;</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */

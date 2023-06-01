@@ -154,7 +154,9 @@ inputElement.addEventListener('change', (event) => {
 <<cacheaudio "keep1" "assets/audio/keep1.mp3">>
 <<cacheaudio "keep2" "assets/audio/keep2.mp3">>
 <<cacheaudio "hedgehog" "assets/audio/hedgehog.mp3">>
+<<cacheaudio "chimechime" "assets/audio/chimechime.mp3">>
 <<cacheaudio "uploadcomplete" "assets/audio/uploadcomplete.mp3">>
+<<cacheaudio "uploading" "assets/audio/uploading.mp3">>
 
 <<waitforaudio>>
 
@@ -300,7 +302,7 @@ inputElement.addEventListener('change', (event) => {
 </footer>
 <<timed 12s>>
     <<append "#footerField">>
-  <<button "I've uploaded my image">> <<goto "Backpack">><</button>>
+  <<button "I've uploaded my image">> <<goto $nextpass>><</button>>
     <</append>><</timed>>
 
 :: footercode
@@ -1588,6 +1590,7 @@ Enter the code to get to the final challenge:
 <main class="main-section message jude">
 <div id='audio'></div>
 <div id="msgMount"></div>
+  <<audio "uploading" "play">>
   <<audio "uploadcomplete" "play">>
 <<timed 2s>>
   <<audio "ping1" "play">>
@@ -1616,6 +1619,7 @@ Enter the code to get to the final challenge:
 
  <div class="voicenote">
 <<link "<img src = 'assets/img/call.png'>" >>
+<<audio ":all" "stop">>
  <<replace "#audio">>
   <audio autoplay >
   <source src="https://www.youhavefoundconey.net/nwt/callaudio/Call_6_Jude_With_Sound_checked.mp3">
@@ -1672,7 +1676,7 @@ Enter the code to get to the final challenge:
 <<set $pass to "call7Jude">>
 <<set $nextpass to "finalChallengeIntro">>
 <<include "headermessage">>
-<main class="main-section message">
+<main class="main-section message jude">
 <div id='audio'></div>
 <div id="msgMount"></div>
 <<timed 1s>>
@@ -1753,7 +1757,7 @@ Enter the code to get to the final challenge:
 </main> 
 <<include "footerupload">>
 
-:: finalChallengeOutro
+:: finalChallengeOutro [nobr]
 <<set $prevpass to "finalChallenge">>
 <<set $pass to "finalChallengeOutro">>
 <<set $nextpass to "Backpack">>
@@ -1788,6 +1792,7 @@ Enter the code to get to the final challenge:
   <<button "Next">> <<goto "Backpack">><</button>>
     <</append>>
 <</timed>>
+
 </main>
 
 
