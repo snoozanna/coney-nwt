@@ -161,14 +161,20 @@ inputElement.addEventListener('change', (event) => {
 :: landing {"position":"425,75","size":"100,100"}
 <main>
 <div class="landing-wrapper">
-    
-          <<button "Start">><<goto "Backpack">><</button>>
+    [img[assets/img/ncplogo.png]]
+          <div class="menu-wrapper"><<button "Start">><<goto "Backpack">><</button>></div>
 </div>
 </main>     
       
 
-
-
+:: map [nobr]
+<<set $prevpass to "Backpack">>
+<<set $pass to "map">>
+<<set $nextpass to "Backpack">>
+<main class="main-section">
+ [img[assets/img/map.png]]
+ </main>
+<<include "footer">>
 
 :: Backpack [nobr] {"position":"425,450","size":"100,100"}
 <<if hasVisited("Backpack")>>
@@ -183,45 +189,67 @@ inputElement.addEventListener('change', (event) => {
 </header>
 
 <main class="main-section backpack">
-
-
-
 <div class="backpack-container">
     <div class="backpack-item">
-        <<button "LOAD THE PIT CHALLENGE">><<goto "fieldRecording">><</button>>
+        <<button "Harding’s Pit Field Recordings">>
+        <<set $nextpass to "fieldRecordingIntro">><<goto "loading">><</button>>
          <<if hasVisited("fieldRecording")>><span class="complete">Complete!</span>
          <<else>>
          <span class="todo">To do</span>
          <</if>>
     </div>
     <div class="backpack-item">
-        <<button "THE COMPASS">><<goto "codebreaking">><</button>>
+        <<button "The Compass Codebreaker">><<set $nextpass to "codebreaking">><<goto "loading">><</button>>
          <<if hasVisited("codebreaking")>><span class="complete">Complete!</span>
          <<else>>
          <span class="todo">To do</span>
          <</if>>
     </div>
     <div class="backpack-item">
-        <<button "SPOTTING GAME">><<goto "spottingGame1">><</button>>
+        <<button "Passageway Hedgehog Highway">><<set $nextpass to "spottingIntro">><<goto "loading">>
+        <</button>>
      <<if hasVisited("spottingGame1")>><span class="complete">Complete!</span>
      <<else>>
          <span class="todo">To do</span>
     <</if>>
     </div>
     <div class="backpack-item">
-        <<button "BUG BNB">><<goto "leaveAReview1">><</button>>
+        <<button "Minster’s Bug BnB">>
+        <<set $nextpass to "leaveAReviewIntro">><<goto "loading">>
+        <</button>>
         <<if hasVisited("leaveAReview1")>><span class="complete">Complete!</span>
     <<else>>
-         <span class="todo">To do</span><</if>>
+         <span class="todo">Todo</span><</if>>
     </div>
-    <div class="backpack-item">
+     /* This one based on codeword */
+  <div class="backpack-item">
     <<if hasVisited("fieldRecording", "codebreaking", "spottingGame1", "leaveAReview1")>>
-        <<if not hasVisited("finalChallengeIntro")>>…
-           <<goto "finalChallengeIntro">>
+        <<if not hasVisited("judeMessage")>>
+           <<goto "judeMessage">>
         <</if>>
-        <<if hasVisited("finalChallengeIntro")>>
+        <<if hasVisited("judeMessage")>>
+            <<if not hasVisited("finalChallenge")>>
+                <<button "Thoresby College’s Secret Tree">><<set $nextpass to "finalChallengeIntro">><<goto "loading">><</button>>
+                    <span class="locked">Locked!</span> 
+            <</if>>
+            <<if hasVisited("finalChallenge")>>
+                <<button "Thoresby College’s Secret Tree">><<set $nextpass to "finalChallengeIntro">><<goto "loading">><</button>>
+                <span class="complete">Complete!</span> 
+            <</if>>
+        <</if>>
+        
+    <</if>>
+    </div>
+
+    /* This one based on having completed the sections  */
+    /* <div class="backpack-item">
+    <<if hasVisited("fieldRecording", "codebreaking", "spottingGame1", "leaveAReview1")>>
+        <<if not hasVisited("judeMessage")>>…
+           <<goto "judeMessage">>
+        <</if>>
+        <<if hasVisited("judeMessage")>>
             <<if not hasVisited("finalChallenge")>>…
-                <<button "UPLOAD PICTURE">><<goto "finalChallenge">><</button>>
+                <<button "ThoresbyCollege’sSecretTree">><<goto "finalChallenge">><</button>>
                     <span class="new">New!</span> 
             <</if>>
         <</if>>
@@ -230,14 +258,16 @@ inputElement.addEventListener('change', (event) => {
                 <span class="complete">Complete!</span> 
         <</if>>
     <</if>>
-     
-    </div>
+    </div> */
 </div>
 </main>
-<footer><<button "Show map">><</button>></footer>
+<footer><<button "Show map">><<goto "map">><</button>></footer>
 
 :: headerhedge
 <header class="hedgehog"><h2><span>Hedgehog Highway </span><span>Spot Check</span></h2><div></div></header>
+
+:: headermessage
+<header><h3>Incoming message</h3></header>
 
 
 
@@ -245,27 +275,93 @@ inputElement.addEventListener('change', (event) => {
 <footer><<button "Back">><<goto $prevpass>><</button>></footer>
 
 
-:: footernext
+:: footernext[nobr]
 <footer><<button "Back">><<goto $prevpass>><</button>><<button "Next">><<goto $nextpass>><</button>></footer>
 
-:: footerfield
-<footer><<button "Back">><<goto $prevpass>><</button>><<button "I've submitted my sounds">> <<goto "fieldRecordingoutro">><</button>></footer>
+:: footeremitter[nobr]
+<footer id="footerEmitter"><<button "Back">><<goto $prevpass>><</button>></footer>
+
+<<timed 15s>>
+    <<append "#footerEmitter">>
+<<button "Next">><<goto $nextpass>><</button>>
+    <</append>><</timed>>
+
+:: footerfield [nobr]
+<footer id="footerField"><<button "Back">><<goto $prevpass>><</button>>
+</footer>
+<<timed 60s>>
+    <<append "#footerField">>
+  <<button "I've submitted my sounds">> <<goto "fieldRecordingoutro">><</button>>
+    <</append>><</timed>>
+
+:: footerupload [nobr]
+<footer id="footerField"><<button "Back">><<goto $prevpass>><</button>>
+</footer>
+<<timed 12s>>
+    <<append "#footerField">>
+  <<button "I've uploaded my image">> <<goto "Backpack">><</button>>
+    <</append>><</timed>>
+
+:: footercode
+<footer class="codebreaking"><<button "Back">><<goto $prevpass>><</button>></footer>
 
 
-:: HouseEnd {"position":"425,450","size":"100,100"}
+:: loading [nobr]
 <main class="main-section">
-<img src="./assets/img/housebasement.png" class="housemap codeword">
+<<switch $nextpass>>
+<<case "codebreaking">>
+	[img[assets/img/compass_icon.png]]
+<<case "fieldRecordingIntro">>
+	[img[assets/img/minster_icon_small.png]]
+ <<case "spottingIntro">>
+	[img[assets/img/3_crowns_small.png]]
+ <<case "leaveAReviewIntro">>
+	[img[assets/img/bug_icon.png]]
+ <<case "finalChallengeIntro">>
+	[img[assets/img/secret_icon.png]]
+<<default>>
+[img[./assets/img/ncplogo.png]]
+<</switch>>
 
-
-The end
-
-<<button "Back to the Start">><<goto "Backpack">><</button>>
+<div class="menu-wrapper"><div id="mount"></div></div>
 </main>
 
-:: fieldRecording [nobr]
+<<timed 1s>>
+    <<replace "#mount">>
+    Loading...
+    <</replace>><</timed>>
+
+<<timed 3s>>
+    <<replace "#mount">>
+
+    <</replace>><</timed>>
+
+    <<timed 5s>>
+    <<replace "#mount">>
+    Loading...
+    <</replace>><</timed>>
+<<timed 7s>>
+<<goto $nextpass>>
+<</timed>>
+
+:: fieldRecordingIntro [nobr]
 <<set $prevpass to "Backpack">>
+<<set $pass to "fieldRecordingIntro">>
+<<set $nextpass to "fieldRecording">>
+<main class="main-section">
+
+Are you in a spot where you can see lots of reeds and perhaps a colourful boat?
+<br><br>
+<div class="menu-wrapper">
+<<button "Yes">><<goto "fieldRecording">><</button>>
+</div>
+</main>
+<<include "footer">>
+
+:: fieldRecording [nobr]
+<<set $prevpass to "fieldRecordingIntro">>
 <<set $pass to "fieldRecording">>
-<<set $nextpass to "Backpack">>
+<<set $nextpass to "fieldRecordingoutro">>
 <main class="main-section">
 We need you to send through Field Recordings of the sounds here at Harding’s Pit. They’ll be birds, bees and bugs that you can find but I want you to send through the sound you love! 
 <br><br>
@@ -281,24 +377,35 @@ You can upload the sound here and it will go straight through to Jude
 <<set $prevpass to "fieldRecording">>
 <<set $pass to "fieldRecordingoutro">>
 <<set $nextpass to "Backpack">>
+<<include "headermessage">>
 <main class="main-section message">
+
 <div id="msgMount"></div>
   <<audio "uploadcomplete" "play">>
 <<timed 2s>>
     <<audio "ping1" "play">>
     <<append "#msgMount">>
-    <p>Sound Sent!</p>
+    <span class="sender">Judy</span>
+    <p>Sounds received.</p>
     <</append>>
 <</timed>>
 
 <<timed 4s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
-    <p class="final">Send me the word SOUNDS.  </p>
+    <p >Excellent work </p>
     <</append>>
 <</timed>>
 
-<<timed 5s>>
+<<timed 6s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+    <p class="final">Text me the word SOUNDS and I'll call you. </p>
+    <</append>>
+<</timed>>
+
+
+<<timed 7s>>
     <<append "#msgMount">>
   <<button "Next">> <<goto "Backpack">><</button>>
     <</append>>
@@ -318,15 +425,11 @@ You can upload the sound here and it will go straight through to Jude
 <<set $pass to "codebreaking">>
 <<set $nextpass to "Backpack">>
 <<set $correctans to []>>
-<header id="header"><h3>Enter the code:</h3></header>
-<main class="main-section" id="mainMount">
+<header id="header" class="column">
+<h2>Compass Secret Codeword</h2>
+<p>Click on the below boxes to get the clues to crack the code</p></header>
+<main class="main-section codebreaking" id="mainMount">
 
-
-
-
-<div id="inputMount"></div>
-<br>
-<br>
 <div class="wordcontainer">
 <<set $current to "">>
 /* Letter S  */
@@ -342,7 +445,8 @@ You can upload the sound here and it will go straight through to Jude
         <<removeclass "#letterItemA" "current">>   
         <<removeclass "#letterItemL" "current">>   
         <<removeclass "#letterItemT" "current">>   
-        <<removeclass "#letterItemY" "current">>   
+        <<removeclass "#letterItemY" "current">> 
+        <span class="title">CLUES</span>  
         <span>WEST</span>
         <span>FIRST NAME</span>
         <span>FIRST LETTER</span>
@@ -390,6 +494,7 @@ You can upload the sound here and it will go straight through to Jude
         <<removeclass "#letterItemL" "current">>   
         <<removeclass "#letterItemT" "current">>   
         <<removeclass "#letterItemY" "current">>   
+       <span class="title">CLUES</span>  
         <span>SOUTH</span>
         <span>FIRST WORD</span>
         <span>FIRST LETTER</span>
@@ -437,6 +542,7 @@ You can upload the sound here and it will go straight through to Jude
         <<addclass "#letterItemL" "current">>   
         <<removeclass "#letterItemT" "current">>   
         <<removeclass "#letterItemY" "current">>   
+        <span class="title">CLUES</span>  
         <span>EAST</span>
         <span>FIRST WORD</span>
         <span>LAST LETTER</span>
@@ -485,6 +591,7 @@ You can upload the sound here and it will go straight through to Jude
         <<removeclass "#letterItemL" "current">>   
         <<addclass "#letterItemT" "current">>   
         <<removeclass "#letterItemY" "current">>   
+        <span class="title">CLUES</span>  
         <span>NORTH</span>
         <span>FIRST WORD</span>
         <span>FOURTH LETTER</span>
@@ -533,6 +640,7 @@ You can upload the sound here and it will go straight through to Jude
         <<removeclass "#letterItemL" "current">>   
         <<removeclass "#letterItemT" "current">>   
         <<addclass "#letterItemY" "current">>   
+        <span class="title">CLUES</span>  
         <span>NORTH-WEST</span>
         <span>LAST NAME</span>
         <span>LAST LETTER</span>
@@ -567,7 +675,9 @@ You can upload the sound here and it will go straight through to Jude
   <</link>>
 </div>
 </div>
-
+<br>
+<br>
+<div id="inputMount"></div>
 <br>
 <br>
 <div id="clueMount">
@@ -581,20 +691,22 @@ You can upload the sound here and it will go straight through to Jude
 <<set $prevpass to "codebreaking">>
 <<set $pass to "codebreakingoutro">>
 <<set $nextpass to "Backpack">>
+<<include "headermessage">>
 <main class="main-section message">
 <div id="msgMount"></div>
   <<audio "uploadcomplete" "play">>
 <<timed 2s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
-    <p>You did it!</p>
+     <span class="sender">Judy</span>
+    <p>You did it.</p>
     <</append>>
 <</timed>>
 
 <<timed 4s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
-    <p class="final"> Text the word "SALTY" to me.  </p>
+    <p class="final"> Text me the word SALTY and I'll call you.  </p>
     <</append>>
 <</timed>>
 
@@ -603,6 +715,22 @@ You can upload the sound here and it will go straight through to Jude
   <<button "Next">> <<goto "Backpack">><</button>>
     <</append>>
 <</timed>>
+</main>
+
+:: spottingIntro [nobr]
+<<set $prevpass to "Backpack">>
+<<set $pass to "spottingIntro">>
+<<set $nextpass to "spottingGame1">>
+<<include "headerhedge">>
+<main class="main-section "><p>I need you to check the Hedgehog Highway.</p>
+<p>If you spot it, check the box.</p>
+<p>And then we can use your phone to load up the Hedgehog Sound Scanner</p>
+<p>Head outside the secret garden - don’t go in - we don’t want to disturb Pointer. </p>
+
+<p>Are you ready to Spot?</p>
+
+<<button "Yes">><<goto "spottingGame1">><</button>>
+
 </main>
 
 
@@ -753,10 +881,11 @@ You can upload the sound here and it will go straight through to Jude
   <<set $spinning to false>>
 <main class="main-section emitter">
 <div id="mount">
-    <h3>Yes!</h3>
-    <p>You’ve activated the Hedgehog Sound Emitter</p>
+    <h3>YES</h3>
+    <p>You’ve activated the Hedgehog Sound Scanner</p>
     <p>Let’s see if we can hear Pointer.</p>
-    <p>Click on the Emitter to turn it on.</p>
+    <p>Click on the Scanner to turn it on.</p>
+    <p>You may need to move the phone around to pick up the sound.</p>
 </div>
  <div class = "detector">
 
@@ -778,17 +907,19 @@ You can upload the sound here and it will go straight through to Jude
  
 
 </main>
-<<include "footernext">>
+<<include "footeremitter">>
 
 :: spottingGameOutro[nobr]
 <<set $prevpass to "spottingGameEmitter">>
 <<set $pass to "spottingGameOutro">>
 <<set $nextpass to "Backpack">>
+<<include "headermessage">>
 <main class="main-section message">
 <div id="msgMount"></div>
 <<timed 1s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
+    <span class="sender">Judy</span>
     <p>Yes! There was Pointer</p>
     <</append>>
 <</timed>>
@@ -796,7 +927,7 @@ You can upload the sound here and it will go straight through to Jude
 <<timed 3s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
-    <p class="final">Text the word POINTER and I’ll call. </p>
+    <p class="final">Text the word POINTER and I’ll call you. </p>
     <</append>>
 <</timed>>
 
@@ -807,7 +938,22 @@ You can upload the sound here and it will go straight through to Jude
 <</timed>>
 </main>
 
+:: leaveAReviewIntro [nobr]
+<<set $prevpass to "Backpack">>
+<<set $pass to "leaveAReviewIntro">>
+<<set $nextpass to "leaveAReview1">>
+<main class="main-section">
 
+<p>Are you standing next to the Bug BnB?</p>
+<p>It is off to the right of the Minster on the grass.</p>
+
+<div class="menu-wrapper">
+    <<button "Yes">><<goto "leaveAReview1">><</button>>
+  
+</div>
+
+</main>
+<<include "footer">>
 
 :: leaveAReview1 [nobr]
 <<set $prevpass to "Backpack">>
@@ -1048,16 +1194,26 @@ You can upload the sound here and it will go straight through to Jude
 <<set $prevpass to "reviewSubmitted">>
 <<set $pass to "leaveAReviewoutro">>
 <<set $nextpass to "Backpack">>
+<<include "headermessage">>
 <main class="main-section message">
 <div id="msgMount"></div>
 <<timed 1s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
-    <p class="final">Text BUGBNB to Judy to update her. </p>
+ <span class="sender">Judy</span>
+ <p>Thank you for sending through the review. </p>
+
     <</append>>
 <</timed>>
 
 <<timed 3s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+    <p class="final">Text BUGBNB and I'll call. </p>
+    <</append>>
+<</timed>>
+
+<<timed 4s>>
     <<append "#msgMount">>
   <<button "Next">> <<goto "Backpack">><</button>>
     <</append>>
@@ -1070,6 +1226,9 @@ I5fGiJYF5iD8WzMJl */
 
 
 :: enterFinalChallenge
+<<set $prevpass to "Backpack">>
+<<set $pass to "enterFinalChallenge">>
+<<set $nextpass to "Backpack">>
  <main class="main-section">
 Enter the code to get to the final challenge:
 
@@ -1084,32 +1243,99 @@ Enter the code to get to the final challenge:
  /% PASSWORD CODE %/
 <<set $code to $code.toUpperCase()>>
 /% CODEWORD CORRECT %/
-<<if $code isnot "" and $code is "CODE">>
+<<if $code isnot "" and $code is "TRIFLE">>
 <<replace "#coderesult">>CORRECT<</replace>>
 <<timed 3s>><<goto "finalChallenge">><</timed>>
 <</if>>
 /% CODEWORD INCORRECT %/
-<<if $code isnot "" and $code is not "CODE">>
+<<if $code isnot "" and $code is not "TRIFLE">>
 <<replace "#coderesult">>Thats not right.<</replace>>
 <<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
 <</if>><</button>>
 </div>
 </main> 
+<<include "footer">>
 
 
-:: finalChallengeIntro
- <main class="main-section">
-Hello, it’s Jude. 
-I don’t know who this is but can we chat? 
-Text me the word PROTECTOR so I know it is you. 
-<br/>
-<<button "Next (after phone call)">> <<goto "Backpack">><</button>>
+:: judeMessage [nobr]
+<<set $prevpass to "Backpack">>
+<<set $pass to "judeMessage">>
+<<set $nextpass to "Backpack">>
+<<include "headermessage">>
+<main class="main-section message">
+<div id="msgMount"></div>
+  <<audio "uploadcomplete" "play">>
+<<timed 2s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+     <span class="sender">Jude</span>
+    <p>Hello, this is Jude</p>
+    <</append>>
+<</timed>>
+
+<<timed 4s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+    <p>I don't know who you are but can we chat? </p>
+    <</append>>
+<</timed>>
+
+<<timed 6s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+    <p>Text me the word PROTECTORS so I know its you.</p>
+    <</append>>
+<</timed>>
+<<timed 8s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+    <p class="final">My number is <a href="tel:072929292992"> 072929292992</a></p>
+    <</append>>
+<</timed>>
+
+<<timed 9s>>
+    <<append "#msgMount">>
+<<button "Next">> <<goto "Backpack">><</button>>
+    <</append>>
+<</timed>>
 </main>
 
-:: finalChallenge
+
+:: finalChallengeIntro 
+<<set $prevpass to "Backpack">>
+<<set $pass to "finalChallengeIntro">>
+<<set $nextpass to "finalChallengeIntro2">>
+ <main class="main-section">
+<p>Are you standing in front of the Judas Tree?</p>
+
+<div class="menu-wrapper">
+    <<button "Yes">><<goto "finalChallengeIntro2">><</button>>
+</div>
+</main> 
+
+:: finalChallengeIntro2
+<<set $prevpass to "finalChallengeIntro">>
+<<set $pass to "finalChallengeIntro2">>
+<<set $nextpass to "finalChallenge">>
+ <main class="main-section">
+<p>Can you do the Nature Corridor Protectors Ritual and upload a picture of the tree for Judy to remind her of this special place.</p>
+
+<div class="menu-wrapper">
+    <<button "Tell me more">><<goto "finalChallenge">><</button>>
+</div>
+</main> 
+
+:: finalChallenge [nobr]
+<<set $prevpass to "finalChallengeIntro2">>
+<<set $pass to "finalChallenge">>
+<<set $nextpass to "finalChallengeOutro">>
  <main class="main-section">
 <input type="file" accept="image/*" capture="camera" id="inputImg" class="hide">
-You can upload an image of a tree here:
+<h3>Nature Corridor Protectors Ritual</h3>
+<br>
+<p>Find a piece of nature - a petal, a leaf or something we liked - that had landed on the path</p>
+<p>Place it in the bowl on the other side of the grass.</p>
+<p>And take a picture of the bowl (and the tree if you can)</p>
 <br>
 <div id="success">
 <<button "Upload Image">>
@@ -1118,16 +1344,53 @@ You can upload an image of a tree here:
   <br>
   <br>
   <div id="error"></div>
-   <<button "Done!">><<goto "Backpack">><</button>>
+
 </main> 
+<<include "footerupload">>
 
 :: finalChallengeOutro
- <main class="main-section">
-<p>I’ll call you – text me the word TREE when you are ready. </p>
-   <<button "Done!">><<goto "Backpack">><</button>>
-</main> 
+<<set $prevpass to "finalChallenge">>
+<<set $pass to "finalChallengeOutro">>
+<<set $nextpass to "Backpack">>
+<<include "headermessage">>
+<main class="main-section message">
 
+<div id="msgMount"></div>
+  <<audio "uploadcomplete" "play">>
+<<timed 2s>>
+    <<audio "ping1" "play">>
+    <<append "#msgMount">>
+    <span class="sender">Judy</span>
+    <p>Wow - the Secret Tree.</p>
+    <</append>>
+<</timed>>
 
+<<timed 4s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+    <p >The 5th spot!</p>
+    <</append>>
+<</timed>>
+
+<<timed 6s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+    <p >How did you find it? </p>
+    <</append>>
+<</timed>>
+
+<<timed 8s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+    <p class="final">Text me the word TREE and I'll call you right away. </p>
+    <</append>>
+<</timed>>
+<<timed 7s>>
+    <<append "#msgMount">>
+  <<button "Next">> <<goto "Backpack">><</button>>
+    <</append>>
+<</timed>>
+</main>
 
 
 

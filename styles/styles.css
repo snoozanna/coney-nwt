@@ -105,6 +105,14 @@ header {
   padding: var(--padding);
 }
 
+header.column {
+  flex-direction: column;
+}
+
+header.column > p {
+  text-align: center;
+}
+
 .header-item > h1 {
   font-size: 2rem;
 }
@@ -118,7 +126,7 @@ header {
 
 main {
   padding: var(--padding);
-  min-height: 80vh;
+  min-height: 70vh;
   margin-block-end: 10rem !important;
   display: flex;
   justify-content: center;
@@ -355,10 +363,10 @@ header.backpack > .avatar-icon > img {
   margin-bottom: 0.8rem;
 }
 
-span.new {
+span.locked {
   position: absolute;
   right: 5%;
-  background-color: rgb(123, 255, 0);
+  background-color: red;
   padding: 5px;
   color: black;
   transform: rotate(-5deg);
@@ -655,6 +663,14 @@ main.main-section.spotting {
 }
 
 /* CODEBREAKING  */
+.main-section.codebreaking {
+  min-height: inherit;
+}
+
+footer.codebreaking {
+  position: inherit;
+}
+
 .wordcontainer {
   display: flex;
   flex-direction: row;
@@ -724,6 +740,10 @@ main.main-section.spotting {
   font-weight: 900;
 }
 
+#clueMount > span.title {
+  color: black;
+}
+
 #mainMount > h3 {
   text-align: center;
   width: 100%;
@@ -735,6 +755,12 @@ main.main-section.spotting {
   background-color: var(--asparagus-light);
   height: 100vh;
 }
+.main-section.message > #msgMount > span.sender {
+  color: black;
+  font-weight: 700;
+  margin-left: 1rem;
+}
+
 .main-section.message > #msgMount > p {
   background-color: var(--greenpea-dark1);
   color: white;

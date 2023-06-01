@@ -236,10 +236,16 @@ inputElement.addEventListener('change', (event) => {
 
 &lt;&lt;waitforaudio&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="landing" tags="" position="425,75" size="100,100">&lt;main&gt;
 &lt;div class=&quot;landing-wrapper&quot;&gt;
-    
-          &lt;&lt;button &quot;Start&quot;&gt;&gt;&lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+    [img[assets/img/ncplogo.png]]
+          &lt;div class=&quot;menu-wrapper&quot;&gt;&lt;&lt;button &quot;Start&quot;&gt;&gt;&lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="3" name="Backpack" tags="nobr" position="425,450" size="100,100">&lt;&lt;if hasVisited(&quot;Backpack&quot;)&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="3" name="map" tags="nobr" position="350,100" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;map&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;Backpack&quot;&gt;&gt;
+&lt;main class=&quot;main-section&quot;&gt;
+ [img[assets/img/map.png]]
+ &lt;/main&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="Backpack" tags="nobr" position="425,450" size="100,100">&lt;&lt;if hasVisited(&quot;Backpack&quot;)&gt;&gt;
 &lt;&lt;audio &quot;keep2&quot; &quot;play&quot;&gt;&gt;
 &lt;&lt;else&gt;&gt;
 &lt;&lt;audio &quot;keep1&quot; &quot;play&quot;&gt;&gt;
@@ -251,45 +257,67 @@ inputElement.addEventListener('change', (event) => {
 &lt;/header&gt;
 
 &lt;main class=&quot;main-section backpack&quot;&gt;
-
-
-
 &lt;div class=&quot;backpack-container&quot;&gt;
     &lt;div class=&quot;backpack-item&quot;&gt;
-        &lt;&lt;button &quot;LOAD THE PIT CHALLENGE&quot;&gt;&gt;&lt;&lt;goto &quot;fieldRecording&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+        &lt;&lt;button &quot;Harding’s Pit Field Recordings&quot;&gt;&gt;
+        &lt;&lt;set $nextpass to &quot;fieldRecordingIntro&quot;&gt;&gt;&lt;&lt;goto &quot;loading&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
          &lt;&lt;if hasVisited(&quot;fieldRecording&quot;)&gt;&gt;&lt;span class=&quot;complete&quot;&gt;Complete!&lt;/span&gt;
          &lt;&lt;else&gt;&gt;
          &lt;span class=&quot;todo&quot;&gt;To do&lt;/span&gt;
          &lt;&lt;/if&gt;&gt;
     &lt;/div&gt;
     &lt;div class=&quot;backpack-item&quot;&gt;
-        &lt;&lt;button &quot;THE COMPASS&quot;&gt;&gt;&lt;&lt;goto &quot;codebreaking&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+        &lt;&lt;button &quot;The Compass Codebreaker&quot;&gt;&gt;&lt;&lt;set $nextpass to &quot;codebreaking&quot;&gt;&gt;&lt;&lt;goto &quot;loading&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
          &lt;&lt;if hasVisited(&quot;codebreaking&quot;)&gt;&gt;&lt;span class=&quot;complete&quot;&gt;Complete!&lt;/span&gt;
          &lt;&lt;else&gt;&gt;
          &lt;span class=&quot;todo&quot;&gt;To do&lt;/span&gt;
          &lt;&lt;/if&gt;&gt;
     &lt;/div&gt;
     &lt;div class=&quot;backpack-item&quot;&gt;
-        &lt;&lt;button &quot;SPOTTING GAME&quot;&gt;&gt;&lt;&lt;goto &quot;spottingGame1&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+        &lt;&lt;button &quot;Passageway Hedgehog Highway&quot;&gt;&gt;&lt;&lt;set $nextpass to &quot;spottingIntro&quot;&gt;&gt;&lt;&lt;goto &quot;loading&quot;&gt;&gt;
+        &lt;&lt;/button&gt;&gt;
      &lt;&lt;if hasVisited(&quot;spottingGame1&quot;)&gt;&gt;&lt;span class=&quot;complete&quot;&gt;Complete!&lt;/span&gt;
      &lt;&lt;else&gt;&gt;
          &lt;span class=&quot;todo&quot;&gt;To do&lt;/span&gt;
     &lt;&lt;/if&gt;&gt;
     &lt;/div&gt;
     &lt;div class=&quot;backpack-item&quot;&gt;
-        &lt;&lt;button &quot;BUG BNB&quot;&gt;&gt;&lt;&lt;goto &quot;leaveAReview1&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+        &lt;&lt;button &quot;Minster’s Bug BnB&quot;&gt;&gt;
+        &lt;&lt;set $nextpass to &quot;leaveAReviewIntro&quot;&gt;&gt;&lt;&lt;goto &quot;loading&quot;&gt;&gt;
+        &lt;&lt;/button&gt;&gt;
         &lt;&lt;if hasVisited(&quot;leaveAReview1&quot;)&gt;&gt;&lt;span class=&quot;complete&quot;&gt;Complete!&lt;/span&gt;
     &lt;&lt;else&gt;&gt;
-         &lt;span class=&quot;todo&quot;&gt;To do&lt;/span&gt;&lt;&lt;/if&gt;&gt;
+         &lt;span class=&quot;todo&quot;&gt;Todo&lt;/span&gt;&lt;&lt;/if&gt;&gt;
     &lt;/div&gt;
-    &lt;div class=&quot;backpack-item&quot;&gt;
+     /* This one based on codeword */
+  &lt;div class=&quot;backpack-item&quot;&gt;
     &lt;&lt;if hasVisited(&quot;fieldRecording&quot;, &quot;codebreaking&quot;, &quot;spottingGame1&quot;, &quot;leaveAReview1&quot;)&gt;&gt;
-        &lt;&lt;if not hasVisited(&quot;finalChallengeIntro&quot;)&gt;&gt;…
-           &lt;&lt;goto &quot;finalChallengeIntro&quot;&gt;&gt;
+        &lt;&lt;if not hasVisited(&quot;judeMessage&quot;)&gt;&gt;
+           &lt;&lt;goto &quot;judeMessage&quot;&gt;&gt;
         &lt;&lt;/if&gt;&gt;
-        &lt;&lt;if hasVisited(&quot;finalChallengeIntro&quot;)&gt;&gt;
+        &lt;&lt;if hasVisited(&quot;judeMessage&quot;)&gt;&gt;
+            &lt;&lt;if not hasVisited(&quot;finalChallenge&quot;)&gt;&gt;
+                &lt;&lt;button &quot;Thoresby College’s Secret Tree&quot;&gt;&gt;&lt;&lt;set $nextpass to &quot;finalChallengeIntro&quot;&gt;&gt;&lt;&lt;goto &quot;loading&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+                    &lt;span class=&quot;locked&quot;&gt;Locked!&lt;/span&gt; 
+            &lt;&lt;/if&gt;&gt;
+            &lt;&lt;if hasVisited(&quot;finalChallenge&quot;)&gt;&gt;
+                &lt;&lt;button &quot;Thoresby College’s Secret Tree&quot;&gt;&gt;&lt;&lt;set $nextpass to &quot;finalChallengeIntro&quot;&gt;&gt;&lt;&lt;goto &quot;loading&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+                &lt;span class=&quot;complete&quot;&gt;Complete!&lt;/span&gt; 
+            &lt;&lt;/if&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
+        
+    &lt;&lt;/if&gt;&gt;
+    &lt;/div&gt;
+
+    /* This one based on having completed the sections  */
+    /* &lt;div class=&quot;backpack-item&quot;&gt;
+    &lt;&lt;if hasVisited(&quot;fieldRecording&quot;, &quot;codebreaking&quot;, &quot;spottingGame1&quot;, &quot;leaveAReview1&quot;)&gt;&gt;
+        &lt;&lt;if not hasVisited(&quot;judeMessage&quot;)&gt;&gt;…
+           &lt;&lt;goto &quot;judeMessage&quot;&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
+        &lt;&lt;if hasVisited(&quot;judeMessage&quot;)&gt;&gt;
             &lt;&lt;if not hasVisited(&quot;finalChallenge&quot;)&gt;&gt;…
-                &lt;&lt;button &quot;UPLOAD PICTURE&quot;&gt;&gt;&lt;&lt;goto &quot;finalChallenge&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+                &lt;&lt;button &quot;ThoresbyCollege’sSecretTree&quot;&gt;&gt;&lt;&lt;goto &quot;finalChallenge&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
                     &lt;span class=&quot;new&quot;&gt;New!&lt;/span&gt; 
             &lt;&lt;/if&gt;&gt;
         &lt;&lt;/if&gt;&gt;
@@ -298,20 +326,73 @@ inputElement.addEventListener('change', (event) => {
                 &lt;span class=&quot;complete&quot;&gt;Complete!&lt;/span&gt; 
         &lt;&lt;/if&gt;&gt;
     &lt;&lt;/if&gt;&gt;
-     
-    &lt;/div&gt;
+    &lt;/div&gt; */
 &lt;/div&gt;
 &lt;/main&gt;
-&lt;footer&gt;&lt;&lt;button &quot;Show map&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/footer&gt;</tw-passagedata><tw-passagedata pid="4" name="headerhedge" tags="" position="475,100" size="100,100">&lt;header class=&quot;hedgehog&quot;&gt;&lt;h2&gt;&lt;span&gt;Hedgehog Highway &lt;/span&gt;&lt;span&gt;Spot Check&lt;/span&gt;&lt;/h2&gt;&lt;div&gt;&lt;/div&gt;&lt;/header&gt;</tw-passagedata><tw-passagedata pid="5" name="footer" tags="" position="600,100" size="100,100">&lt;footer&gt;&lt;&lt;button &quot;Back&quot;&gt;&gt;&lt;&lt;goto $prevpass&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/footer&gt;</tw-passagedata><tw-passagedata pid="6" name="footernext" tags="" position="725,100" size="100,100">&lt;footer&gt;&lt;&lt;button &quot;Back&quot;&gt;&gt;&lt;&lt;goto $prevpass&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;Next&quot;&gt;&gt;&lt;&lt;goto $nextpass&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/footer&gt;</tw-passagedata><tw-passagedata pid="7" name="footerfield" tags="" position="850,100" size="100,100">&lt;footer&gt;&lt;&lt;button &quot;Back&quot;&gt;&gt;&lt;&lt;goto $prevpass&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;I&#39;ve submitted my sounds&quot;&gt;&gt; &lt;&lt;goto &quot;fieldRecordingoutro&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/footer&gt;</tw-passagedata><tw-passagedata pid="8" name="HouseEnd" tags="" position="425,450" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
-&lt;img src=&quot;./assets/img/housebasement.png&quot; class=&quot;housemap codeword&quot;&gt;
+&lt;footer&gt;&lt;&lt;button &quot;Show map&quot;&gt;&gt;&lt;&lt;goto &quot;map&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/footer&gt;</tw-passagedata><tw-passagedata pid="5" name="headerhedge" tags="" position="600,100" size="100,100">&lt;header class=&quot;hedgehog&quot;&gt;&lt;h2&gt;&lt;span&gt;Hedgehog Highway &lt;/span&gt;&lt;span&gt;Spot Check&lt;/span&gt;&lt;/h2&gt;&lt;div&gt;&lt;/div&gt;&lt;/header&gt;</tw-passagedata><tw-passagedata pid="6" name="headermessage" tags="" position="725,100" size="100,100">&lt;header&gt;&lt;h3&gt;Incoming message&lt;/h3&gt;&lt;/header&gt;</tw-passagedata><tw-passagedata pid="7" name="footer" tags="" position="850,100" size="100,100">&lt;footer&gt;&lt;&lt;button &quot;Back&quot;&gt;&gt;&lt;&lt;goto $prevpass&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/footer&gt;</tw-passagedata><tw-passagedata pid="8" name="footernext" tags="nobr" position="975,100" size="100,100">&lt;footer&gt;&lt;&lt;button &quot;Back&quot;&gt;&gt;&lt;&lt;goto $prevpass&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;Next&quot;&gt;&gt;&lt;&lt;goto $nextpass&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/footer&gt;</tw-passagedata><tw-passagedata pid="9" name="footeremitter" tags="nobr" position="1100,100" size="100,100">&lt;footer id=&quot;footerEmitter&quot;&gt;&lt;&lt;button &quot;Back&quot;&gt;&gt;&lt;&lt;goto $prevpass&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/footer&gt;
 
+&lt;&lt;timed 15s&gt;&gt;
+    &lt;&lt;append &quot;#footerEmitter&quot;&gt;&gt;
+&lt;&lt;button &quot;Next&quot;&gt;&gt;&lt;&lt;goto $nextpass&gt;&gt;&lt;&lt;/button&gt;&gt;
+    &lt;&lt;/append&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="footerfield" tags="nobr" position="1225,100" size="100,100">&lt;footer id=&quot;footerField&quot;&gt;&lt;&lt;button &quot;Back&quot;&gt;&gt;&lt;&lt;goto $prevpass&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;/footer&gt;
+&lt;&lt;timed 60s&gt;&gt;
+    &lt;&lt;append &quot;#footerField&quot;&gt;&gt;
+  &lt;&lt;button &quot;I&#39;ve submitted my sounds&quot;&gt;&gt; &lt;&lt;goto &quot;fieldRecordingoutro&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+    &lt;&lt;/append&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="footerupload" tags="nobr" position="100,225" size="100,100">&lt;footer id=&quot;footerField&quot;&gt;&lt;&lt;button &quot;Back&quot;&gt;&gt;&lt;&lt;goto $prevpass&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;/footer&gt;
+&lt;&lt;timed 12s&gt;&gt;
+    &lt;&lt;append &quot;#footerField&quot;&gt;&gt;
+  &lt;&lt;button &quot;I&#39;ve uploaded my image&quot;&gt;&gt; &lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+    &lt;&lt;/append&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="footercode" tags="" position="225,225" size="100,100">&lt;footer class=&quot;codebreaking&quot;&gt;&lt;&lt;button &quot;Back&quot;&gt;&gt;&lt;&lt;goto $prevpass&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/footer&gt;</tw-passagedata><tw-passagedata pid="13" name="loading" tags="nobr" position="350,225" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
+&lt;&lt;switch $nextpass&gt;&gt;
+&lt;&lt;case &quot;codebreaking&quot;&gt;&gt;
+	[img[assets/img/compass_icon.png]]
+&lt;&lt;case &quot;fieldRecordingIntro&quot;&gt;&gt;
+	[img[assets/img/minster_icon_small.png]]
+ &lt;&lt;case &quot;spottingIntro&quot;&gt;&gt;
+	[img[assets/img/3_crowns_small.png]]
+ &lt;&lt;case &quot;leaveAReviewIntro&quot;&gt;&gt;
+	[img[assets/img/bug_icon.png]]
+ &lt;&lt;case &quot;finalChallengeIntro&quot;&gt;&gt;
+	[img[assets/img/secret_icon.png]]
+&lt;&lt;default&gt;&gt;
+[img[./assets/img/ncplogo.png]]
+&lt;&lt;/switch&gt;&gt;
 
-The end
+&lt;div class=&quot;menu-wrapper&quot;&gt;&lt;div id=&quot;mount&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/main&gt;
 
-&lt;&lt;button &quot;Back to the Start&quot;&gt;&gt;&lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="9" name="fieldRecording" tags="nobr" position="1100,100" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
+&lt;&lt;timed 1s&gt;&gt;
+    &lt;&lt;replace &quot;#mount&quot;&gt;&gt;
+    Loading...
+    &lt;&lt;/replace&gt;&gt;&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 3s&gt;&gt;
+    &lt;&lt;replace &quot;#mount&quot;&gt;&gt;
+
+    &lt;&lt;/replace&gt;&gt;&lt;&lt;/timed&gt;&gt;
+
+    &lt;&lt;timed 5s&gt;&gt;
+    &lt;&lt;replace &quot;#mount&quot;&gt;&gt;
+    Loading...
+    &lt;&lt;/replace&gt;&gt;&lt;&lt;/timed&gt;&gt;
+&lt;&lt;timed 7s&gt;&gt;
+&lt;&lt;goto $nextpass&gt;&gt;
+&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="fieldRecordingIntro" tags="nobr" position="475,225" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;fieldRecordingIntro&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;fieldRecording&quot;&gt;&gt;
+&lt;main class=&quot;main-section&quot;&gt;
+
+Are you in a spot where you can see lots of reeds and perhaps a colourful boat?
+&lt;br&gt;&lt;br&gt;
+&lt;div class=&quot;menu-wrapper&quot;&gt;
+&lt;&lt;button &quot;Yes&quot;&gt;&gt;&lt;&lt;goto &quot;fieldRecording&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;/div&gt;
+&lt;/main&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="fieldRecording" tags="nobr" position="600,225" size="100,100">&lt;&lt;set $prevpass to &quot;fieldRecordingIntro&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;fieldRecording&quot;&gt;&gt;
-&lt;&lt;set $nextpass to &quot;Backpack&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;fieldRecordingoutro&quot;&gt;&gt;
 &lt;main class=&quot;main-section&quot;&gt;
 We need you to send through Field Recordings of the sounds here at Harding’s Pit. They’ll be birds, bees and bugs that you can find but I want you to send through the sound you love! 
 &lt;br&gt;&lt;br&gt;
@@ -321,48 +402,55 @@ You can upload the sound here and it will go straight through to Jude
 &lt;br&gt;&lt;br&gt;
 
 &lt;/main&gt;
-&lt;&lt;include &quot;footerfield&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="fieldRecordingoutro" tags="nobr" position="1225,100" size="100,100">&lt;&lt;set $prevpass to &quot;fieldRecording&quot;&gt;&gt;
+&lt;&lt;include &quot;footerfield&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="fieldRecordingoutro" tags="nobr" position="725,225" size="100,100">&lt;&lt;set $prevpass to &quot;fieldRecording&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;fieldRecordingoutro&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;Backpack&quot;&gt;&gt;
+&lt;&lt;include &quot;headermessage&quot;&gt;&gt;
 &lt;main class=&quot;main-section message&quot;&gt;
+
 &lt;div id=&quot;msgMount&quot;&gt;&lt;/div&gt;
   &lt;&lt;audio &quot;uploadcomplete&quot; &quot;play&quot;&gt;&gt;
 &lt;&lt;timed 2s&gt;&gt;
     &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
     &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
-    &lt;p&gt;Sound Sent!&lt;/p&gt;
+    &lt;span class=&quot;sender&quot;&gt;Judy&lt;/span&gt;
+    &lt;p&gt;Sounds received.&lt;/p&gt;
     &lt;&lt;/append&gt;&gt;
 &lt;&lt;/timed&gt;&gt;
 
 &lt;&lt;timed 4s&gt;&gt;
   &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
     &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
-    &lt;p class=&quot;final&quot;&gt;Send me the word SOUNDS.  &lt;/p&gt;
+    &lt;p &gt;Excellent work &lt;/p&gt;
     &lt;&lt;/append&gt;&gt;
 &lt;&lt;/timed&gt;&gt;
 
-&lt;&lt;timed 5s&gt;&gt;
+&lt;&lt;timed 6s&gt;&gt;
+  &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+    &lt;p class=&quot;final&quot;&gt;Text me the word SOUNDS and I&#39;ll call you. &lt;/p&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+
+&lt;&lt;timed 7s&gt;&gt;
     &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
   &lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
     &lt;&lt;/append&gt;&gt;
 &lt;&lt;/timed&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="11" name="checkcorrectans" tags="" position="100,225" size="100,100">&lt;&lt;if $correctans.includesAll(&quot;S&quot;, &quot;A&quot;, &quot;L&quot;, &quot;T&quot;, &quot;Y&quot;)&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="17" name="checkcorrectans" tags="" position="850,225" size="100,100">&lt;&lt;if $correctans.includesAll(&quot;S&quot;, &quot;A&quot;, &quot;L&quot;, &quot;T&quot;, &quot;Y&quot;)&gt;&gt;
 &lt;&lt;timed 2s&gt;&gt;
 &lt;&lt;goto &quot;codebreakingoutro&quot;&gt;&gt;
 &lt;&lt;/timed&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="codebreaking" tags="nobr" position="225,225" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="codebreaking" tags="nobr" position="975,225" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;codebreaking&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;Backpack&quot;&gt;&gt;
 &lt;&lt;set $correctans to []&gt;&gt;
-&lt;header id=&quot;header&quot;&gt;&lt;h3&gt;Enter the code:&lt;/h3&gt;&lt;/header&gt;
-&lt;main class=&quot;main-section&quot; id=&quot;mainMount&quot;&gt;
+&lt;header id=&quot;header&quot; class=&quot;column&quot;&gt;
+&lt;h2&gt;Compass Secret Codeword&lt;/h2&gt;
+&lt;p&gt;Click on the below boxes to get the clues to crack the code&lt;/p&gt;&lt;/header&gt;
+&lt;main class=&quot;main-section codebreaking&quot; id=&quot;mainMount&quot;&gt;
 
-
-
-
-&lt;div id=&quot;inputMount&quot;&gt;&lt;/div&gt;
-&lt;br&gt;
-&lt;br&gt;
 &lt;div class=&quot;wordcontainer&quot;&gt;
 &lt;&lt;set $current to &quot;&quot;&gt;&gt;
 /* Letter S  */
@@ -378,7 +466,8 @@ You can upload the sound here and it will go straight through to Jude
         &lt;&lt;removeclass &quot;#letterItemA&quot; &quot;current&quot;&gt;&gt;   
         &lt;&lt;removeclass &quot;#letterItemL&quot; &quot;current&quot;&gt;&gt;   
         &lt;&lt;removeclass &quot;#letterItemT&quot; &quot;current&quot;&gt;&gt;   
-        &lt;&lt;removeclass &quot;#letterItemY&quot; &quot;current&quot;&gt;&gt;   
+        &lt;&lt;removeclass &quot;#letterItemY&quot; &quot;current&quot;&gt;&gt; 
+        &lt;span class=&quot;title&quot;&gt;CLUES&lt;/span&gt;  
         &lt;span&gt;WEST&lt;/span&gt;
         &lt;span&gt;FIRST NAME&lt;/span&gt;
         &lt;span&gt;FIRST LETTER&lt;/span&gt;
@@ -426,6 +515,7 @@ You can upload the sound here and it will go straight through to Jude
         &lt;&lt;removeclass &quot;#letterItemL&quot; &quot;current&quot;&gt;&gt;   
         &lt;&lt;removeclass &quot;#letterItemT&quot; &quot;current&quot;&gt;&gt;   
         &lt;&lt;removeclass &quot;#letterItemY&quot; &quot;current&quot;&gt;&gt;   
+       &lt;span class=&quot;title&quot;&gt;CLUES&lt;/span&gt;  
         &lt;span&gt;SOUTH&lt;/span&gt;
         &lt;span&gt;FIRST WORD&lt;/span&gt;
         &lt;span&gt;FIRST LETTER&lt;/span&gt;
@@ -473,6 +563,7 @@ You can upload the sound here and it will go straight through to Jude
         &lt;&lt;addclass &quot;#letterItemL&quot; &quot;current&quot;&gt;&gt;   
         &lt;&lt;removeclass &quot;#letterItemT&quot; &quot;current&quot;&gt;&gt;   
         &lt;&lt;removeclass &quot;#letterItemY&quot; &quot;current&quot;&gt;&gt;   
+        &lt;span class=&quot;title&quot;&gt;CLUES&lt;/span&gt;  
         &lt;span&gt;EAST&lt;/span&gt;
         &lt;span&gt;FIRST WORD&lt;/span&gt;
         &lt;span&gt;LAST LETTER&lt;/span&gt;
@@ -521,6 +612,7 @@ You can upload the sound here and it will go straight through to Jude
         &lt;&lt;removeclass &quot;#letterItemL&quot; &quot;current&quot;&gt;&gt;   
         &lt;&lt;addclass &quot;#letterItemT&quot; &quot;current&quot;&gt;&gt;   
         &lt;&lt;removeclass &quot;#letterItemY&quot; &quot;current&quot;&gt;&gt;   
+        &lt;span class=&quot;title&quot;&gt;CLUES&lt;/span&gt;  
         &lt;span&gt;NORTH&lt;/span&gt;
         &lt;span&gt;FIRST WORD&lt;/span&gt;
         &lt;span&gt;FOURTH LETTER&lt;/span&gt;
@@ -569,6 +661,7 @@ You can upload the sound here and it will go straight through to Jude
         &lt;&lt;removeclass &quot;#letterItemL&quot; &quot;current&quot;&gt;&gt;   
         &lt;&lt;removeclass &quot;#letterItemT&quot; &quot;current&quot;&gt;&gt;   
         &lt;&lt;addclass &quot;#letterItemY&quot; &quot;current&quot;&gt;&gt;   
+        &lt;span class=&quot;title&quot;&gt;CLUES&lt;/span&gt;  
         &lt;span&gt;NORTH-WEST&lt;/span&gt;
         &lt;span&gt;LAST NAME&lt;/span&gt;
         &lt;span&gt;LAST LETTER&lt;/span&gt;
@@ -603,7 +696,9 @@ You can upload the sound here and it will go straight through to Jude
   &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
+&lt;br&gt;
+&lt;br&gt;
+&lt;div id=&quot;inputMount&quot;&gt;&lt;/div&gt;
 &lt;br&gt;
 &lt;br&gt;
 &lt;div id=&quot;clueMount&quot;&gt;
@@ -611,23 +706,25 @@ You can upload the sound here and it will go straight through to Jude
 &lt;/div&gt;
 
 &lt;/main&gt;
-&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="codebreakingoutro" tags="nobr" position="350,225" size="100,100">&lt;&lt;set $prevpass to &quot;codebreaking&quot;&gt;&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="codebreakingoutro" tags="nobr" position="1100,225" size="100,100">&lt;&lt;set $prevpass to &quot;codebreaking&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;codebreakingoutro&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;Backpack&quot;&gt;&gt;
+&lt;&lt;include &quot;headermessage&quot;&gt;&gt;
 &lt;main class=&quot;main-section message&quot;&gt;
 &lt;div id=&quot;msgMount&quot;&gt;&lt;/div&gt;
   &lt;&lt;audio &quot;uploadcomplete&quot; &quot;play&quot;&gt;&gt;
 &lt;&lt;timed 2s&gt;&gt;
   &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
     &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
-    &lt;p&gt;You did it!&lt;/p&gt;
+     &lt;span class=&quot;sender&quot;&gt;Judy&lt;/span&gt;
+    &lt;p&gt;You did it.&lt;/p&gt;
     &lt;&lt;/append&gt;&gt;
 &lt;&lt;/timed&gt;&gt;
 
 &lt;&lt;timed 4s&gt;&gt;
   &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
     &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
-    &lt;p class=&quot;final&quot;&gt; Text the word &quot;SALTY&quot; to me.  &lt;/p&gt;
+    &lt;p class=&quot;final&quot;&gt; Text me the word SALTY and I&#39;ll call you.  &lt;/p&gt;
     &lt;&lt;/append&gt;&gt;
 &lt;&lt;/timed&gt;&gt;
 
@@ -636,7 +733,20 @@ You can upload the sound here and it will go straight through to Jude
   &lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
     &lt;&lt;/append&gt;&gt;
 &lt;&lt;/timed&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="14" name="spottingGame1" tags="nobr" position="475,225" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="20" name="spottingIntro" tags="nobr" position="1225,225" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;spottingIntro&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;spottingGame1&quot;&gt;&gt;
+&lt;&lt;include &quot;headerhedge&quot;&gt;&gt;
+&lt;main class=&quot;main-section &quot;&gt;&lt;p&gt;I need you to check the Hedgehog Highway.&lt;/p&gt;
+&lt;p&gt;If you spot it, check the box.&lt;/p&gt;
+&lt;p&gt;And then we can use your phone to load up the Hedgehog Sound Scanner&lt;/p&gt;
+&lt;p&gt;Head outside the secret garden - don’t go in - we don’t want to disturb Pointer. &lt;/p&gt;
+
+&lt;p&gt;Are you ready to Spot?&lt;/p&gt;
+
+&lt;&lt;button &quot;Yes&quot;&gt;&gt;&lt;&lt;goto &quot;spottingGame1&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="21" name="spottingGame1" tags="nobr" position="100,350" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;spottingGame1&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;spottingGame2&quot;&gt;&gt;
 &lt;&lt;include &quot;headerhedge&quot;&gt;&gt;
@@ -654,7 +764,7 @@ You can upload the sound here and it will go straight through to Jude
 &lt;/div&gt;
 &lt;/main&gt;
 
-&lt;&lt;include &quot;footernext&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="spottingGame2" tags="nobr" position="600,225" size="100,100">&lt;&lt;set $prevpass to &quot;spottingGame1&quot;&gt;&gt;
+&lt;&lt;include &quot;footernext&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="spottingGame2" tags="nobr" position="225,350" size="100,100">&lt;&lt;set $prevpass to &quot;spottingGame1&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;spottingGame2&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;spottingGame3&quot;&gt;&gt;
 &lt;&lt;include &quot;headerhedge&quot;&gt;&gt;
@@ -674,7 +784,7 @@ You can upload the sound here and it will go straight through to Jude
 
 
 &lt;/main&gt;
-&lt;&lt;include &quot;footernext&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="spottingGame3" tags="nobr" position="725,225" size="100,100">&lt;&lt;set $prevpass to &quot;spottingGame2&quot;&gt;&gt;
+&lt;&lt;include &quot;footernext&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="spottingGame3" tags="nobr" position="350,350" size="100,100">&lt;&lt;set $prevpass to &quot;spottingGame2&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;spottingGame3&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;spottingGame4&quot;&gt;&gt;
 &lt;&lt;include &quot;headerhedge&quot;&gt;&gt;
@@ -693,7 +803,7 @@ You can upload the sound here and it will go straight through to Jude
 &lt;/div&gt;
 
 &lt;/main&gt;
-&lt;&lt;include &quot;footernext&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="spottingGame4" tags="nobr" position="850,225" size="100,100">&lt;&lt;set $prevpass to &quot;spottingGame3&quot;&gt;&gt;
+&lt;&lt;include &quot;footernext&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="spottingGame4" tags="nobr" position="475,350" size="100,100">&lt;&lt;set $prevpass to &quot;spottingGame3&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;spottingGame4&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;spottingGame5&quot;&gt;&gt;
 &lt;&lt;include &quot;headerhedge&quot;&gt;&gt;
@@ -713,7 +823,7 @@ You can upload the sound here and it will go straight through to Jude
 
 
 &lt;/main&gt;
-&lt;&lt;include &quot;footernext&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="spottingGame5" tags="nobr" position="975,225" size="100,100">&lt;&lt;set $prevpass to &quot;spottingGame4&quot;&gt;&gt;
+&lt;&lt;include &quot;footernext&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="spottingGame5" tags="nobr" position="600,350" size="100,100">&lt;&lt;set $prevpass to &quot;spottingGame4&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;spottingGame5&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;spottingGame6&quot;&gt;&gt;
 &lt;&lt;include &quot;headerhedge&quot;&gt;&gt;
@@ -733,7 +843,7 @@ You can upload the sound here and it will go straight through to Jude
 
 
 &lt;/main&gt;
-&lt;&lt;include &quot;footernext&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="spottingGame6" tags="nobr" position="1100,225" size="100,100">&lt;&lt;set $prevpass to &quot;spottingGame5&quot;&gt;&gt;
+&lt;&lt;include &quot;footernext&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="spottingGame6" tags="nobr" position="725,350" size="100,100">&lt;&lt;set $prevpass to &quot;spottingGame5&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;spottingGame6&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;spottingGameEmitter&quot;&gt;&gt;
 &lt;&lt;include &quot;headerhedge&quot;&gt;&gt;
@@ -756,16 +866,17 @@ You can upload the sound here and it will go straight through to Jude
 
 
 &lt;/main&gt;
-&lt;&lt;include &quot;footernext&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="spottingGameEmitter" tags="nobr" position="1225,225" size="100,100">&lt;&lt;set $prevpass to &quot;spottingGame6&quot;&gt;&gt;
+&lt;&lt;include &quot;footernext&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="spottingGameEmitter" tags="nobr" position="850,350" size="100,100">&lt;&lt;set $prevpass to &quot;spottingGame6&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;spottingGameEmitter&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;spottingGameOutro&quot;&gt;&gt;
   &lt;&lt;set $spinning to false&gt;&gt;
 &lt;main class=&quot;main-section emitter&quot;&gt;
 &lt;div id=&quot;mount&quot;&gt;
-    &lt;h3&gt;Yes!&lt;/h3&gt;
-    &lt;p&gt;You’ve activated the Hedgehog Sound Emitter&lt;/p&gt;
+    &lt;h3&gt;YES&lt;/h3&gt;
+    &lt;p&gt;You’ve activated the Hedgehog Sound Scanner&lt;/p&gt;
     &lt;p&gt;Let’s see if we can hear Pointer.&lt;/p&gt;
-    &lt;p&gt;Click on the Emitter to turn it on.&lt;/p&gt;
+    &lt;p&gt;Click on the Scanner to turn it on.&lt;/p&gt;
+    &lt;p&gt;You may need to move the phone around to pick up the sound.&lt;/p&gt;
 &lt;/div&gt;
  &lt;div class = &quot;detector&quot;&gt;
 
@@ -787,14 +898,16 @@ You can upload the sound here and it will go straight through to Jude
  
 
 &lt;/main&gt;
-&lt;&lt;include &quot;footernext&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="spottingGameOutro" tags="nobr" position="100,350" size="100,100">&lt;&lt;set $prevpass to &quot;spottingGameEmitter&quot;&gt;&gt;
+&lt;&lt;include &quot;footeremitter&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="spottingGameOutro" tags="nobr" position="975,350" size="100,100">&lt;&lt;set $prevpass to &quot;spottingGameEmitter&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;spottingGameOutro&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;Backpack&quot;&gt;&gt;
+&lt;&lt;include &quot;headermessage&quot;&gt;&gt;
 &lt;main class=&quot;main-section message&quot;&gt;
 &lt;div id=&quot;msgMount&quot;&gt;&lt;/div&gt;
 &lt;&lt;timed 1s&gt;&gt;
   &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
     &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+    &lt;span class=&quot;sender&quot;&gt;Judy&lt;/span&gt;
     &lt;p&gt;Yes! There was Pointer&lt;/p&gt;
     &lt;&lt;/append&gt;&gt;
 &lt;&lt;/timed&gt;&gt;
@@ -802,7 +915,7 @@ You can upload the sound here and it will go straight through to Jude
 &lt;&lt;timed 3s&gt;&gt;
   &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
     &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
-    &lt;p class=&quot;final&quot;&gt;Text the word POINTER and I’ll call. &lt;/p&gt;
+    &lt;p class=&quot;final&quot;&gt;Text the word POINTER and I’ll call you. &lt;/p&gt;
     &lt;&lt;/append&gt;&gt;
 &lt;&lt;/timed&gt;&gt;
 
@@ -811,7 +924,21 @@ You can upload the sound here and it will go straight through to Jude
   &lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
     &lt;&lt;/append&gt;&gt;
 &lt;&lt;/timed&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="22" name="leaveAReview1" tags="nobr" position="225,350" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="29" name="leaveAReviewIntro" tags="nobr" position="1100,350" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;leaveAReviewIntro&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;leaveAReview1&quot;&gt;&gt;
+&lt;main class=&quot;main-section&quot;&gt;
+
+&lt;p&gt;Are you standing next to the Bug BnB?&lt;/p&gt;
+&lt;p&gt;It is off to the right of the Minster on the grass.&lt;/p&gt;
+
+&lt;div class=&quot;menu-wrapper&quot;&gt;
+    &lt;&lt;button &quot;Yes&quot;&gt;&gt;&lt;&lt;goto &quot;leaveAReview1&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+  
+&lt;/div&gt;
+
+&lt;/main&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="leaveAReview1" tags="nobr" position="1225,350" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;leaveAReview1&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;leaveAReview3&quot;&gt;&gt;
 &lt;main class=&quot;main-section reviewq&quot;&gt;
@@ -827,7 +954,7 @@ You can upload the sound here and it will go straight through to Jude
 &lt;/div&gt;
 
 &lt;/main&gt;
-&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="leaveAReview2" tags="nobr" position="350,350" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReview1&quot;&gt;&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="leaveAReview2" tags="nobr" position="100,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReview1&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;leaveAReview2&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;leaveAReview3&quot;&gt;&gt;
 &lt;main class=&quot;main-section reviewq&quot;&gt;
@@ -836,7 +963,7 @@ You can upload the sound here and it will go straight through to Jude
 &lt;&lt;button &quot;Okay...&quot;&gt;&gt;&lt;&lt;goto &quot;leaveAReview1&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
 &lt;/main&gt;
-&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="leaveAReview3" tags="nobr" position="475,350" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReview2&quot;&gt;&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="leaveAReview3" tags="nobr" position="225,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReview2&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;leaveAReview3&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;leaveAReviewroof&quot;&gt;&gt;
 &lt;main class=&quot;main-section reviewq&quot;&gt;
@@ -854,7 +981,7 @@ You can upload the sound here and it will go straight through to Jude
 
 &lt;&lt;button &quot;Next&quot;&gt;&gt;&lt;&lt;goto &quot;leaveAReviewroof&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/main&gt;
-&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="leaveAReviewroof" tags="nobr" position="600,350" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReview3&quot;&gt;&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="leaveAReviewroof" tags="nobr" position="350,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReview3&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;leaveAReviewroof&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;leaveAReviewholes&quot;&gt;&gt;
 &lt;main class=&quot;main-section reviewq&quot;&gt;
@@ -868,7 +995,7 @@ You can upload the sound here and it will go straight through to Jude
     &lt;&lt;button &quot;No&quot;&gt;&gt;&lt;&lt;set $roof to false&gt;&gt;&lt;&lt;goto &quot;leaveAReviewholes&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
 &lt;/main&gt;
-&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="leaveAReviewholes" tags="nobr" position="725,350" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewroof&quot;&gt;&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="leaveAReviewholes" tags="nobr" position="475,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewroof&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;leaveAReviewholes&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;leaveAReviewspiders&quot;&gt;&gt;
 &lt;main class=&quot;main-section reviewq&quot;&gt;
@@ -884,7 +1011,7 @@ You can upload the sound here and it will go straight through to Jude
 &lt;/div&gt;
 
 &lt;/main&gt;
-&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="leaveAReviewspiders" tags="nobr" position="850,350" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewholes&quot;&gt;&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="leaveAReviewspiders" tags="nobr" position="600,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewholes&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;leaveAReviewspiders&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;leaveAReviewmaterials&quot;&gt;&gt;
 &lt;main class=&quot;main-section reviewq&quot;&gt;
@@ -899,7 +1026,7 @@ You can upload the sound here and it will go straight through to Jude
 &lt;/div&gt;
 
 &lt;/main&gt;
-&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="leaveAReviewmaterials" tags="nobr" position="975,350" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewspiders&quot;&gt;&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="leaveAReviewmaterials" tags="nobr" position="725,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewspiders&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;leaveAReviewmaterials&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;leaveAReviewquiet&quot;&gt;&gt;
 &lt;main class=&quot;main-section reviewq&quot;&gt;
@@ -913,7 +1040,7 @@ You can upload the sound here and it will go straight through to Jude
     &lt;&lt;button &quot;No&quot;&gt;&gt;&lt;&lt;set $materials to false&gt;&gt;&lt;&lt;goto &quot;leaveAReviewquiet&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
 &lt;/main&gt;
-&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="leaveAReviewquiet" tags="nobr" position="1100,350" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewmaterials&quot;&gt;&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="leaveAReviewquiet" tags="nobr" position="850,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewmaterials&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;leaveAReviewquiet&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;leaveAReviewrating&quot;&gt;&gt;
 &lt;main class=&quot;main-section reviewq&quot;&gt;
@@ -928,7 +1055,7 @@ You can upload the sound here and it will go straight through to Jude
 &lt;/div&gt;
 
 &lt;/main&gt;
-&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="leaveAReviewrating" tags="nobr" position="1225,350" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewquiet&quot;&gt;&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="38" name="leaveAReviewrating" tags="nobr" position="975,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewquiet&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;leaveAReviewrating&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;reviewSubmitted&quot;&gt;&gt;
 &lt;main class=&quot;main-section&quot;&gt;
@@ -950,7 +1077,7 @@ You can upload the sound here and it will go straight through to Jude
 &lt;br&gt;
 &lt;&lt;button &quot;Submit&quot;&gt;&gt;&lt;&lt;goto &quot;reviewSubmitted&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/main&gt;
-&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="reviewSubmitted" tags="nobr" position="100,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewrating&quot;&gt;&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="reviewSubmitted" tags="nobr" position="1100,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewrating&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;reviewSubmitted&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;leaveAReviewoutro&quot;&gt;&gt;
 &lt;main class=&quot;main-section&quot;&gt;
@@ -1016,19 +1143,29 @@ You can upload the sound here and it will go straight through to Jude
  &lt;&lt;done&gt;&gt;
 &lt;&lt;set $setup to setup.initEmail()&gt;&gt;
 &lt;&lt;set $s to setup.test()&gt;&gt;
-&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="leaveAReviewoutro" tags="nobr" position="225,475" size="100,100">&lt;&lt;set $prevpass to &quot;reviewSubmitted&quot;&gt;&gt;
+&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="leaveAReviewoutro" tags="nobr" position="1225,475" size="100,100">&lt;&lt;set $prevpass to &quot;reviewSubmitted&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;leaveAReviewoutro&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;Backpack&quot;&gt;&gt;
+&lt;&lt;include &quot;headermessage&quot;&gt;&gt;
 &lt;main class=&quot;main-section message&quot;&gt;
 &lt;div id=&quot;msgMount&quot;&gt;&lt;/div&gt;
 &lt;&lt;timed 1s&gt;&gt;
   &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
     &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
-    &lt;p class=&quot;final&quot;&gt;Text BUGBNB to Judy to update her. &lt;/p&gt;
+ &lt;span class=&quot;sender&quot;&gt;Judy&lt;/span&gt;
+ &lt;p&gt;Thank you for sending through the review. &lt;/p&gt;
+
     &lt;&lt;/append&gt;&gt;
 &lt;&lt;/timed&gt;&gt;
 
 &lt;&lt;timed 3s&gt;&gt;
+  &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+    &lt;p class=&quot;final&quot;&gt;Text BUGBNB and I&#39;ll call. &lt;/p&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 4s&gt;&gt;
     &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
   &lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
     &lt;&lt;/append&gt;&gt;
@@ -1037,7 +1174,10 @@ You can upload the sound here and it will go straight through to Jude
 
 /* template_8rbm75p
 service_hqggznf
-I5fGiJYF5iD8WzMJl */</tw-passagedata><tw-passagedata pid="33" name="enterFinalChallenge" tags="" position="350,475" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
+I5fGiJYF5iD8WzMJl */</tw-passagedata><tw-passagedata pid="41" name="enterFinalChallenge" tags="" position="100,600" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;enterFinalChallenge&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;Backpack&quot;&gt;&gt;
+ &lt;main class=&quot;main-section&quot;&gt;
 Enter the code to get to the final challenge:
 
 &lt;div id=&quot;coderesult&quot;&gt;&lt;/div&gt;
@@ -1051,25 +1191,85 @@ Enter the code to get to the final challenge:
  /% PASSWORD CODE %/
 &lt;&lt;set $code to $code.toUpperCase()&gt;&gt;
 /% CODEWORD CORRECT %/
-&lt;&lt;if $code isnot &quot;&quot; and $code is &quot;CODE&quot;&gt;&gt;
+&lt;&lt;if $code isnot &quot;&quot; and $code is &quot;TRIFLE&quot;&gt;&gt;
 &lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;CORRECT&lt;&lt;/replace&gt;&gt;
 &lt;&lt;timed 3s&gt;&gt;&lt;&lt;goto &quot;finalChallenge&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 /% CODEWORD INCORRECT %/
-&lt;&lt;if $code isnot &quot;&quot; and $code is not &quot;CODE&quot;&gt;&gt;
+&lt;&lt;if $code isnot &quot;&quot; and $code is not &quot;TRIFLE&quot;&gt;&gt;
 &lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;Thats not right.&lt;&lt;/replace&gt;&gt;
 &lt;&lt;timed 1.5s&gt;&gt;&lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/timed&gt;&gt;
 &lt;&lt;/if&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="34" name="finalChallengeIntro" tags="" position="475,475" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
-Hello, it’s Jude. 
-I don’t know who this is but can we chat? 
-Text me the word PROTECTOR so I know it is you. 
-&lt;br/&gt;
-&lt;&lt;button &quot;Next (after phone call)&quot;&gt;&gt; &lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="35" name="finalChallenge" tags="" position="600,475" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
+&lt;/main&gt; 
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="judeMessage" tags="nobr" position="225,600" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;judeMessage&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;Backpack&quot;&gt;&gt;
+&lt;&lt;include &quot;headermessage&quot;&gt;&gt;
+&lt;main class=&quot;main-section message&quot;&gt;
+&lt;div id=&quot;msgMount&quot;&gt;&lt;/div&gt;
+  &lt;&lt;audio &quot;uploadcomplete&quot; &quot;play&quot;&gt;&gt;
+&lt;&lt;timed 2s&gt;&gt;
+  &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+     &lt;span class=&quot;sender&quot;&gt;Jude&lt;/span&gt;
+    &lt;p&gt;Hello, this is Jude&lt;/p&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 4s&gt;&gt;
+  &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+    &lt;p&gt;I don&#39;t know who you are but can we chat? &lt;/p&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 6s&gt;&gt;
+  &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+    &lt;p&gt;Text me the word PROTECTORS so I know its you.&lt;/p&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+&lt;&lt;timed 8s&gt;&gt;
+  &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+    &lt;p class=&quot;final&quot;&gt;My number is &lt;a href=&quot;tel:072929292992&quot;&gt; 072929292992&lt;/a&gt;&lt;/p&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 9s&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+&lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="43" name="finalChallengeIntro" tags="" position="350,600" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;finalChallengeIntro&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;finalChallengeIntro2&quot;&gt;&gt;
+ &lt;main class=&quot;main-section&quot;&gt;
+&lt;p&gt;Are you standing in front of the Judas Tree?&lt;/p&gt;
+
+&lt;div class=&quot;menu-wrapper&quot;&gt;
+    &lt;&lt;button &quot;Yes&quot;&gt;&gt;&lt;&lt;goto &quot;finalChallengeIntro2&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;/div&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="44" name="finalChallengeIntro2" tags="" position="475,600" size="100,100">&lt;&lt;set $prevpass to &quot;finalChallengeIntro&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;finalChallengeIntro2&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;finalChallenge&quot;&gt;&gt;
+ &lt;main class=&quot;main-section&quot;&gt;
+&lt;p&gt;Can you do the Nature Corridor Protectors Ritual and upload a picture of the tree for Judy to remind her of this special place.&lt;/p&gt;
+
+&lt;div class=&quot;menu-wrapper&quot;&gt;
+    &lt;&lt;button &quot;Tell me more&quot;&gt;&gt;&lt;&lt;goto &quot;finalChallenge&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;/div&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="45" name="finalChallenge" tags="nobr" position="600,600" size="100,100">&lt;&lt;set $prevpass to &quot;finalChallengeIntro2&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;finalChallenge&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;finalChallengeOutro&quot;&gt;&gt;
+ &lt;main class=&quot;main-section&quot;&gt;
 &lt;input type=&quot;file&quot; accept=&quot;image/*&quot; capture=&quot;camera&quot; id=&quot;inputImg&quot; class=&quot;hide&quot;&gt;
-You can upload an image of a tree here:
+&lt;h3&gt;Nature Corridor Protectors Ritual&lt;/h3&gt;
+&lt;br&gt;
+&lt;p&gt;Find a piece of nature - a petal, a leaf or something we liked - that had landed on the path&lt;/p&gt;
+&lt;p&gt;Place it in the bowl on the other side of the grass.&lt;/p&gt;
+&lt;p&gt;And take a picture of the bowl (and the tree if you can)&lt;/p&gt;
 &lt;br&gt;
 &lt;div id=&quot;success&quot;&gt;
 &lt;&lt;button &quot;Upload Image&quot;&gt;&gt;
@@ -1078,10 +1278,49 @@ You can upload an image of a tree here:
   &lt;br&gt;
   &lt;br&gt;
   &lt;div id=&quot;error&quot;&gt;&lt;/div&gt;
-   &lt;&lt;button &quot;Done!&quot;&gt;&gt;&lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="36" name="finalChallengeOutro" tags="" position="725,475" size="100,100">&lt;main class=&quot;main-section&quot;&gt;
-&lt;p&gt;I’ll call you – text me the word TREE when you are ready. &lt;/p&gt;
-   &lt;&lt;button &quot;Done!&quot;&gt;&gt;&lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+&lt;/main&gt; 
+&lt;&lt;include &quot;footerupload&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="finalChallengeOutro" tags="" position="725,600" size="100,100">&lt;&lt;set $prevpass to &quot;finalChallenge&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;finalChallengeOutro&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;Backpack&quot;&gt;&gt;
+&lt;&lt;include &quot;headermessage&quot;&gt;&gt;
+&lt;main class=&quot;main-section message&quot;&gt;
+
+&lt;div id=&quot;msgMount&quot;&gt;&lt;/div&gt;
+  &lt;&lt;audio &quot;uploadcomplete&quot; &quot;play&quot;&gt;&gt;
+&lt;&lt;timed 2s&gt;&gt;
+    &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+    &lt;span class=&quot;sender&quot;&gt;Judy&lt;/span&gt;
+    &lt;p&gt;Wow - the Secret Tree.&lt;/p&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 4s&gt;&gt;
+  &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+    &lt;p &gt;The 5th spot!&lt;/p&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 6s&gt;&gt;
+  &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+    &lt;p &gt;How did you find it? &lt;/p&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 8s&gt;&gt;
+  &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+    &lt;p class=&quot;final&quot;&gt;Text me the word TREE and I&#39;ll call you right away. &lt;/p&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+&lt;&lt;timed 7s&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+  &lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
 &lt;/main&gt;</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
