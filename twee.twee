@@ -153,6 +153,7 @@ inputElement.addEventListener('change', (event) => {
 <<cacheaudio "ping1" "assets/audio/ping1.mp3">>
 <<cacheaudio "keep1" "assets/audio/keep1.mp3">>
 <<cacheaudio "keep2" "assets/audio/keep2.mp3">>
+<<cacheaudio "hedgehog" "assets/audio/hedgehog.mp3">>
 <<cacheaudio "uploadcomplete" "assets/audio/uploadcomplete.mp3">>
 
 <<waitforaudio>>
@@ -160,10 +161,10 @@ inputElement.addEventListener('change', (event) => {
 
 :: landing {"position":"425,75","size":"100,100"}
 <main>
-<div class="landing-wrapper">
-    [img[assets/img/ncplogo.png]]
+
+   <div class="logo-wrapper"> [img[assets/img/ncplogo.png]]</div>
           <div class="menu-wrapper"><<button "Start">><<goto "Backpack">><</button>></div>
-</div>
+
 </main>     
       
 
@@ -208,7 +209,7 @@ inputElement.addEventListener('change', (event) => {
     <div class="backpack-item">
         <<button "Passageway Hedgehog Highway">><<set $nextpass to "spottingIntro">><<goto "loading">>
         <</button>>
-     <<if hasVisited("spottingGame1")>><span class="complete">Complete!</span>
+     <<if hasVisited("spottingGameEmitter")>><span class="complete">Complete!</span>
      <<else>>
          <span class="todo">To do</span>
     <</if>>
@@ -217,23 +218,23 @@ inputElement.addEventListener('change', (event) => {
         <<button "Minster’s Bug BnB">>
         <<set $nextpass to "leaveAReviewIntro">><<goto "loading">>
         <</button>>
-        <<if hasVisited("leaveAReview1")>><span class="complete">Complete!</span>
+        <<if hasVisited("reviewSubmitted")>><span class="complete">Complete!</span>
     <<else>>
          <span class="todo">Todo</span><</if>>
     </div>
      /* This one based on codeword */
   <div class="backpack-item">
-    <<if hasVisited("fieldRecording", "codebreaking", "spottingGame1", "leaveAReview1")>>
+    <<if hasVisited("fieldRecording", "codebreaking", "spottingGameEmitter", "reviewSubmitted")>>
         <<if not hasVisited("judeMessage")>>
            <<goto "judeMessage">>
         <</if>>
         <<if hasVisited("judeMessage")>>
             <<if not hasVisited("finalChallenge")>>
-                <<button "Thoresby College’s Secret Tree">><<set $nextpass to "finalChallengeIntro">><<goto "loading">><</button>>
+                <<button "Thoresby College’s Secret Tree">><<set $nextpass to "enterFinalChallenge">><<goto "loading">><</button>>
                     <span class="locked">Locked!</span> 
             <</if>>
             <<if hasVisited("finalChallenge")>>
-                <<button "Thoresby College’s Secret Tree">><<set $nextpass to "finalChallengeIntro">><<goto "loading">><</button>>
+                <<button "Thoresby College’s Secret Tree">><<set $nextpass to "enterFinalChallenge">><<goto "loading">><</button>>
                 <span class="complete">Complete!</span> 
             <</if>>
         <</if>>
@@ -306,8 +307,10 @@ inputElement.addEventListener('change', (event) => {
 <footer class="codebreaking"><<button "Back">><<goto $prevpass>><</button>></footer>
 
 
-:: loading [nobr]
-<main class="main-section">
+:: loading [nobr t8n.typewriter.4]
+<main class="main-section loading">
+
+<div class="loading-img-wrapper">
 <<switch $nextpass>>
 <<case "codebreaking">>
 	[img[assets/img/compass_icon.png]]
@@ -317,34 +320,28 @@ inputElement.addEventListener('change', (event) => {
 	[img[assets/img/3_crowns_small.png]]
  <<case "leaveAReviewIntro">>
 	[img[assets/img/bug_icon.png]]
- <<case "finalChallengeIntro">>
+ <<case "enterFinalChallenge">>
 	[img[assets/img/secret_icon.png]]
 <<default>>
 [img[./assets/img/ncplogo.png]]
 <</switch>>
-
-<div class="menu-wrapper"><div id="mount"></div></div>
+</div>
+<br>
+<div class="menu-wrapper">
+<div id="mount"></div></div>
 </main>
 
-<<timed 1s>>
+
+<<timed 0.5s>>
     <<replace "#mount">>
-    Loading...
+    <<type 400ms>><h3>Loading...</h3><</type>>
     <</replace>><</timed>>
 
-<<timed 3s>>
-    <<replace "#mount">>
-
-    <</replace>><</timed>>
-
-    <<timed 5s>>
-    <<replace "#mount">>
-    Loading...
-    <</replace>><</timed>>
 <<timed 7s>>
 <<goto $nextpass>>
 <</timed>>
 
-:: fieldRecordingIntro [nobr]
+:: fieldRecordingIntro [nobr t8n.typewriter.4]
 <<set $prevpass to "Backpack">>
 <<set $pass to "fieldRecordingIntro">>
 <<set $nextpass to "fieldRecording">>
@@ -358,7 +355,7 @@ Are you in a spot where you can see lots of reeds and perhaps a colourful boat?
 </main>
 <<include "footer">>
 
-:: fieldRecording [nobr]
+:: fieldRecording [nobr t8n.typewriter.4]
 <<set $prevpass to "fieldRecordingIntro">>
 <<set $pass to "fieldRecording">>
 <<set $nextpass to "fieldRecordingoutro">>
@@ -373,7 +370,7 @@ You can upload the sound here and it will go straight through to Jude
 </main>
 <<include "footerfield">>
 
-:: fieldRecordingoutro [nobr]
+:: fieldRecordingoutro [nobr ]
 <<set $prevpass to "fieldRecording">>
 <<set $pass to "fieldRecordingoutro">>
 <<set $nextpass to "Backpack">>
@@ -717,11 +714,12 @@ You can upload the sound here and it will go straight through to Jude
 <</timed>>
 </main>
 
-:: spottingIntro [nobr]
+:: spottingIntro [nobr t8n.typewriter.4]
 <<set $prevpass to "Backpack">>
 <<set $pass to "spottingIntro">>
 <<set $nextpass to "spottingGame1">>
 <<include "headerhedge">>
+<<include "footer">>
 <main class="main-section "><p>I need you to check the Hedgehog Highway.</p>
 <p>If you spot it, check the box.</p>
 <p>And then we can use your phone to load up the Hedgehog Sound Scanner</p>
@@ -734,11 +732,12 @@ You can upload the sound here and it will go straight through to Jude
 </main>
 
 
-:: spottingGame1 [nobr]
+:: spottingGame1 [nobr t8n.typewriter.4]
 <<set $prevpass to "Backpack">>
 <<set $pass to "spottingGame1">>
 <<set $nextpass to "spottingGame2">>
 <<include "headerhedge">>
+<<include "footernext">>
 <main class="main-section spotting">
 
 <h3>Can you spot any holes in the fence or gaps that mean Hedgehogs can move easily? </h3>
@@ -753,14 +752,15 @@ You can upload the sound here and it will go straight through to Jude
 </div>
 </main>
 
-<<include "footernext">>
 
 
-:: spottingGame2[nobr]
+
+:: spottingGame2[nobr t8n.typewriter.4]
 <<set $prevpass to "spottingGame1">>
 <<set $pass to "spottingGame2">>
 <<set $nextpass to "spottingGame3">>
 <<include "headerhedge">>
+<<include "footernext">>
 <main class="main-section spotting">
 
 <h3>Can you spot any hedges? </h3>
@@ -777,13 +777,14 @@ You can upload the sound here and it will go straight through to Jude
 
 
 </main>
-<<include "footernext">>
 
-:: spottingGame3[nobr]
+
+:: spottingGame3[nobr t8n.typewriter.4]
 <<set $prevpass to "spottingGame2">>
 <<set $pass to "spottingGame3">>
 <<set $nextpass to "spottingGame4">>
 <<include "headerhedge">>
+<<include "footernext">>
 <main class="main-section spotting">
 
 <h3>Can you hear any water nearby? </h3>
@@ -799,13 +800,14 @@ You can upload the sound here and it will go straight through to Jude
 </div>
 
 </main>
-<<include "footernext">>
 
-:: spottingGame4[nobr]
+
+:: spottingGame4[nobr t8n.typewriter.4]
 <<set $prevpass to "spottingGame3">>
 <<set $pass to "spottingGame4">>
 <<set $nextpass to "spottingGame5">>
 <<include "headerhedge">>
+<<include "footernext">>
 <main class="main-section spotting">
 
 <h3>Can you see any slugs? </h3>
@@ -822,13 +824,14 @@ You can upload the sound here and it will go straight through to Jude
 
 
 </main>
-<<include "footernext">>
 
-:: spottingGame5[nobr]
+
+:: spottingGame5[nobr t8n.typewriter.4]
 <<set $prevpass to "spottingGame4">>
 <<set $pass to "spottingGame5">>
 <<set $nextpass to "spottingGame6">>
 <<include "headerhedge">>
+<<include "footernext">>
 <main class="main-section spotting">
 
 <h3>Is there a Compost Heap nearby? </h3>
@@ -845,13 +848,15 @@ You can upload the sound here and it will go straight through to Jude
 
 
 </main>
-<<include "footernext">>
 
-:: spottingGame6[nobr]
+
+:: spottingGame6[nobr t8n.typewriter.4]
 <<set $prevpass to "spottingGame5">>
 <<set $pass to "spottingGame6">>
 <<set $nextpass to "spottingGameEmitter">>
+ <<audio ":all" "stop">>
 <<include "headerhedge">>
+<<include "footernext">>
 <main class="main-section spotting">
 
 <h3>Can you see a hedgehog house? </h3>
@@ -871,7 +876,7 @@ You can upload the sound here and it will go straight through to Jude
 
 
 </main>
-<<include "footernext">>
+
 
 
 :: spottingGameEmitter[nobr]
@@ -894,13 +899,14 @@ You can upload the sound here and it will go straight through to Jude
     <<set $spinning to true>>
         /* <<audio "badjoke" play>> */
    	    <<addclass ".detector" "spinning">>
-        <<replace "#mount">>Searching...<</replace>>
+        <<replace "#mount">><h3>Searching...</h3><</replace>>
   <</timed>>
   <<timed 6.5s>>
       	<<set $spinning to false>>
         /* <<audio ":all" stop>> */
 		<<removeclass ".detector" "spinning">>
-          <<replace "#mount">>Hedgehog found!<</replace>>
+          <<replace "#mount">><h3>Hedgehog found!</h3><</replace>>
+      <<audio "hedgehog" "play">>
   <</timed>>
 <</link>> 
 </div>
@@ -913,6 +919,7 @@ You can upload the sound here and it will go straight through to Jude
 <<set $prevpass to "spottingGameEmitter">>
 <<set $pass to "spottingGameOutro">>
 <<set $nextpass to "Backpack">>
+  <<audio ":all" "stop">>
 <<include "headermessage">>
 <main class="main-section message">
 <div id="msgMount"></div>
@@ -938,7 +945,7 @@ You can upload the sound here and it will go straight through to Jude
 <</timed>>
 </main>
 
-:: leaveAReviewIntro [nobr]
+:: leaveAReviewIntro [nobr t8n.typewriter.4]
 <<set $prevpass to "Backpack">>
 <<set $pass to "leaveAReviewIntro">>
 <<set $nextpass to "leaveAReview1">>
@@ -955,7 +962,7 @@ You can upload the sound here and it will go straight through to Jude
 </main>
 <<include "footer">>
 
-:: leaveAReview1 [nobr]
+:: leaveAReview1 [nobr t8n.typewriter.4]
 <<set $prevpass to "Backpack">>
 <<set $pass to "leaveAReview1">>
 <<set $nextpass to "leaveAReview3">>
@@ -974,7 +981,7 @@ You can upload the sound here and it will go straight through to Jude
 </main>
 <<include "footer">>
 
-:: leaveAReview2 [nobr]
+:: leaveAReview2 [nobr t8n.typewriter.4]
 <<set $prevpass to "leaveAReview1">>
 <<set $pass to "leaveAReview2">>
 <<set $nextpass to "leaveAReview3">>
@@ -986,7 +993,7 @@ You can upload the sound here and it will go straight through to Jude
 </main>
 <<include "footer">>
 
-:: leaveAReview3 [nobr]
+:: leaveAReview3 [nobr t8n.typewriter.4]
 <<set $prevpass to "leaveAReview2">>
 <<set $pass to "leaveAReview3">>
 <<set $nextpass to "leaveAReviewroof">>
@@ -1007,10 +1014,11 @@ You can upload the sound here and it will go straight through to Jude
 </main>
 <<include "footer">>
 
-:: leaveAReviewroof [nobr]
+:: leaveAReviewroof [nobr t8n.typewriter.4]
 <<set $prevpass to "leaveAReview3">>
 <<set $pass to "leaveAReviewroof">>
 <<set $nextpass to "leaveAReviewholes">>
+<<include "footer">>
 <main class="main-section reviewq">
 
 [img[./assets/img/roof.png]]
@@ -1022,12 +1030,13 @@ You can upload the sound here and it will go straight through to Jude
     <<button "No">><<set $roof to false>><<goto "leaveAReviewholes">><</button>>
 </div>
 </main>
-<<include "footer">>
 
-:: leaveAReviewholes [nobr]
+
+:: leaveAReviewholes [nobr t8n.typewriter.4]
 <<set $prevpass to "leaveAReviewroof">>
 <<set $pass to "leaveAReviewholes">>
 <<set $nextpass to "leaveAReviewspiders">>
+<<include "footer">>
 <main class="main-section reviewq">
 
 [img[./assets/img/holes.png]]
@@ -1041,12 +1050,13 @@ You can upload the sound here and it will go straight through to Jude
 </div>
 
 </main>
-<<include "footer">>
 
-:: leaveAReviewspiders [nobr]
+
+:: leaveAReviewspiders [nobr t8n.typewriter.4]
 <<set $prevpass to "leaveAReviewholes">>
 <<set $pass to "leaveAReviewspiders">>
 <<set $nextpass to "leaveAReviewmaterials">>
+<<include "footer">>
 <main class="main-section reviewq">
 
 [img[./assets/img/web.png]]
@@ -1059,12 +1069,13 @@ You can upload the sound here and it will go straight through to Jude
 </div>
 
 </main>
-<<include "footer">>
 
-:: leaveAReviewmaterials [nobr]
+
+:: leaveAReviewmaterials [nobr t8n.typewriter.4]
 <<set $prevpass to "leaveAReviewspiders">>
 <<set $pass to "leaveAReviewmaterials">>
 <<set $nextpass to "leaveAReviewquiet">>
+<<include "footer">>
 <main class="main-section reviewq">
 
 [img[./assets/img/recycling.png]]
@@ -1076,12 +1087,13 @@ You can upload the sound here and it will go straight through to Jude
     <<button "No">><<set $materials to false>><<goto "leaveAReviewquiet">><</button>>
 </div>
 </main>
-<<include "footer">>
 
-:: leaveAReviewquiet [nobr]
+
+:: leaveAReviewquiet [nobr t8n.typewriter.4]
 <<set $prevpass to "leaveAReviewmaterials">>
 <<set $pass to "leaveAReviewquiet">>
 <<set $nextpass to "leaveAReviewrating">>
+<<include "footer">>
 <main class="main-section reviewq">
 
 [img[./assets/img/quiet.png]]
@@ -1094,12 +1106,13 @@ You can upload the sound here and it will go straight through to Jude
 </div>
 
 </main>
-<<include "footer">>
 
-:: leaveAReviewrating [nobr]
+
+:: leaveAReviewrating [nobr ]
 <<set $prevpass to "leaveAReviewquiet">>
 <<set $pass to "leaveAReviewrating">>
 <<set $nextpass to "reviewSubmitted">>
+<<include "footer">>
 <main class="main-section">
 
 <p>What rating out of 5 would you give it? </p>
@@ -1119,7 +1132,7 @@ You can upload the sound here and it will go straight through to Jude
 <br>
 <<button "Submit">><<goto "reviewSubmitted">><</button>>
 </main>
-<<include "footer">>
+
 
 :: reviewSubmitted  [nobr]
 <<set $prevpass to "leaveAReviewrating">>
@@ -1225,31 +1238,32 @@ service_hqggznf
 I5fGiJYF5iD8WzMJl */
 
 
-:: enterFinalChallenge
+:: enterFinalChallenge [nobr]
 <<set $prevpass to "Backpack">>
 <<set $pass to "enterFinalChallenge">>
 <<set $nextpass to "Backpack">>
  <main class="main-section">
 Enter the code to get to the final challenge:
-
+<br><br>
 <div id="coderesult"></div>
  /% CODEWORD FEEDBACK %/
    <div id="resultbutton">
 /% CODEWORD INPUT %/
 <div class="css-input code-input">
 <<textbox "$code" "">></div>
+<br><br>
 <<button "Enter">>
 </div>
  /% PASSWORD CODE %/
 <<set $code to $code.toUpperCase()>>
 /% CODEWORD CORRECT %/
 <<if $code isnot "" and $code is "TRIFLE">>
-<<replace "#coderesult">>CORRECT<</replace>>
-<<timed 3s>><<goto "finalChallenge">><</timed>>
+<<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
+<<timed 3s>><<goto "finalChallengeIntro">><</timed>>
 <</if>>
 /% CODEWORD INCORRECT %/
 <<if $code isnot "" and $code is not "TRIFLE">>
-<<replace "#coderesult">>Thats not right.<</replace>>
+<<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
 <<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
 <</if>><</button>>
 </div>
@@ -1301,10 +1315,11 @@ Enter the code to get to the final challenge:
 </main>
 
 
-:: finalChallengeIntro 
+:: finalChallengeIntro  [nobr t8n.typewriter.4]
 <<set $prevpass to "Backpack">>
 <<set $pass to "finalChallengeIntro">>
 <<set $nextpass to "finalChallengeIntro2">>
+<<include "footer">>
  <main class="main-section">
 <p>Are you standing in front of the Judas Tree?</p>
 
@@ -1313,10 +1328,11 @@ Enter the code to get to the final challenge:
 </div>
 </main> 
 
-:: finalChallengeIntro2
+:: finalChallengeIntro2 [nobr t8n.typewriter.4]
 <<set $prevpass to "finalChallengeIntro">>
 <<set $pass to "finalChallengeIntro2">>
 <<set $nextpass to "finalChallenge">>
+<<include "footer">>
  <main class="main-section">
 <p>Can you do the Nature Corridor Protectors Ritual and upload a picture of the tree for Judy to remind her of this special place.</p>
 
