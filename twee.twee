@@ -180,6 +180,7 @@ inputElement.addEventListener('change', (event) => {
 <<include "footer">>
 
 :: Backpack [nobr] {"position":"425,450","size":"100,100"}
+<<audio ":all" "stop">>
 <<if hasVisited("Backpack")>>
 <<audio "keep2" "play">>
 <<else>>
@@ -1641,6 +1642,7 @@ Enter the code to get to the final challenge:
 <<set $prevpass to "Backpack">>
 <<set $pass to "enterFinal">>
 <<set $nextpass to "call7Jude">>
+<<audio ":all" "stop">>
  <main class="main-section">
 <p>Are you at Thoresby College? </p>
 <p>Enter the keyword Thoresby if so. </p>
