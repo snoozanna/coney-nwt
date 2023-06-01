@@ -193,21 +193,21 @@ inputElement.addEventListener('change', (event) => {
 <div class="backpack-container">
     <div class="backpack-item">
         <<button "Harding’s Pit Field Recordings">>
-        <<set $nextpass to "fieldRecordingIntro">><<goto "loading">><</button>>
+        <<set $nextpass to "enterPit">><<goto "loading">><</button>>
          <<if hasVisited("fieldRecording")>><span class="complete">Complete!</span>
          <<else>>
          <span class="todo">To do</span>
          <</if>>
     </div>
     <div class="backpack-item">
-        <<button "The Compass Codebreaker">><<set $nextpass to "codebreaking">><<goto "loading">><</button>>
+        <<button "The Compass Codebreaker">><<set $nextpass to "enterCompass">><<goto "loading">><</button>>
          <<if hasVisited("codebreaking")>><span class="complete">Complete!</span>
          <<else>>
          <span class="todo">To do</span>
          <</if>>
     </div>
     <div class="backpack-item">
-        <<button "Passageway Hedgehog Highway">><<set $nextpass to "spottingIntro">><<goto "loading">>
+        <<button "Passageway Hedgehog Highway">><<set $nextpass to "enterPass">><<goto "loading">>
         <</button>>
      <<if hasVisited("spottingGameEmitter")>><span class="complete">Complete!</span>
      <<else>>
@@ -230,11 +230,11 @@ inputElement.addEventListener('change', (event) => {
         <</if>>
         <<if hasVisited("judeMessage")>>
             <<if not hasVisited("finalChallenge")>>
-                <<button "Thoresby College’s Secret Tree">><<set $nextpass to "enterFinalChallenge">><<goto "loading">><</button>>
-                    <span class="locked">Locked!</span> 
+                <<button "Thoresby College’s Secret Tree">><<set $nextpass to "enterFinal">><<goto "loading">><</button>>
+                    <span class="locked">Unlocked!</span> 
             <</if>>
             <<if hasVisited("finalChallenge")>>
-                <<button "Thoresby College’s Secret Tree">><<set $nextpass to "enterFinalChallenge">><<goto "loading">><</button>>
+                <<button "Thoresby College’s Secret Tree">><<set $nextpass to "enterFinal">><<goto "loading">><</button>>
                 <span class="complete">Complete!</span> 
             <</if>>
         <</if>>
@@ -312,15 +312,15 @@ inputElement.addEventListener('change', (event) => {
 
 <div class="loading-img-wrapper">
 <<switch $nextpass>>
-<<case "codebreaking">>
+<<case "codebreaking" "enterCompass">>
 	[img[assets/img/compass_icon.png]]
-<<case "fieldRecordingIntro">>
+<<case "enterPit" "fieldRecordingIntro">>
 	[img[assets/img/boat_icon_small.png]]
- <<case "spottingIntro">>
+ <<case "spottingIntro" "enterPass">>
 	[img[assets/img/3_crowns_small.png]]
  <<case "enterReview" "leaveAReview1">>
 	[img[assets/img/bug_icon.png]]
- <<case "enterFinalChallenge">>
+ <<case "enterFinalChallenge" "enterFinal">>
 	[img[assets/img/secret_icon.png]]
 <<default>>
 [img[./assets/img/ncplogo.png]]
@@ -340,6 +340,78 @@ inputElement.addEventListener('change', (event) => {
 <<timed 7s>>
 <<goto $nextpass>>
 <</timed>>
+
+:: enterPit [nobr t8n.typewriter.4]
+<<set $prevpass to "Backpack">>
+<<set $pass to "enterPit">>
+<<set $nextpass to "call4PitIntro">>
+ <main class="main-section">
+<p>Off to Harding’s Pit. </p>
+<p>Follow the map and when you are there enter the keyword to get the portal open. 
+</p>
+
+<br><br>
+<div id="coderesult"></div>
+ /% CODEWORD FEEDBACK %/
+   <div id="resultbutton">
+/% CODEWORD INPUT %/
+<div class="css-input code-input">
+<<textbox "$code" "">></div>
+<br><br>
+<<button "Enter">>
+</div>
+ /% PASSWORD CODE %/
+<<set $code to $code.toUpperCase()>>
+/% CODEWORD CORRECT %/
+<<if $code isnot "" and $code is "PIT">>
+<<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
+<<timed 3s>><<goto $nextpass>><</timed>>
+<</if>>
+/% CODEWORD INCORRECT %/
+<<if $code isnot "" and $code is not "PIT">>
+<<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
+<<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
+<</if>><</button>>
+</div>
+</main> 
+<<include "footer">>
+
+:: call4PitIntro [nobr]
+<<set $prevpass to "enterPit">>
+<<set $pass to "call4PitIntro">>
+<<set $nextpass to "fieldRecordingIntro">>
+<<include "headermessage">>
+<main class="main-section message">
+<div id='audio'></div>
+<div id="msgMount"></div>
+<<timed 1s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+ <span class="sender">Judy</span>
+ <div class="voicenote">
+<<link "<img src = 'assets/img/play.png'>" >>
+ <<replace "#audio">>
+  <audio autoplay >
+  <source src="https://www.youhavefoundconey.net/nwt/callaudio/Call_4_PIT_Intro_with_Sound_checked.mp3">
+</audio>
+  <</replace>>
+  <<replace "#note">><em>Playing...</em><</replace>>
+<</link>> <p id="note">Voice note </p></div>
+    <</append>>
+<</timed>>
+<<timed 2s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+    <p class="final" >Press play to listen. </p>
+    <</append>>
+<</timed>>
+
+<<timed 14s>>
+    <<append "#msgMount">>
+  <<button "Next">> <<goto "loading">><</button>>
+    <</append>>
+<</timed>>
+</main>
 
 :: fieldRecordingIntro [nobr t8n.typewriter.4]
 <<set $prevpass to "Backpack">>
@@ -377,32 +449,31 @@ You can upload the sound here and it will go straight through to Jude
 <<include "headermessage">>
 <main class="main-section message">
 
+<div id='audio'></div>
 <div id="msgMount"></div>
-  <<audio "uploadcomplete" "play">>
+
+<<timed 1s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+ <span class="sender">Judy</span>
+ <div class="voicenote">
+<<link "<img src = 'assets/img/play.png'>" >>
+ <<replace "#audio">>
+  <audio autoplay >
+  <source src="https://www.youhavefoundconey.net/nwt/callaudio/Call_4_PIT_Outro_with_Sound_checked.mp3">
+</audio>
+  <</replace>>
+  <<replace "#note">><em>Playing...</em><</replace>>
+<</link>> <p id="note">Voice note </p></div>
+    <</append>>
+<</timed>>
 <<timed 2s>>
-    <<audio "ping1" "play">>
-    <<append "#msgMount">>
-    <span class="sender">Judy</span>
-    <p>Sounds received.</p>
-    <</append>>
-<</timed>>
-
-<<timed 4s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
-    <p >Excellent work </p>
+    <p class="final" >Press play to listen. </p>
     <</append>>
 <</timed>>
-
-<<timed 6s>>
-  <<audio "ping1" "play">>
-    <<append "#msgMount">>
-    <p class="final">Text me the word SOUNDS and I'll call you. </p>
-    <</append>>
-<</timed>>
-
-
-<<timed 7s>>
+<<timed 14s>>
     <<append "#msgMount">>
   <<button "Next">> <<goto "Backpack">><</button>>
     <</append>>
@@ -416,6 +487,78 @@ You can upload the sound here and it will go straight through to Jude
 <<goto "codebreakingoutro">>
 <</timed>>
 <</if>>
+
+:: enterCompass [nobr t8n.typewriter.4]
+<<set $prevpass to "Backpack">>
+<<set $pass to "enterCompass">>
+<<set $nextpass to "call3CompIntro">>
+ <main class="main-section">
+<p>Off to Purfleet Quay.  </p>
+<p>Let me know when you are there by entering the keyword below.
+</p>
+
+<br><br>
+<div id="coderesult"></div>
+ /% CODEWORD FEEDBACK %/
+   <div id="resultbutton">
+/% CODEWORD INPUT %/
+<div class="css-input code-input">
+<<textbox "$code" "">></div>
+<br><br>
+<<button "Enter">>
+</div>
+ /% PASSWORD CODE %/
+<<set $code to $code.toUpperCase()>>
+/% CODEWORD CORRECT %/
+<<if $code isnot "" and $code is "COMPASS">>
+<<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
+<<timed 3s>><<goto $nextpass>><</timed>>
+<</if>>
+/% CODEWORD INCORRECT %/
+<<if $code isnot "" and $code is not "COMPASS">>
+<<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
+<<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
+<</if>><</button>>
+</div>
+</main> 
+<<include "footer">>
+
+:: call3CompIntro [nobr]
+<<set $prevpass to "enterPit">>
+<<set $pass to "call3CompIntro">>
+<<set $nextpass to "codebreaking">>
+<<include "headermessage">>
+<main class="main-section message">
+<div id='audio'></div>
+<div id="msgMount"></div>
+<<timed 1s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+ <span class="sender">Judy</span>
+ <div class="voicenote">
+<<link "<img src = 'assets/img/play.png'>" >>
+ <<replace "#audio">>
+  <audio autoplay >
+  <source src="https://www.youhavefoundconey.net/nwt/callaudio/Call_3_COMP_Intro_with_Sound_checked.mp3">
+</audio>
+  <</replace>>
+  <<replace "#note">><em>Playing...</em><</replace>>
+<</link>> <p id="note">Voice note </p></div>
+    <</append>>
+<</timed>>
+<<timed 2s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+    <p class="final" >Press play to listen. </p>
+    <</append>>
+<</timed>>
+
+<<timed 14s>>
+    <<append "#msgMount">>
+  <<button "Next">> <<goto "loading">><</button>>
+    <</append>>
+<</timed>>
+</main>
 
 :: codebreaking [nobr]
 <<set $prevpass to "Backpack">>
@@ -690,26 +833,104 @@ You can upload the sound here and it will go straight through to Jude
 <<set $nextpass to "Backpack">>
 <<include "headermessage">>
 <main class="main-section message">
+<div id='audio'></div>
 <div id="msgMount"></div>
-  <<audio "uploadcomplete" "play">>
+
+<<timed 1s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+ <span class="sender">Judy</span>
+ <div class="voicenote">
+<<link "<img src = 'assets/img/play.png'>" >>
+ <<replace "#audio">>
+  <audio autoplay >
+  <source src="https://www.youhavefoundconey.net/nwt/callaudio/Call_3_COMP_Outro_with_Sound_checked.mp3">
+</audio>
+  <</replace>>
+  <<replace "#note">><em>Playing...</em><</replace>>
+<</link>> <p id="note">Voice note </p></div>
+    <</append>>
+<</timed>>
 <<timed 2s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
-     <span class="sender">Judy</span>
-    <p>You did it.</p>
+    <p class="final" >Press play to listen. </p>
     <</append>>
 <</timed>>
-
-<<timed 4s>>
-  <<audio "ping1" "play">>
-    <<append "#msgMount">>
-    <p class="final"> Text me the word SALTY and I'll call you.  </p>
-    <</append>>
-<</timed>>
-
-<<timed 5s>>
+<<timed 14s>>
     <<append "#msgMount">>
   <<button "Next">> <<goto "Backpack">><</button>>
+    <</append>>
+<</timed>>
+</main>
+
+:: enterPass [nobr t8n.typewriter.4]
+<<set $prevpass to "Backpack">>
+<<set $pass to "enterPass">>
+<<set $nextpass to "call5PassIntro">>
+ <main class="main-section">
+<p>The Passage way, found down Three Crowns Way</p>
+<p>You can find it by going along Queen Street OR through a secret passageway under Three Crowns House.</p>
+<p>When there, enter the keyword from the map</p>
+<br><br>
+<div id="coderesult"></div>
+ /% CODEWORD FEEDBACK %/
+   <div id="resultbutton">
+/% CODEWORD INPUT %/
+<div class="css-input code-input">
+<<textbox "$code" "">></div>
+<br><br>
+<<button "Enter">>
+</div>
+ /% PASSWORD CODE %/
+<<set $code to $code.toUpperCase()>>
+/% CODEWORD CORRECT %/
+<<if $code isnot "" and $code is "CROWNS">>
+<<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
+<<timed 3s>><<goto $nextpass>><</timed>>
+<</if>>
+/% CODEWORD INCORRECT %/
+<<if $code isnot "" and $code is not "CROWNS">>
+<<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
+<<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
+<</if>><</button>>
+</div>
+</main> 
+<<include "footer">>
+
+:: call5PassIntro [nobr]
+<<set $prevpass to "enterPass">>
+<<set $pass to "call5PassIntro">>
+<<set $nextpass to "spottingIntro">>
+<<include "headermessage">>
+<main class="main-section message">
+<div id='audio'></div>
+<div id="msgMount"></div>
+<<timed 1s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+ <span class="sender">Judy</span>
+ <div class="voicenote">
+<<link "<img src = 'assets/img/play.png'>" >>
+ <<replace "#audio">>
+  <audio autoplay >
+  <source src="https://www.youhavefoundconey.net/nwt/callaudio/Call_5_PASS_Intro_With_Sound_checked.mp3">
+</audio>
+  <</replace>>
+  <<replace "#note">><em>Playing...</em><</replace>>
+<</link>> <p id="note">Voice note </p></div>
+    <</append>>
+<</timed>>
+<<timed 2s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+    <p class="final" >Press play to listen. </p>
+    <</append>>
+<</timed>>
+
+<<timed 14s>>
+    <<append "#msgMount">>
+  <<button "Next">> <<goto "loading">><</button>>
     <</append>>
 <</timed>>
 </main>
@@ -922,23 +1143,31 @@ You can upload the sound here and it will go straight through to Jude
   <<audio ":all" "stop">>
 <<include "headermessage">>
 <main class="main-section message">
+<div id='audio'></div>
 <div id="msgMount"></div>
+
 <<timed 1s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
-    <span class="sender">Judy</span>
-    <p>Yes! There was Pointer</p>
+ <span class="sender">Judy</span>
+ <div class="voicenote">
+<<link "<img src = 'assets/img/play.png'>" >>
+ <<replace "#audio">>
+  <audio autoplay >
+  <source src="https://www.youhavefoundconey.net/nwt/callaudio/Call_5_PASS_Outro_with_Sound_checked.mp3">
+</audio>
+  <</replace>>
+  <<replace "#note">><em>Playing...</em><</replace>>
+<</link>> <p id="note">Voice note </p></div>
     <</append>>
 <</timed>>
-
-<<timed 3s>>
+<<timed 2s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
-    <p class="final">Text the word POINTER and I’ll call you. </p>
+    <p class="final" >Press play to listen. </p>
     <</append>>
 <</timed>>
-
-<<timed 5s>>
+<<timed 14s>>
     <<append "#msgMount">>
   <<button "Next">> <<goto "Backpack">><</button>>
     <</append>>
@@ -997,7 +1226,7 @@ You can upload the sound here and it will go straight through to Jude
 <<link "<img src = 'assets/img/play.png'>" >>
  <<replace "#audio">>
   <audio autoplay >
-  <source src="https://www.youhavefoundconey.net@youhavefoundconey.net/nwt/callaudio/Call_2_MIN_Intro_with_Sound_checked.mp3">
+  <source src="https://www.youhavefoundconey.net/nwt/callaudio/Call_2_MIN_Intro_with_Sound_checked.mp3">
 </audio>
   <</replace>>
   <<replace "#note">><em>Playing...</em><</replace>>
@@ -1293,7 +1522,7 @@ You can upload the sound here and it will go straight through to Jude
 <<link "<img src = 'assets/img/play.png'>" >>
  <<replace "#audio">>
   <audio autoplay >
-  <source src="https://www.youhavefoundconey.net@youhavefoundconey.net/nwt/callaudio/Call_2_MIN_Outro_with_Sound_checked.mp3">
+  <source src="https://www.youhavefoundconey.net/nwt/callaudio/Call_2_MIN_Outro_with_Sound_checked.mp3">
 </audio>
   <</replace>>
   <<replace "#note">><em>Playing...</em><</replace>>
@@ -1356,7 +1585,8 @@ Enter the code to get to the final challenge:
 <<set $pass to "judeMessage">>
 <<set $nextpass to "Backpack">>
 <<include "headermessage">>
-<main class="main-section message">
+<main class="main-section message jude">
+<div id='audio'></div>
 <div id="msgMount"></div>
   <<audio "uploadcomplete" "play">>
 <<timed 2s>>
@@ -1370,30 +1600,109 @@ Enter the code to get to the final challenge:
 <<timed 4s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
-    <p>I don't know who you are but can we chat? </p>
+    <p>I don’t know who you are but I think you are helping my sister.  </p>
     <</append>>
 <</timed>>
 
 <<timed 6s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
-    <p>Text me the word PROTECTORS so I know its you.</p>
+    <p>Let me explain everything</p>
     <</append>>
 <</timed>>
 <<timed 8s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
-    <p class="final">My number is <a href="tel:072929292992"> 072929292992</a></p>
+
+ <div class="voicenote">
+<<link "<img src = 'assets/img/call.png'>" >>
+ <<replace "#audio">>
+  <audio autoplay >
+  <source src="https://www.youhavefoundconey.net/nwt/callaudio/Call_6_Jude_With_Sound_checked.mp3">
+</audio>
+  <</replace>>
+  <<replace "#note">><em>Calling...</em><</replace>>
+<</link>> <p id="note">Call Jude </p></div>
     <</append>>
 <</timed>>
 
-<<timed 9s>>
+<<timed 29s>>
     <<append "#msgMount">>
 <<button "Next">> <<goto "Backpack">><</button>>
     <</append>>
 <</timed>>
 </main>
 
+:: enterFinal [nobr t8n.typewriter.4]
+<<set $prevpass to "Backpack">>
+<<set $pass to "enterFinal">>
+<<set $nextpass to "call7Jude">>
+ <main class="main-section">
+<p>Are you at Thoresby College? </p>
+<p>Enter the keyword Thoresby if so. </p>
+
+<br><br>
+<div id="coderesult"></div>
+ /% CODEWORD FEEDBACK %/
+   <div id="resultbutton">
+/% CODEWORD INPUT %/
+<div class="css-input code-input">
+<<textbox "$code" "">></div>
+<br><br>
+<<button "Enter">>
+</div>
+ /% PASSWORD CODE %/
+<<set $code to $code.toUpperCase()>>
+/% CODEWORD CORRECT %/
+<<if $code isnot "" and $code is "THORESBY">>
+<<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
+<<timed 3s>><<goto $nextpass>><</timed>>
+<</if>>
+/% CODEWORD INCORRECT %/
+<<if $code isnot "" and $code is not "THORESBY">>
+<<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
+<<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
+<</if>><</button>>
+</div>
+</main> 
+<<include "footer">>
+
+:: call7Jude [nobr]
+<<set $prevpass to "enterFinal">>
+<<set $pass to "call7Jude">>
+<<set $nextpass to "finalChallengeIntro">>
+<<include "headermessage">>
+<main class="main-section message">
+<div id='audio'></div>
+<div id="msgMount"></div>
+<<timed 1s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+ <span class="sender">Jude</span>
+ <div class="voicenote">
+<<link "<img src = 'assets/img/play.png'>" >>
+ <<replace "#audio">>
+  <audio autoplay >
+  <source src="https://www.youhavefoundconey.net/nwt/callaudio/Call_7_Jude_with_Sound_checked.mp3">
+</audio>
+  <</replace>>
+  <<replace "#note">><em>Playing...</em><</replace>>
+<</link>> <p id="note">Voice note </p></div>
+    <</append>>
+<</timed>>
+<<timed 2s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+    <p class="final" >Press play to listen. </p>
+    <</append>>
+<</timed>>
+
+<<timed 14s>>
+    <<append "#msgMount">>
+  <<button "Next">> <<goto $nextpass>><</button>>
+    <</append>>
+<</timed>>
+</main>
 
 :: finalChallengeIntro  [nobr t8n.typewriter.4]
 <<set $prevpass to "Backpack">>
@@ -1457,31 +1766,24 @@ Enter the code to get to the final challenge:
     <<audio "ping1" "play">>
     <<append "#msgMount">>
     <span class="sender">Judy</span>
-    <p>Wow - the Secret Tree.</p>
+    <p>The Tree!</p>
     <</append>>
 <</timed>>
 
 <<timed 4s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
-    <p >The 5th spot!</p>
+    <p >Text me the word TREE and I'll call you right away. </p>
     <</append>>
 <</timed>>
 
 <<timed 6s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
-    <p >How did you find it? </p>
+    <p >My number is 07400179362 - it's on the map! </p>
     <</append>>
 <</timed>>
-
-<<timed 8s>>
-  <<audio "ping1" "play">>
-    <<append "#msgMount">>
-    <p class="final">Text me the word TREE and I'll call you right away. </p>
-    <</append>>
-<</timed>>
-<<timed 7s>>
+<<timed 24s>>
     <<append "#msgMount">>
   <<button "Next">> <<goto "Backpack">><</button>>
     <</append>>

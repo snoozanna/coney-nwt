@@ -780,6 +780,12 @@ footer.codebreaking {
   background-color: var(--asparagus-light);
   height: 100vh;
 }
+
+.main-section.message.jude {
+  background-color: #dfa86e;
+  height: 100vh;
+}
+
 .main-section.message > #msgMount > span.sender {
   color: black;
   font-weight: 700;
