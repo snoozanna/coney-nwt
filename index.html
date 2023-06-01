@@ -284,7 +284,7 @@ inputElement.addEventListener('change', (event) => {
     &lt;/div&gt;
     &lt;div class=&quot;backpack-item&quot;&gt;
         &lt;&lt;button &quot;Minster’s Bug BnB&quot;&gt;&gt;
-        &lt;&lt;set $nextpass to &quot;leaveAReviewIntro&quot;&gt;&gt;&lt;&lt;goto &quot;loading&quot;&gt;&gt;
+        &lt;&lt;set $nextpass to &quot;enterReview&quot;&gt;&gt;&lt;&lt;goto &quot;loading&quot;&gt;&gt;
         &lt;&lt;/button&gt;&gt;
         &lt;&lt;if hasVisited(&quot;reviewSubmitted&quot;)&gt;&gt;&lt;span class=&quot;complete&quot;&gt;Complete!&lt;/span&gt;
     &lt;&lt;else&gt;&gt;
@@ -352,10 +352,10 @@ inputElement.addEventListener('change', (event) => {
 &lt;&lt;case &quot;codebreaking&quot;&gt;&gt;
 	[img[assets/img/compass_icon.png]]
 &lt;&lt;case &quot;fieldRecordingIntro&quot;&gt;&gt;
-	[img[assets/img/minster_icon_small.png]]
+	[img[assets/img/boat_icon_small.png]]
  &lt;&lt;case &quot;spottingIntro&quot;&gt;&gt;
 	[img[assets/img/3_crowns_small.png]]
- &lt;&lt;case &quot;leaveAReviewIntro&quot;&gt;&gt;
+ &lt;&lt;case &quot;enterReview&quot; &quot;leaveAReview1&quot;&gt;&gt;
 	[img[assets/img/bug_icon.png]]
  &lt;&lt;case &quot;enterFinalChallenge&quot;&gt;&gt;
 	[img[assets/img/secret_icon.png]]
@@ -924,7 +924,72 @@ You can upload the sound here and it will go straight through to Jude
   &lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
     &lt;&lt;/append&gt;&gt;
 &lt;&lt;/timed&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="29" name="leaveAReviewIntro" tags="nobr t8n.typewriter.4" position="1100,350" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="29" name="enterReview" tags="nobr t8n.typewriter.4" position="1100,350" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;enterReview&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;call2MinIntro&quot;&gt;&gt;
+ &lt;main class=&quot;main-section&quot;&gt;
+&lt;p&gt;Head to the Minster. &lt;/p&gt;
+&lt;p&gt;When there, enter the keyword to get onto the challenge&lt;/p&gt;
+
+&lt;br&gt;&lt;br&gt;
+&lt;div id=&quot;coderesult&quot;&gt;&lt;/div&gt;
+ /% CODEWORD FEEDBACK %/
+   &lt;div id=&quot;resultbutton&quot;&gt;
+/% CODEWORD INPUT %/
+&lt;div class=&quot;css-input code-input&quot;&gt;
+&lt;&lt;textbox &quot;$code&quot; &quot;&quot;&gt;&gt;&lt;/div&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;&lt;button &quot;Enter&quot;&gt;&gt;
+&lt;/div&gt;
+ /% PASSWORD CODE %/
+&lt;&lt;set $code to $code.toUpperCase()&gt;&gt;
+/% CODEWORD CORRECT %/
+&lt;&lt;if $code isnot &quot;&quot; and $code is &quot;MINSTER&quot;&gt;&gt;
+&lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;div class=&quot;confirmation&quot; id=&quot;confirmation&quot;&gt;Correct!&lt;/div&gt;&lt;&lt;/replace&gt;&gt;
+&lt;&lt;timed 3s&gt;&gt;&lt;&lt;goto &quot;call2MinIntro&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+/% CODEWORD INCORRECT %/
+&lt;&lt;if $code isnot &quot;&quot; and $code is not &quot;MINSTER&quot;&gt;&gt;
+&lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;div class=&quot;confirmation&quot; id=&quot;confirmation&quot;&gt;That&#39;s not right...&lt;/div&gt;&lt;&lt;/replace&gt;&gt;
+&lt;&lt;timed 1.5s&gt;&gt;&lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/timed&gt;&gt;
+&lt;&lt;/if&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;/div&gt;
+&lt;/main&gt; 
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="call2MinIntro" tags="nobr" position="1225,350" size="100,100">&lt;&lt;set $prevpass to &quot;enterReview&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;call2MinIntro&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;leaveAReviewIntro&quot;&gt;&gt;
+&lt;&lt;include &quot;headermessage&quot;&gt;&gt;
+&lt;main class=&quot;main-section message&quot;&gt;
+&lt;div id=&#39;audio&#39;&gt;&lt;/div&gt;
+&lt;div id=&quot;msgMount&quot;&gt;&lt;/div&gt;
+&lt;&lt;timed 1s&gt;&gt;
+  &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+ &lt;span class=&quot;sender&quot;&gt;Judy&lt;/span&gt;
+ &lt;div class=&quot;voicenote&quot;&gt;
+&lt;&lt;link &quot;&lt;img src = &#39;assets/img/play.png&#39;&gt;&quot; &gt;&gt;
+ &lt;&lt;replace &quot;#audio&quot;&gt;&gt;
+  &lt;audio autoplay &gt;
+  &lt;source src=&quot;https://www.youhavefoundconey.net@youhavefoundconey.net/nwt/callaudio/Call_2_MIN_Intro_with_Sound_checked.mp3&quot;&gt;
+&lt;/audio&gt;
+  &lt;&lt;/replace&gt;&gt;
+  &lt;&lt;replace &quot;#note&quot;&gt;&gt;&lt;em&gt;Playing...&lt;/em&gt;&lt;&lt;/replace&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;p id=&quot;note&quot;&gt;Voice note &lt;/p&gt;&lt;/div&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+&lt;&lt;timed 2s&gt;&gt;
+  &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+    &lt;p class=&quot;final&quot; &gt;Press play to listen. &lt;/p&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 24s&gt;&gt;
+    &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
+  &lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto $nextpass&gt;&gt;&lt;&lt;/button&gt;&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="31" name="leaveAReviewIntro" tags="nobr t8n.typewriter.4" position="100,475" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;leaveAReviewIntro&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;leaveAReview1&quot;&gt;&gt;
 &lt;main class=&quot;main-section&quot;&gt;
@@ -933,12 +998,12 @@ You can upload the sound here and it will go straight through to Jude
 &lt;p&gt;It is off to the right of the Minster on the grass.&lt;/p&gt;
 
 &lt;div class=&quot;menu-wrapper&quot;&gt;
-    &lt;&lt;button &quot;Yes&quot;&gt;&gt;&lt;&lt;goto &quot;leaveAReview1&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+    &lt;&lt;button &quot;Yes&quot;&gt;&gt;&lt;&lt;goto &quot;loading&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
   
 &lt;/div&gt;
 
 &lt;/main&gt;
-&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="leaveAReview1" tags="nobr t8n.typewriter.4" position="1225,350" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="leaveAReview1" tags="nobr t8n.typewriter.4" position="225,475" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;leaveAReview1&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;leaveAReview3&quot;&gt;&gt;
 &lt;main class=&quot;main-section reviewq&quot;&gt;
@@ -954,7 +1019,7 @@ You can upload the sound here and it will go straight through to Jude
 &lt;/div&gt;
 
 &lt;/main&gt;
-&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="leaveAReview2" tags="nobr t8n.typewriter.4" position="100,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReview1&quot;&gt;&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="leaveAReview2" tags="nobr t8n.typewriter.4" position="350,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReview1&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;leaveAReview2&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;leaveAReview3&quot;&gt;&gt;
 &lt;main class=&quot;main-section reviewq&quot;&gt;
@@ -963,7 +1028,7 @@ You can upload the sound here and it will go straight through to Jude
 &lt;&lt;button &quot;Okay...&quot;&gt;&gt;&lt;&lt;goto &quot;leaveAReview1&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
 &lt;/main&gt;
-&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="leaveAReview3" tags="nobr t8n.typewriter.4" position="225,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReview2&quot;&gt;&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="leaveAReview3" tags="nobr t8n.typewriter.4" position="475,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReview2&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;leaveAReview3&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;leaveAReviewroof&quot;&gt;&gt;
 &lt;main class=&quot;main-section reviewq&quot;&gt;
@@ -981,7 +1046,7 @@ You can upload the sound here and it will go straight through to Jude
 
 &lt;&lt;button &quot;Next&quot;&gt;&gt;&lt;&lt;goto &quot;leaveAReviewroof&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/main&gt;
-&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="leaveAReviewroof" tags="nobr t8n.typewriter.4" position="350,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReview3&quot;&gt;&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="leaveAReviewroof" tags="nobr t8n.typewriter.4" position="600,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReview3&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;leaveAReviewroof&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;leaveAReviewholes&quot;&gt;&gt;
 &lt;&lt;include &quot;footer&quot;&gt;&gt;
@@ -995,7 +1060,7 @@ You can upload the sound here and it will go straight through to Jude
     &lt;&lt;button &quot;Yes&quot;&gt;&gt;&lt;&lt;set $roof to true&gt;&gt;&lt;&lt;goto &quot;leaveAReviewholes&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
     &lt;&lt;button &quot;No&quot;&gt;&gt;&lt;&lt;set $roof to false&gt;&gt;&lt;&lt;goto &quot;leaveAReviewholes&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="34" name="leaveAReviewholes" tags="nobr t8n.typewriter.4" position="475,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewroof&quot;&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="36" name="leaveAReviewholes" tags="nobr t8n.typewriter.4" position="725,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewroof&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;leaveAReviewholes&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;leaveAReviewspiders&quot;&gt;&gt;
 &lt;&lt;include &quot;footer&quot;&gt;&gt;
@@ -1011,7 +1076,7 @@ You can upload the sound here and it will go straight through to Jude
     &lt;&lt;button &quot;No&quot;&gt;&gt;&lt;&lt;set $holes to false&gt;&gt;&lt;&lt;goto &quot;leaveAReviewspiders&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
 
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="35" name="leaveAReviewspiders" tags="nobr t8n.typewriter.4" position="600,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewholes&quot;&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="37" name="leaveAReviewspiders" tags="nobr t8n.typewriter.4" position="850,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewholes&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;leaveAReviewspiders&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;leaveAReviewmaterials&quot;&gt;&gt;
 &lt;&lt;include &quot;footer&quot;&gt;&gt;
@@ -1026,7 +1091,7 @@ You can upload the sound here and it will go straight through to Jude
     &lt;&lt;button &quot;No&quot;&gt;&gt;&lt;&lt;set $spiders to false&gt;&gt;&lt;&lt;goto &quot;leaveAReviewmaterials&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
 
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="36" name="leaveAReviewmaterials" tags="nobr t8n.typewriter.4" position="725,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewspiders&quot;&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="38" name="leaveAReviewmaterials" tags="nobr t8n.typewriter.4" position="975,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewspiders&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;leaveAReviewmaterials&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;leaveAReviewquiet&quot;&gt;&gt;
 &lt;&lt;include &quot;footer&quot;&gt;&gt;
@@ -1040,7 +1105,7 @@ You can upload the sound here and it will go straight through to Jude
     &lt;&lt;button &quot;Yes&quot;&gt;&gt;&lt;&lt;set $materials to true&gt;&gt;&lt;&lt;goto &quot;leaveAReviewquiet&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
     &lt;&lt;button &quot;No&quot;&gt;&gt;&lt;&lt;set $materials to false&gt;&gt;&lt;&lt;goto &quot;leaveAReviewquiet&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="37" name="leaveAReviewquiet" tags="nobr t8n.typewriter.4" position="850,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewmaterials&quot;&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="39" name="leaveAReviewquiet" tags="nobr t8n.typewriter.4" position="1100,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewmaterials&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;leaveAReviewquiet&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;leaveAReviewrating&quot;&gt;&gt;
 &lt;&lt;include &quot;footer&quot;&gt;&gt;
@@ -1055,7 +1120,7 @@ You can upload the sound here and it will go straight through to Jude
     &lt;&lt;button &quot;No&quot;&gt;&gt;&lt;&lt;set $quiet to false&gt;&gt;&lt;&lt;goto &quot;leaveAReviewrating&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
 
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="38" name="leaveAReviewrating" tags="nobr" position="975,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewquiet&quot;&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="40" name="leaveAReviewrating" tags="nobr" position="1225,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewquiet&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;leaveAReviewrating&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;reviewSubmitted&quot;&gt;&gt;
 &lt;&lt;include &quot;footer&quot;&gt;&gt;
@@ -1077,7 +1142,7 @@ You can upload the sound here and it will go straight through to Jude
 &lt;&lt;textarea &quot;$ratingreason&quot;&quot;&quot;&gt;&gt;
 &lt;br&gt;
 &lt;&lt;button &quot;Submit&quot;&gt;&gt;&lt;&lt;goto &quot;reviewSubmitted&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="39" name="reviewSubmitted" tags="nobr" position="1100,475" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewrating&quot;&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="41" name="reviewSubmitted" tags="nobr" position="100,600" size="100,100">&lt;&lt;set $prevpass to &quot;leaveAReviewrating&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;reviewSubmitted&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;leaveAReviewoutro&quot;&gt;&gt;
 &lt;main class=&quot;main-section&quot;&gt;
@@ -1143,29 +1208,36 @@ You can upload the sound here and it will go straight through to Jude
  &lt;&lt;done&gt;&gt;
 &lt;&lt;set $setup to setup.initEmail()&gt;&gt;
 &lt;&lt;set $s to setup.test()&gt;&gt;
-&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="leaveAReviewoutro" tags="nobr" position="1225,475" size="100,100">&lt;&lt;set $prevpass to &quot;reviewSubmitted&quot;&gt;&gt;
+&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="leaveAReviewoutro" tags="nobr" position="225,600" size="100,100">&lt;&lt;set $prevpass to &quot;reviewSubmitted&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;leaveAReviewoutro&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;Backpack&quot;&gt;&gt;
 &lt;&lt;include &quot;headermessage&quot;&gt;&gt;
 &lt;main class=&quot;main-section message&quot;&gt;
+&lt;div id=&#39;audio&#39;&gt;&lt;/div&gt;
 &lt;div id=&quot;msgMount&quot;&gt;&lt;/div&gt;
+
 &lt;&lt;timed 1s&gt;&gt;
   &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
     &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
  &lt;span class=&quot;sender&quot;&gt;Judy&lt;/span&gt;
- &lt;p&gt;Thank you for sending through the review. &lt;/p&gt;
-
+ &lt;div class=&quot;voicenote&quot;&gt;
+&lt;&lt;link &quot;&lt;img src = &#39;assets/img/play.png&#39;&gt;&quot; &gt;&gt;
+ &lt;&lt;replace &quot;#audio&quot;&gt;&gt;
+  &lt;audio autoplay &gt;
+  &lt;source src=&quot;https://www.youhavefoundconey.net@youhavefoundconey.net/nwt/callaudio/Call_2_MIN_Outro_with_Sound_checked.mp3&quot;&gt;
+&lt;/audio&gt;
+  &lt;&lt;/replace&gt;&gt;
+  &lt;&lt;replace &quot;#note&quot;&gt;&gt;&lt;em&gt;Playing...&lt;/em&gt;&lt;&lt;/replace&gt;&gt;
+&lt;&lt;/link&gt;&gt; &lt;p id=&quot;note&quot;&gt;Voice note &lt;/p&gt;&lt;/div&gt;
     &lt;&lt;/append&gt;&gt;
 &lt;&lt;/timed&gt;&gt;
-
-&lt;&lt;timed 3s&gt;&gt;
+&lt;&lt;timed 2s&gt;&gt;
   &lt;&lt;audio &quot;ping1&quot; &quot;play&quot;&gt;&gt;
     &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
-    &lt;p class=&quot;final&quot;&gt;Text BUGBNB and I&#39;ll call. &lt;/p&gt;
+    &lt;p class=&quot;final&quot; &gt;Press play to listen. &lt;/p&gt;
     &lt;&lt;/append&gt;&gt;
 &lt;&lt;/timed&gt;&gt;
-
-&lt;&lt;timed 4s&gt;&gt;
+&lt;&lt;timed 14s&gt;&gt;
     &lt;&lt;append &quot;#msgMount&quot;&gt;&gt;
   &lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
     &lt;&lt;/append&gt;&gt;
@@ -1174,7 +1246,7 @@ You can upload the sound here and it will go straight through to Jude
 
 /* template_8rbm75p
 service_hqggznf
-I5fGiJYF5iD8WzMJl */</tw-passagedata><tw-passagedata pid="41" name="enterFinalChallenge" tags="nobr" position="100,600" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
+I5fGiJYF5iD8WzMJl */</tw-passagedata><tw-passagedata pid="43" name="enterFinalChallenge" tags="nobr" position="350,600" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;enterFinalChallenge&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;Backpack&quot;&gt;&gt;
  &lt;main class=&quot;main-section&quot;&gt;
@@ -1203,7 +1275,7 @@ Enter the code to get to the final challenge:
 &lt;&lt;/if&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
 &lt;/main&gt; 
-&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="judeMessage" tags="nobr" position="225,600" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="judeMessage" tags="nobr" position="475,600" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;judeMessage&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;Backpack&quot;&gt;&gt;
 &lt;&lt;include &quot;headermessage&quot;&gt;&gt;
@@ -1243,7 +1315,7 @@ Enter the code to get to the final challenge:
 &lt;&lt;button &quot;Next&quot;&gt;&gt; &lt;&lt;goto &quot;Backpack&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
     &lt;&lt;/append&gt;&gt;
 &lt;&lt;/timed&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="43" name="finalChallengeIntro" tags="nobr t8n.typewriter.4" position="350,600" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="45" name="finalChallengeIntro" tags="nobr t8n.typewriter.4" position="600,600" size="100,100">&lt;&lt;set $prevpass to &quot;Backpack&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;finalChallengeIntro&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;finalChallengeIntro2&quot;&gt;&gt;
 &lt;&lt;include &quot;footer&quot;&gt;&gt;
@@ -1253,7 +1325,7 @@ Enter the code to get to the final challenge:
 &lt;div class=&quot;menu-wrapper&quot;&gt;
     &lt;&lt;button &quot;Yes&quot;&gt;&gt;&lt;&lt;goto &quot;finalChallengeIntro2&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="44" name="finalChallengeIntro2" tags="nobr t8n.typewriter.4" position="475,600" size="100,100">&lt;&lt;set $prevpass to &quot;finalChallengeIntro&quot;&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="46" name="finalChallengeIntro2" tags="nobr t8n.typewriter.4" position="725,600" size="100,100">&lt;&lt;set $prevpass to &quot;finalChallengeIntro&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;finalChallengeIntro2&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;finalChallenge&quot;&gt;&gt;
 &lt;&lt;include &quot;footer&quot;&gt;&gt;
@@ -1263,7 +1335,7 @@ Enter the code to get to the final challenge:
 &lt;div class=&quot;menu-wrapper&quot;&gt;
     &lt;&lt;button &quot;Tell me more&quot;&gt;&gt;&lt;&lt;goto &quot;finalChallenge&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="45" name="finalChallenge" tags="nobr" position="600,600" size="100,100">&lt;&lt;set $prevpass to &quot;finalChallengeIntro2&quot;&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="47" name="finalChallenge" tags="nobr" position="850,600" size="100,100">&lt;&lt;set $prevpass to &quot;finalChallengeIntro2&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;finalChallenge&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;finalChallengeOutro&quot;&gt;&gt;
  &lt;main class=&quot;main-section&quot;&gt;
@@ -1283,7 +1355,7 @@ Enter the code to get to the final challenge:
   &lt;div id=&quot;error&quot;&gt;&lt;/div&gt;
 
 &lt;/main&gt; 
-&lt;&lt;include &quot;footerupload&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="finalChallengeOutro" tags="" position="725,600" size="100,100">&lt;&lt;set $prevpass to &quot;finalChallenge&quot;&gt;&gt;
+&lt;&lt;include &quot;footerupload&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="48" name="finalChallengeOutro" tags="" position="975,600" size="100,100">&lt;&lt;set $prevpass to &quot;finalChallenge&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;finalChallengeOutro&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;Backpack&quot;&gt;&gt;
 &lt;&lt;include &quot;headermessage&quot;&gt;&gt;

@@ -216,7 +216,7 @@ inputElement.addEventListener('change', (event) => {
     </div>
     <div class="backpack-item">
         <<button "Minster’s Bug BnB">>
-        <<set $nextpass to "leaveAReviewIntro">><<goto "loading">>
+        <<set $nextpass to "enterReview">><<goto "loading">>
         <</button>>
         <<if hasVisited("reviewSubmitted")>><span class="complete">Complete!</span>
     <<else>>
@@ -315,10 +315,10 @@ inputElement.addEventListener('change', (event) => {
 <<case "codebreaking">>
 	[img[assets/img/compass_icon.png]]
 <<case "fieldRecordingIntro">>
-	[img[assets/img/minster_icon_small.png]]
+	[img[assets/img/boat_icon_small.png]]
  <<case "spottingIntro">>
 	[img[assets/img/3_crowns_small.png]]
- <<case "leaveAReviewIntro">>
+ <<case "enterReview" "leaveAReview1">>
 	[img[assets/img/bug_icon.png]]
  <<case "enterFinalChallenge">>
 	[img[assets/img/secret_icon.png]]
@@ -945,6 +945,79 @@ You can upload the sound here and it will go straight through to Jude
 <</timed>>
 </main>
 
+
+
+:: enterReview [nobr t8n.typewriter.4]
+<<set $prevpass to "Backpack">>
+<<set $pass to "enterReview">>
+<<set $nextpass to "call2MinIntro">>
+ <main class="main-section">
+<p>Head to the Minster. </p>
+<p>When there, enter the keyword to get onto the challenge</p>
+
+<br><br>
+<div id="coderesult"></div>
+ /% CODEWORD FEEDBACK %/
+   <div id="resultbutton">
+/% CODEWORD INPUT %/
+<div class="css-input code-input">
+<<textbox "$code" "">></div>
+<br><br>
+<<button "Enter">>
+</div>
+ /% PASSWORD CODE %/
+<<set $code to $code.toUpperCase()>>
+/% CODEWORD CORRECT %/
+<<if $code isnot "" and $code is "MINSTER">>
+<<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
+<<timed 3s>><<goto "call2MinIntro">><</timed>>
+<</if>>
+/% CODEWORD INCORRECT %/
+<<if $code isnot "" and $code is not "MINSTER">>
+<<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
+<<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
+<</if>><</button>>
+</div>
+</main> 
+<<include "footer">>
+
+:: call2MinIntro [nobr]
+<<set $prevpass to "enterReview">>
+<<set $pass to "call2MinIntro">>
+<<set $nextpass to "leaveAReviewIntro">>
+<<include "headermessage">>
+<main class="main-section message">
+<div id='audio'></div>
+<div id="msgMount"></div>
+<<timed 1s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+ <span class="sender">Judy</span>
+ <div class="voicenote">
+<<link "<img src = 'assets/img/play.png'>" >>
+ <<replace "#audio">>
+  <audio autoplay >
+  <source src="https://www.youhavefoundconey.net@youhavefoundconey.net/nwt/callaudio/Call_2_MIN_Intro_with_Sound_checked.mp3">
+</audio>
+  <</replace>>
+  <<replace "#note">><em>Playing...</em><</replace>>
+<</link>> <p id="note">Voice note </p></div>
+    <</append>>
+<</timed>>
+<<timed 2s>>
+  <<audio "ping1" "play">>
+    <<append "#msgMount">>
+    <p class="final" >Press play to listen. </p>
+    <</append>>
+<</timed>>
+
+<<timed 24s>>
+    <<append "#msgMount">>
+  <<button "Next">> <<goto $nextpass>><</button>>
+    <</append>>
+<</timed>>
+</main>
+
 :: leaveAReviewIntro [nobr t8n.typewriter.4]
 <<set $prevpass to "Backpack">>
 <<set $pass to "leaveAReviewIntro">>
@@ -955,7 +1028,7 @@ You can upload the sound here and it will go straight through to Jude
 <p>It is off to the right of the Minster on the grass.</p>
 
 <div class="menu-wrapper">
-    <<button "Yes">><<goto "leaveAReview1">><</button>>
+    <<button "Yes">><<goto "loading">><</button>>
   
 </div>
 
@@ -1209,24 +1282,31 @@ You can upload the sound here and it will go straight through to Jude
 <<set $nextpass to "Backpack">>
 <<include "headermessage">>
 <main class="main-section message">
+<div id='audio'></div>
 <div id="msgMount"></div>
+
 <<timed 1s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
  <span class="sender">Judy</span>
- <p>Thank you for sending through the review. </p>
-
+ <div class="voicenote">
+<<link "<img src = 'assets/img/play.png'>" >>
+ <<replace "#audio">>
+  <audio autoplay >
+  <source src="https://www.youhavefoundconey.net@youhavefoundconey.net/nwt/callaudio/Call_2_MIN_Outro_with_Sound_checked.mp3">
+</audio>
+  <</replace>>
+  <<replace "#note">><em>Playing...</em><</replace>>
+<</link>> <p id="note">Voice note </p></div>
     <</append>>
 <</timed>>
-
-<<timed 3s>>
+<<timed 2s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
-    <p class="final">Text BUGBNB and I'll call. </p>
+    <p class="final" >Press play to listen. </p>
     <</append>>
 <</timed>>
-
-<<timed 4s>>
+<<timed 14s>>
     <<append "#msgMount">>
   <<button "Next">> <<goto "Backpack">><</button>>
     <</append>>

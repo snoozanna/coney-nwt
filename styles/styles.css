@@ -786,7 +786,8 @@ footer.codebreaking {
   margin-left: 1rem;
 }
 
-.main-section.message > #msgMount > p {
+.main-section.message > #msgMount > p,
+.main-section.message > #msgMount > .voicenote {
   background-color: var(--greenpea-dark1);
   color: white;
   padding: 5px 8px;
@@ -815,6 +816,22 @@ footer.codebreaking {
   border-bottom: 0;
   margin-top: 3px;
   margin-left: -11px;
+}
+
+.main-section.message > #msgMount > .voicenote {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.main-section.message > #msgMount > .voicenote > p {
+  margin-bottom: 0;
+}
+
+.main-section.message > #msgMount > .voicenote > a > img {
+  max-width: 40px;
+  margin-right: 2rem;
 }
 
 /* loading  */
