@@ -137,6 +137,11 @@ header.column > p {
   margin-block-end: 2rem;
 }
 
+strong.specialfont {
+  font-family: var(--font-headings);
+  text-transform: uppercase;
+}
+
 main {
   padding: var(--padding);
   min-height: 70vh;
@@ -292,22 +297,6 @@ textarea {
   }
 }
 
-/* SHOW NOTHING ON A COMP  */
-
-/* .comp-warning {
-  display: none;
-}
-
-@media screen and (min-width: 500px) {
-  main {
-    display: none !important;
-  }
-  .comp-warning {
-    text-align: center;
-    display: inherit;
-  }
-} */
-
 /* PULSE ANIMATION  */
 .circle {
   /* width: 35px;
@@ -392,10 +381,12 @@ span.locked {
   position: absolute;
   right: 5%;
   background-color: red;
+  border: white 1px solid;
   padding: 5px;
-  color: black;
+  color: white;
   transform: rotate(-5deg);
   font-size: 1.2rem;
+  font-weight: 900;
 }
 
 span.complete,
