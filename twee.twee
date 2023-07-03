@@ -182,7 +182,7 @@ inputElement.addEventListener('change', (event) => {
 :: IntroJudy[nobr]
 <<set $prevpass to "landing">>
 <<set $pass to "IntroJudy">>
-<<set $nextpass to "IntroJudy2">>
+<<set $nextpass to "IntroJudy4">>
 <<include "headermessage">>
 <main class="main-section message">
 <div id='audio'></div>
@@ -198,7 +198,7 @@ inputElement.addEventListener('change', (event) => {
 <<timed 3s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
-    <p >Click below to hear my voice message. </p>
+    <p >Click below to hear my voice messages. </p>
     <</append>>
 <</timed>>
 <<timed 5s>>
@@ -209,98 +209,69 @@ inputElement.addEventListener('change', (event) => {
 <<link "<img src = 'assets/img/play.png'>" >>
  <<replace "#audio">>
   <audio autoplay >
-  <source src="">
+  <source src="https://youhavefoundconey.net/nwt/call1%20zpart%201%20%28us%29%20checked.mp3">
 </audio>
   <</replace>>
-  <<replace "#note">><em>Playing...</em><</replace>>
-<</link>> <p id="note" c>Voice note </p></div>
+  <<replace "#note1">><em>Playing...</em><</replace>>
+<</link>> <p id="note1" c>Voice note </p></div>
     <</append>>
 <</timed>>
-
 
 <<timed 14s>>
-    <<append "#msgMount">>
-  <<button "Next">> <<goto $nextpass>><</button>>
-    <</append>>
-<</timed>>
-</main>
-
-:: IntroJudy2[nobr]
-<<set $prevpass to "IntroJudy">>
-<<set $pass to "IntroJudy2">>
-<<set $nextpass to "IntroJudy3">>
-<<include "headermessage">>
-<main class="main-section message">
-<div id='audio'></div>
-<div id="msgMount"></div>
-<<timed 1s>>
     <<audio "ping1" "play">>
     <<append "#msgMount">>
-  <span class="sender">Judy</span>
+
  <div class="voicenote">
 <<link "<img src = 'assets/img/play.png'>" >>
  <<replace "#audio">>
   <audio autoplay >
-  <source src="">
+  <source src="https://youhavefoundconey.net/nwt/call%201%20part%202%20%28us%29%20checked.mp3">
 </audio>
   <</replace>>
-  <<replace "#note">><em>Playing...</em><</replace>>
-<</link>> <p id="note">Voice note </p></div>
+  <<replace "#note2">><em>Playing...</em><</replace>>
+<</link>> <p id="note2">Voice note </p></div>
     <</append>>
 <</timed>>
 
-<<timed 3s>>
-  <<audio "ping1" "play">>
-    <<append "#msgMount">>
-   <p class="final" >Press play to listen. </p>
-    <</append>>
-<</timed>>
-
-<<timed 14s>>
-    <<append "#msgMount">>
-  <<button "Next">> <<goto $nextpass>><</button>>
-    <</append>>
-<</timed>>
-</main>
-
-:: IntroJudy3[nobr]
-<<set $prevpass to "IntroJudy2">>
-<<set $pass to "IntroJudy3">>
-<<set $nextpass to "IntroJudy4">>
-<<include "headermessage">>
-<main class="main-section message">
-<div id='audio'></div>
-<div id="msgMount"></div>
-<<timed 1s>>
+<<timed 20s>>
     <<audio "ping1" "play">>
     <<append "#msgMount">>
-  <span class="sender">Judy</span>
+
  <div class="voicenote">
 <<link "<img src = 'assets/img/play.png'>" >>
  <<replace "#audio">>
   <audio autoplay >
-  <source src="">
+   <source src="https://youhavefoundconey.net/nwt/call%201%20part%203%20%28us%29%20checked.mp3">
 </audio>
   <</replace>>
-  <<replace "#note">><em>Playing...</em><</replace>>
-<</link>> <p id="note">Voice note </p></div>
+  <<replace "#note3">><em>Playing...</em><</replace>>
+<</link>> <p id="note3">Voice note </p></div>
     <</append>>
 <</timed>>
 
-<<timed 3s>>
-  <<audio "ping1" "play">>
+<<timed 25s>>
+    <<audio "ping1" "play">>
     <<append "#msgMount">>
-   <p class="final" >Press play to listen. </p>
+
+ <div class="voicenote">
+<<link "<img src = 'assets/img/play.png'>" >>
+ <<replace "#audio">>
+  <audio autoplay >
+   <source src="https://youhavefoundconey.net/nwt/call%201%20part%204%20%28us%29%20checked.mp3">
+</audio>
+  <</replace>>
+  <<replace "#note4">><em>Playing...</em><</replace>>
+<</link>> <p id="note4">Voice note </p></div>
     <</append>>
 <</timed>>
 
-
-<<timed 14s>>
+<<timed 28s>>
     <<append "#msgMount">>
   <<button "Next">> <<goto $nextpass>><</button>>
     <</append>>
 <</timed>>
 </main>
+
 
 :: IntroJudy4[nobr]
 <<set $prevpass to "IntroJudy3">>
@@ -733,7 +704,7 @@ You can upload the sound here and it will go straight through to Jude
 <<link "<img src = 'assets/img/play.png'>" >>
  <<replace "#audio">>
   <audio autoplay >
-  <source src="https://www.youhavefoundconey.net/nwt/callaudio/Call_3_COMP_Intro_with_Sound_checked.mp3">
+  <source src="https://youhavefoundconey.net/nwt/Call%203%20Intro%20with%20Sound%20v2%20checked.mp3">
 </audio>
   <</replace>>
   <<replace "#note">><em>Playing...</em><</replace>>
@@ -1448,7 +1419,7 @@ From the town side, you are looking for Three Crowns Way along Queen Street.
 <<link "<img src = 'assets/img/play.png'>" >>
  <<replace "#audio">>
   <audio autoplay >
-  <source src="https://www.youhavefoundconey.net/nwt/callaudio/Call_2_MIN_Intro_with_Sound_checked.mp3">
+  <source src="https://youhavefoundconey.net/nwt/Call%202%20Intro%20with%20Sound%20v2%20checked.mp3">
 </audio>
   <</replace>>
   <<replace "#note">><em>Playing...</em><</replace>>
@@ -1513,7 +1484,7 @@ From the town side, you are looking for Three Crowns Way along Queen Street.
 <<timed 6s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
-    <p >In the review tell Jude the truth. </p>
+    <p class="final">In the review tell Jude the truth. </p>
     <</append>>
 <</timed>>
 <<timed 10s>>
