@@ -564,7 +564,7 @@ inputElement.addEventListener('change', (event) => {
 :: fieldRecordingIntro [nobr t8n.typewriter.4]
 <<set $prevpass to "Backpack">>
 <<set $pass to "fieldRecordingIntro">>
-<<set $nextpass to "fieldRecording2">>
+<<set $nextpass to "fieldRecordingIntro2">>
 <main class="main-section">
 
 <p>Head up on the bank where you can see lots of reeds and perhaps a colourful boat. </p>
