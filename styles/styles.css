@@ -831,6 +831,13 @@ footer.codebreaking {
   margin-right: 2rem;
 }
 
+main.instructions > ul {
+  list-style: inherit;
+}
+main.instructions > ul > li {
+  margin-block-end: 1rem;
+}
+
 /* loading  */
 @-webkit-keyframes pulse {
   0% {

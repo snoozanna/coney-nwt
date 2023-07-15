@@ -157,6 +157,7 @@ inputElement.addEventListener('change', (event) => {
 <<cacheaudio "chimechime" "assets/audio/chimechime.mp3">>
 <<cacheaudio "uploadcomplete" "assets/audio/uploadcomplete.mp3">>
 <<cacheaudio "uploading" "assets/audio/uploading.mp3">>
+<<cacheaudio "taperecorder" "assets/audio/taperecorder.mp3">>
 
 <<waitforaudio>>
 
@@ -175,7 +176,7 @@ inputElement.addEventListener('change', (event) => {
 <<set $pass to "map">>
 <<set $nextpass to "Backpack">>
 <main class="main-section">
- [img[assets/img/map.png]]
+ [img[assets/img/map.jpg]]
  </main>
 <<include "footer">>
 
@@ -209,7 +210,7 @@ inputElement.addEventListener('change', (event) => {
 <<link "<img src = 'assets/img/play.png'>" >>
  <<replace "#audio">>
   <audio autoplay >
-  <source src="https://youhavefoundconey.net/nwt/call1%20zpart%201%20%28us%29%20checked.mp3">
+  <source src="https://youhavefoundconey.net/nwt/NWTCall1_2.mp3">
 </audio>
   <</replace>>
   <<replace "#note1">><em>Playing...</em><</replace>>
@@ -217,23 +218,9 @@ inputElement.addEventListener('change', (event) => {
     <</append>>
 <</timed>>
 
-<<timed 14s>>
-    <<audio "ping1" "play">>
-    <<append "#msgMount">>
 
- <div class="voicenote">
-<<link "<img src = 'assets/img/play.png'>" >>
- <<replace "#audio">>
-  <audio autoplay >
-  <source src="https://youhavefoundconey.net/nwt/call%201%20part%202%20%28us%29%20checked.mp3">
-</audio>
-  <</replace>>
-  <<replace "#note2">><em>Playing...</em><</replace>>
-<</link>> <p id="note2">Voice note </p></div>
-    <</append>>
-<</timed>>
 
-<<timed 20s>>
+<<timed 83s>>
     <<audio "ping1" "play">>
     <<append "#msgMount">>
 
@@ -249,7 +236,7 @@ inputElement.addEventListener('change', (event) => {
     <</append>>
 <</timed>>
 
-<<timed 25s>>
+<<timed 175s>>
     <<audio "ping1" "play">>
     <<append "#msgMount">>
 
@@ -265,7 +252,7 @@ inputElement.addEventListener('change', (event) => {
     <</append>>
 <</timed>>
 
-<<timed 28s>>
+<<timed 244s>>
     <<append "#msgMount">>
   <<button "Next">> <<goto $nextpass>><</button>>
     <</append>>
@@ -336,6 +323,14 @@ inputElement.addEventListener('change', (event) => {
 
 <main class="main-section backpack">
 <div class="backpack-container">
+ <div class="backpack-item">
+        <<button "Minster’s Bug BnB">>
+        <<set $nextpass to "enterReview">><<goto "loading">>
+        <</button>>
+        <<if hasVisited("reviewSubmitted")>><span class="complete">Complete!</span>
+    <<else>>
+         <span class="todo">Todo</span><</if>>
+    </div>
     <div class="backpack-item">
         <<button "Harding’s Pit Field Recordings">>
         <<set $nextpass to "enterPit">><<goto "loading">><</button>>
@@ -359,14 +354,7 @@ inputElement.addEventListener('change', (event) => {
          <span class="todo">To do</span>
     <</if>>
     </div>
-    <div class="backpack-item">
-        <<button "Minster’s Bug BnB">>
-        <<set $nextpass to "enterReview">><<goto "loading">>
-        <</button>>
-        <<if hasVisited("reviewSubmitted")>><span class="complete">Complete!</span>
-    <<else>>
-         <span class="todo">Todo</span><</if>>
-    </div>
+   
      /* This one based on codeword */
   <div class="backpack-item">
     <<if hasVisited("fieldRecording", "codebreaking", "spottingGameEmitter", "reviewSubmitted")>>
@@ -387,24 +375,7 @@ inputElement.addEventListener('change', (event) => {
     <</if>>
     </div>
 
-    /* This one based on having completed the sections  */
-    /* <div class="backpack-item">
-    <<if hasVisited("fieldRecording", "codebreaking", "spottingGame1", "leaveAReview1")>>
-        <<if not hasVisited("judeMessage")>>…
-           <<goto "judeMessage">>
-        <</if>>
-        <<if hasVisited("judeMessage")>>
-            <<if not hasVisited("finalChallenge")>>…
-                <<button "ThoresbyCollege’sSecretTree">><<goto "finalChallenge">><</button>>
-                    <span class="new">New!</span> 
-            <</if>>
-        <</if>>
-        <<if hasVisited("finalChallenge")>>
-            <<button "UPLOAD PICTURE">><<goto "finalChallenge">><</button>>
-                <span class="complete">Complete!</span> 
-        <</if>>
-    <</if>>
-    </div> */
+    
 </div>
 </main>
 <footer><<button "Show map">><<goto "map">><</button>></footer>
@@ -511,12 +482,12 @@ inputElement.addEventListener('change', (event) => {
  /% PASSWORD CODE %/
 <<set $code to $code.toUpperCase()>>
 /% CODEWORD CORRECT %/
-<<if $code isnot "" and $code is "PIT">>
+<<if $code isnot "" and $code is "BUTTERFLIES">>
 <<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
 <<timed 3s>><<goto $nextpass>><</timed>>
 <</if>>
 /% CODEWORD INCORRECT %/
-<<if $code isnot "" and $code is not "PIT">>
+<<if $code isnot "" and $code is not "BUTTERFLIES">>
 <<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
 <<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
 <</if>><</button>>
@@ -675,12 +646,12 @@ You can upload the sound here and it will go straight through to Jude
  /% PASSWORD CODE %/
 <<set $code to $code.toUpperCase()>>
 /% CODEWORD CORRECT %/
-<<if $code isnot "" and $code is "COMPASS">>
+<<if $code isnot "" and $code is "SEAGULLS">>
 <<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
 <<timed 3s>><<goto $nextpass>><</timed>>
 <</if>>
 /% CODEWORD INCORRECT %/
-<<if $code isnot "" and $code is not "COMPASS">>
+<<if $code isnot "" and $code is not "SEAGULLS">>
 <<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
 <<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
 <</if>><</button>>
@@ -1030,16 +1001,19 @@ You can upload the sound here and it will go straight through to Jude
 </main>
 
 :: enterPass [nobr t8n.typewriter.4]
-/* TODO FIX  */
+
 <<set $prevpass to "Backpack">>
 <<set $pass to "enterPass">>
 <<set $nextpass to "call5PassIntro">>
-$code
- <main class="main-section">
-<p>You are looking for the secret passageway. It can be quite tricky to find. It is down Three Crowns Way. You can access it from two sides.</p>
-<p>From the riverside, there is a hidden route through the covered carpark for Three Crowns House - you can access it on South Quay street.</p>
-From the town side, you are looking for Three Crowns Way along Queen Street.
-<p>Once there, you’ll find a secret garden, which is important for one of our animal friends.</p>
+
+ <main class="main-section instructions">
+   <p>You are looking for the secret passageway. It can be quite tricky to find. It is down Three Crowns Way. You can access it from two sides.</p>
+<ul>
+  <li>From the riverside, there is a hidden route through the covered carpark for Three Crowns House - you can access it on South Quay street.</li>
+ <li> From the town side, you are looking for Three Crowns Way along Queen Street.</li>
+  <li>Once there, you’ll find a secret garden, which is important for one of our animal friends.</li>
+  
+</ul>
 <p>When there, enter the keyword from the map</p>
 <br>
 <div id="coderesult"></div>
@@ -1054,12 +1028,12 @@ From the town side, you are looking for Three Crowns Way along Queen Street.
  /% PASSWORD CODE %/
 <<set $code to $code.toUpperCase()>>
 /% CODEWORD CORRECT %/
-<<if $code isnot "" and $code is "CROWNS">>
+<<if $code isnot "" and $code is "HEDGEHOGS">>
 <<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
 <<timed 3s>><<goto $nextpass>><</timed>>
 <</if>>
 /% CODEWORD INCORRECT %/
-<<if $code isnot "" and $code is not "CROWNS">>
+<<if $code isnot "" and $code is not "HEDGEHOGS">>
 <<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
 <<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
 <</if>><</button>>
@@ -1278,19 +1252,21 @@ From the town side, you are looking for Three Crowns Way along Queen Street.
   <<set $spinning to false>>
 <main class="main-section emitter">
 <div class = "detector">
+<<audio "uploadcomplete" "play" >>
 <<link "<img src = './assets/img/radarbutton.png'>" >>
  <<timed 0.5s>>
     <<set $spinning to true>>
-        /* <<audio "badjoke" play>> */
+        <<audio "taperecorder" play>>
    	    <<addclass ".detector" "spinning">>
         <<replace "#mount">><h3>Searching...</h3><</replace>>
+        
   <</timed>>
   <<timed 6.5s>>
       	<<set $spinning to false>>
         /* <<audio ":all" stop>> */
 		<<removeclass ".detector" "spinning">>
           <<replace "#mount">><h3>Hedgehog found!</h3><</replace>>
-      <<audio "hedgehog" "play">>
+      <<audio ":all" "stop">><<audio "hedgehog" "play">>
   <</timed>>
 <</link>> 
 </div>
@@ -1847,16 +1823,18 @@ Enter the code to get to the final challenge:
   <<audio "ping1" "play">>
     <<append "#msgMount">>
 
- <div class="voicenote">
-<<link "<img src = 'assets/img/call.png'>" >>
-<<audio ":all" "stop">>
- <<replace "#audio">>
-  <audio autoplay >
-  <source src="https://www.youhavefoundconey.net/nwt/callaudio/Call_6_Jude_With_Sound_checked.mp3">
-</audio>
-  <</replace>>
-  <<replace "#note">><em>Calling...</em><</replace>>
-<</link>> <p id="note">Call Jude </p></div>
+    <div class="voicenote">
+      <<link "<img src = 'assets/img/call.png'>" >>
+        <<audio ":all" "stop">>
+        <<replace "#audio">>
+          <audio autoplay >
+          <source src="https://www.youhavefoundconey.net/nwt/callaudio/Call_6_Jude_With_Sound_checked.mp3">
+        </audio>
+          <</replace>>
+        <<replace "#note">><em>Calling...</em><</replace>>
+      <</link>>
+     <p id="note">Call Jude </p>
+    </div>
     <</append>>
 <</timed>>
 
@@ -1918,14 +1896,15 @@ Enter the code to get to the final challenge:
     <<append "#msgMount">>
  <span class="sender">Jude</span>
  <div class="voicenote">
-<<link "<img src = 'assets/img/play.png'>" >>
- <<replace "#audio">>
-  <audio autoplay >
-  <source src="https://www.youhavefoundconey.net/nwt/callaudio/Call_7_Jude_with_Sound_checked.mp3">
-</audio>
-  <</replace>>
-  <<replace "#note">><em>Playing...</em><</replace>>
-<</link>> <p id="note">Voice note </p></div>
+  <<link "<img src = 'assets/img/play.png'>" >>
+      <<replace "#audio">>
+            <audio autoplay >
+            <source src="https://www.youhavefoundconey.net/nwt/callaudio/Call_7_Jude_with_Sound_checked.mp3">
+          </audio>
+        <</replace>>
+      <<replace "#note">><em>Playing...</em><</replace>>
+  <</link>> <p id="note">Voice note </p>
+</div>
     <</append>>
 <</timed>>
 <<timed 2s>>
@@ -1997,7 +1976,7 @@ Enter the code to get to the final challenge:
 <<set $nextpass to "Backpack">>
 <<include "headermessage">>
 <main class="main-section message">
-
+<div id='audio'></div>
 <div id="msgMount"></div>
   <<audio "uploadcomplete" "play">>
 <<timed 2s>>
@@ -2023,7 +2002,7 @@ Enter the code to get to the final challenge:
 <<link "<img src = 'assets/img/play.png'>" >>
  <<replace "#audio">>
   <audio autoplay >
-  <source src="">
+  <source src="https://youhavefoundconey.net/nwt/Call%208%20All%204%20with%20Sound%20checked.mp3">
 </audio>
   <</replace>>
   <<replace "#note">><em>Playing...</em><</replace>>
@@ -2031,30 +2010,32 @@ Enter the code to get to the final challenge:
     <</append>>
 <</timed>>
 
-<<timed 16s>>
+<<timed 96s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
     <p >Text me the word NATURE and I’ll make sure to call you back.</p>
     <</append>>
 <</timed>>
 
-<<timed 18s>>
+<<timed 98s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
     <p >My number is <a href="tel:+447400179362">07400179362</a>.</p>
     <</append>>
 <</timed>>
-<<timed 20s>>
+<<timed 100s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
-    <p class="final">Text me the word NATURE now.</p>
+    <p >Then, that’s it on the NCP portal, thanks so much for your help today.</p>
     <</append>>
 <</timed>>
-<<timed 22s>>
+<<timed 102s>>
+  <<audio "ping1" "play">>
     <<append "#msgMount">>
-  <<button "Next">> <<goto "Backpack">><</button>>
+    <p class="final">I honestly couldn’t have done it without you.</p>
     <</append>>
 <</timed>>
+
 
 </main>
 
