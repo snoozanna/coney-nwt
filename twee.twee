@@ -228,7 +228,7 @@ inputElement.addEventListener('change', (event) => {
 <<link "<img src = 'assets/img/play.png'>" >>
  <<replace "#audio">>
   <audio autoplay >
-   <source src="https://youhavefoundconey.net/nwt/call%201%20part%203%20%28us%29%20checked.mp3">
+   <source src="https://remote.co.com/NCP/Audio/call_1_part_3_(us)_checked_1.mp3">
 </audio>
   <</replace>>
   <<replace "#note3">><em>Playing...</em><</replace>>
@@ -244,7 +244,7 @@ inputElement.addEventListener('change', (event) => {
 <<link "<img src = 'assets/img/play.png'>" >>
  <<replace "#audio">>
   <audio autoplay >
-   <source src="https://youhavefoundconey.net/nwt/call%201%20part%204%20%28us%29%20checked.mp3">
+   <source src="https://remote.co.com/NCP/Audio/call_1_part_4_(us)_checked_1.mp3">
 </audio>
   <</replace>>
   <<replace "#note4">><em>Playing...</em><</replace>>
@@ -511,7 +511,7 @@ inputElement.addEventListener('change', (event) => {
 <<link "<img src = 'assets/img/play.png'>" >>
  <<replace "#audio">>
   <audio autoplay >
-  <source src="https://www.youhavefoundconey.net/nwt/callaudio/Call_4_PIT_Intro_with_Sound_checked.mp3">
+  <source src="https://remote.co.com/NCP/Audio/Call_4_Intro_with_Sound_checked_1.mp3">
 </audio>
   <</replace>>
   <<replace "#note">><em>Playing...</em><</replace>>
@@ -596,7 +596,7 @@ You can upload the sound here and it will go straight through to Jude
 <<link "<img src = 'assets/img/play.png'>" >>
  <<replace "#audio">>
   <audio autoplay >
-  <source src="https://www.youhavefoundconey.net/nwt/callaudio/Call_4_PIT_Outro_with_Sound_checked.mp3">
+  <source src="https://remote.co.com/NCP/Audio/Call_4_Outro_with_Sound_checked_1.mp3">
 </audio>
   <</replace>>
   <<replace "#note">><em>Playing...</em><</replace>>
@@ -675,7 +675,8 @@ You can upload the sound here and it will go straight through to Jude
 <<link "<img src = 'assets/img/play.png'>" >>
  <<replace "#audio">>
   <audio autoplay >
-  <source src="https://youhavefoundconey.net/nwt/Call%203%20Intro%20with%20Sound%20v2%20checked.mp3">
+
+    <source src="https://remote.co.com/NCP/Audio/Call_3_Intro_with_Sound_v2_checked_1.mp3">
 </audio>
   <</replace>>
   <<replace "#note">><em>Playing...</em><</replace>>
@@ -980,7 +981,8 @@ You can upload the sound here and it will go straight through to Jude
 <<link "<img src = 'assets/img/play.png'>" >>
  <<replace "#audio">>
   <audio autoplay >
-  <source src="https://www.youhavefoundconey.net/nwt/callaudio/Call_3_COMP_Outro_with_Sound_checked.mp3">
+ 
+    <source src="https://remote.co.com/NCP/Audio/Call_3_Outro_with_Sound_checked_1.mp3">
 </audio>
   <</replace>>
   <<replace "#note">><em>Playing...</em><</replace>>
@@ -1009,8 +1011,8 @@ You can upload the sound here and it will go straight through to Jude
  <main class="main-section instructions">
    <p>You are looking for the secret passageway. It can be quite tricky to find. It is down Three Crowns Way. You can access it from two sides.</p>
 <ul>
-  <li>From the riverside, there is a hidden route through the covered carpark for Three Crowns House - you can access it on South Quay street.</li>
- <li> From the town side, you are looking for Three Crowns Way along Queen Street.</li>
+  <li>From the riverside: there is a hidden route through the covered carpark for Three Crowns House - you can access it on South Quay street.</li>
+ <li> From the town side: you are looking for Three Crowns Way along Queen Street.</li>
   <li>Once there, you’ll find a secret garden, which is important for one of our animal friends.</li>
   
 </ul>
@@ -1057,7 +1059,7 @@ You can upload the sound here and it will go straight through to Jude
 <<link "<img src = 'assets/img/play.png'>" >>
  <<replace "#audio">>
   <audio autoplay >
-  <source src="https://www.youhavefoundconey.net/nwt/callaudio/Call_5_PASS_Intro_With_Sound_checked.mp3">
+   <source src="https://remote.co.com/NCP/Audio/Call_5_Intro_With_Sound_checked_1.mp3">
 </audio>
   <</replace>>
   <<replace "#note">><em>Playing...</em><</replace>>
@@ -1323,7 +1325,8 @@ You can upload the sound here and it will go straight through to Jude
 <<link "<img src = 'assets/img/play.png'>" >>
  <<replace "#audio">>
   <audio autoplay >
-  <source src="https://www.youhavefoundconey.net/nwt/callaudio/Call_5_PASS_Outro_with_Sound_checked.mp3">
+ 
+  <source src="https://remote.co.com/NCP/Audio/Call_5_Outro_with_Sound_checked_1.mp3">
 </audio>
   <</replace>>
   <<replace "#note">><em>Playing...</em><</replace>>
@@ -1366,12 +1369,12 @@ You can upload the sound here and it will go straight through to Jude
  /% PASSWORD CODE %/
 <<set $code to $code.toUpperCase()>>
 /% CODEWORD CORRECT %/
-<<if $code isnot "" and $code is "MINSTER">>
+<<if $code isnot "" and $code is "BUGS">>
 <<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
 <<timed 3s>><<goto "call2MinIntro">><</timed>>
 <</if>>
 /% CODEWORD INCORRECT %/
-<<if $code isnot "" and $code is not "MINSTER">>
+<<if $code isnot "" and $code is not "BUGS">>
 <<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
 <<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
 <</if>><</button>>
@@ -1395,7 +1398,8 @@ You can upload the sound here and it will go straight through to Jude
 <<link "<img src = 'assets/img/play.png'>" >>
  <<replace "#audio">>
   <audio autoplay >
-  <source src="https://youhavefoundconey.net/nwt/Call%202%20Intro%20with%20Sound%20v2%20checked.mp3">
+
+   <source src="https://remote.co.com/NCP/Audio/Call_2_Intro_with_Sound_v2_checked.mp3">
 </audio>
   <</replace>>
   <<replace "#note">><em>Playing...</em><</replace>>
@@ -1730,7 +1734,7 @@ You can upload the sound here and it will go straight through to Jude
 <<link "<img src = 'assets/img/play.png'>" >>
  <<replace "#audio">>
   <audio autoplay >
-  <source src="https://www.youhavefoundconey.net/nwt/callaudio/Call_2_MIN_Outro_with_Sound_checked.mp3">
+  <source src="https://remote.co.com/NCP/Audio/Call_2_Outro_with_Sound_checked_1.mp3">
 </audio>
   <</replace>>
   <<replace "#note">><em>Playing...</em><</replace>>
@@ -1828,7 +1832,7 @@ Enter the code to get to the final challenge:
         <<audio ":all" "stop">>
         <<replace "#audio">>
           <audio autoplay >
-          <source src="https://www.youhavefoundconey.net/nwt/callaudio/Call_6_Jude_With_Sound_checked.mp3">
+            <source src="https://remote.co.com/NCP/Audio/Call_6_Jude_With_Sound_checked_1.mp3">
         </audio>
           <</replace>>
         <<replace "#note">><em>Calling...</em><</replace>>
@@ -1899,7 +1903,7 @@ Enter the code to get to the final challenge:
   <<link "<img src = 'assets/img/play.png'>" >>
       <<replace "#audio">>
             <audio autoplay >
-            <source src="https://www.youhavefoundconey.net/nwt/callaudio/Call_7_Jude_with_Sound_checked.mp3">
+                 <source src="https://remote.co.com/NCP/Audio/Call_7_Jude_with_Sound_checked_2a.mp3">
           </audio>
         <</replace>>
       <<replace "#note">><em>Playing...</em><</replace>>
@@ -2002,7 +2006,7 @@ Enter the code to get to the final challenge:
 <<link "<img src = 'assets/img/play.png'>" >>
  <<replace "#audio">>
   <audio autoplay >
-  <source src="https://youhavefoundconey.net/nwt/Call%208%20All%204%20with%20Sound%20checked.mp3">
+   <source src="https://remote.co.com/NCP/Audio/Call_8_All_4_with_Sound_checked_1.mp3">
 </audio>
   <</replace>>
   <<replace "#note">><em>Playing...</em><</replace>>
@@ -2020,7 +2024,7 @@ Enter the code to get to the final challenge:
 <<timed 98s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
-    <p >My number is <a href="tel:+447400179362">07400179362</a>.</p>
+    <p >My number is <a href="tel:+447400179362">07700165704</a>.</p>
     <</append>>
 <</timed>>
 <<timed 100s>>
