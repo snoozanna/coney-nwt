@@ -482,15 +482,21 @@ inputElement.addEventListener('change', (event) => {
  /% PASSWORD CODE %/
 <<set $code to $code.toUpperCase()>>
 /% CODEWORD CORRECT %/
-<<if $code isnot "" and $code is "BUTTERFLIES">>
-<<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
-<<timed 3s>><<goto $nextpass>><</timed>>
+<<if $code isnot "">> 
+  <<if $code is "BUTTERFLIES" or $code is "BUTTERFLIES ">>
+    <<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
+    <<timed 3s>><<goto $nextpass>><</timed>>
+   
+<</if>>
 <</if>>
 /% CODEWORD INCORRECT %/
-<<if $code isnot "" and $code is not "BUTTERFLIES">>
-<<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
-<<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
-<</if>><</button>>
+<<if $code isnot "">>
+  <<if $code is not "BUTTERFLIES" and $code is not "BUTTERFLIES ">>
+  <<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
+  <<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
+  <</if>>
+  <</if>>
+<</button>>
 </div>
 </main> 
 <<include "footer">>
@@ -646,15 +652,23 @@ You can upload the sound here and it will go straight through to Jude
  /% PASSWORD CODE %/
 <<set $code to $code.toUpperCase()>>
 /% CODEWORD CORRECT %/
-<<if $code isnot "" and $code is "SEAGULLS">>
-<<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
-<<timed 3s>><<goto $nextpass>><</timed>>
+<<if $code isnot "">> 
+  <<if $code is "SEAGULLS" or $code is "SEAGULLS ">>
+    <<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
+    <<timed 3s>><<goto $nextpass>><</timed>>
+   
 <</if>>
+<</if>>
+
 /% CODEWORD INCORRECT %/
-<<if $code isnot "" and $code is not "SEAGULLS">>
-<<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
-<<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
-<</if>><</button>>
+<<if $code isnot "">>
+  <<if $code is not "SEAGULLS" and $code is not "SEAGULLS ">>
+  <<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
+  <<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
+  <</if>>
+  <</if>>
+<</button>>
+
 </div>
 </main> 
 <<include "footer">>
@@ -731,7 +745,7 @@ You can upload the sound here and it will go straight through to Jude
     <</replace>>
     <<replace "#inputMount">>
         <div id="coderesult"></div>
-        <div class="code-input"><<textbox "$s" "">></div>
+        <div class="code-input white"><<textbox "$s" "">></div>
         <<button "Enter">>
        
         /% PASSWORD CODE %/
@@ -778,7 +792,7 @@ You can upload the sound here and it will go straight through to Jude
     <</replace>>
     <<replace "#inputMount">>
         <div id="coderesult"></div>
-        <div class="code-input"><<textbox "$a" "">></div>
+        <div class="code-input white"><<textbox "$a" "">></div>
         <<button "Enter">>
        
         /% PASSWORD CODE %/
@@ -826,7 +840,7 @@ You can upload the sound here and it will go straight through to Jude
     <</replace>>
     <<replace "#inputMount">>
         <div id="coderesult"></div>
-        <div class="code-input"><<textbox "$l" "">></div>
+        <div class="code-input white"><<textbox "$l" "">></div>
         <<button "Enter">>
        
         /% PASSWORD CODE %/
@@ -875,7 +889,7 @@ You can upload the sound here and it will go straight through to Jude
     <</replace>>
     <<replace "#inputMount">>
         <div id="coderesult"></div>
-        <div class="code-input"><<textbox "$t" "">></div>
+        <div class="code-input white"><<textbox "$t" "">></div>
         <<button "Enter">>
        
         /% PASSWORD CODE %/
@@ -924,7 +938,7 @@ You can upload the sound here and it will go straight through to Jude
     <</replace>>
     <<replace "#inputMount">>
         <div id="coderesult"></div>
-        <div class="code-input"><<textbox "$y" "">></div>
+        <div class="code-input white"><<textbox "$y" "">></div>
         <<button "Enter">>
        
         /% PASSWORD CODE %/
@@ -1030,15 +1044,22 @@ You can upload the sound here and it will go straight through to Jude
  /% PASSWORD CODE %/
 <<set $code to $code.toUpperCase()>>
 /% CODEWORD CORRECT %/
-<<if $code isnot "" and $code is "HEDGEHOGS">>
-<<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
-<<timed 3s>><<goto $nextpass>><</timed>>
+<<if $code isnot "">> 
+  <<if $code is "HEDGEHOGS" or $code is "HEDGEHOGS ">>
+    <<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
+    <<timed 3s>><<goto $nextpass>><</timed>>
+   
 <</if>>
+<</if>>
+
 /% CODEWORD INCORRECT %/
-<<if $code isnot "" and $code is not "HEDGEHOGS">>
-<<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
-<<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
-<</if>><</button>>
+<<if $code isnot "">>
+  <<if $code is not "HEDGEHOGS" and $code is not "HEDGEHOGS ">>
+  <<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
+  <<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
+  <</if>>
+  <</if>>
+<</button>>
 </div>
 </main> 
 <<include "footer">>
@@ -1369,15 +1390,22 @@ You can upload the sound here and it will go straight through to Jude
  /% PASSWORD CODE %/
 <<set $code to $code.toUpperCase()>>
 /% CODEWORD CORRECT %/
-<<if $code isnot "" and $code is "BUGS">>
-<<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
-<<timed 3s>><<goto "call2MinIntro">><</timed>>
+<<if $code isnot "">> 
+  <<if $code is "BUGS" or $code is "BUGS ">>
+    <<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
+    <<timed 3s>><<goto $nextpass>><</timed>>
+  
+<</if>>
 <</if>>
 /% CODEWORD INCORRECT %/
-<<if $code isnot "" and $code is not "BUGS">>
-<<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
-<<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
-<</if>><</button>>
+<<if $code isnot "">>
+  <<if $code is not "BUGS" and $code is not "BUGS ">>
+  <<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
+  <<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
+  <</if>>
+  <</if>>
+<</button>>
+
 </div>
 </main> 
 <<include "footer">>
@@ -1778,15 +1806,22 @@ Enter the code to get to the final challenge:
  /% PASSWORD CODE %/
 <<set $code to $code.toUpperCase()>>
 /% CODEWORD CORRECT %/
-<<if $code isnot "" and $code is "TRIFLE">>
-<<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
-<<timed 3s>><<goto "finalChallengeIntro">><</timed>>
+<<if $code isnot "">> 
+  <<if $code is "TRIFLE" or $code is "TRIFLE ">>
+    <<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
+    <<timed 3s>><<goto $nextpass>><</timed>>
+   
+<</if>>
 <</if>>
 /% CODEWORD INCORRECT %/
-<<if $code isnot "" and $code is not "TRIFLE">>
-<<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
-<<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
-<</if>><</button>>
+
+<<if $code isnot "">>
+  <<if $code is not "TRIFLE" and $code is not "TRIFLE ">>
+  <<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
+  <<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
+  <</if>>
+  <</if>>
+<</button>>
 </div>
 </main> 
 <<include "footer">>
@@ -1874,15 +1909,23 @@ Enter the code to get to the final challenge:
  /% PASSWORD CODE %/
 <<set $code to $code.toUpperCase()>>
 /% CODEWORD CORRECT %/
-<<if $code isnot "" and $code is "THORESBY">>
-<<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
-<<timed 3s>><<goto $nextpass>><</timed>>
+
+<<if $code isnot "">> 
+  <<if $code is "THORESBY" or $code is "THORESBY ">>
+    <<replace "#coderesult">><div class="confirmation" id="confirmation">Correct!</div><</replace>>
+    <<timed 3s>><<goto $nextpass>><</timed>>
+   
+<</if>>
 <</if>>
 /% CODEWORD INCORRECT %/
-<<if $code isnot "" and $code is not "THORESBY">>
-<<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
-<<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
-<</if>><</button>>
+<<if $code isnot "">>
+  <<if $code is not "THORESBY" and $code is not "THORESBY ">>
+  <<replace "#coderesult">><div class="confirmation" id="confirmation">That's not right...</div><</replace>>
+  <<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
+  <</if>>
+  <</if>>
+<</button>>
+
 </div>
 </main> 
 <<include "footer">>
@@ -2024,7 +2067,7 @@ Enter the code to get to the final challenge:
 <<timed 98s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
-    <p >My number is <a href="tel:+447400179362">07700165704</a>.</p>
+    <p >My number is <a href="tel:+447700165704">07700165704</a>.</p>
     <</append>>
 <</timed>>
 <<timed 100s>>
