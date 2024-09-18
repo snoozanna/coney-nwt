@@ -740,11 +740,6 @@ footer.codebreaking {
   text-align: center;
 }
 
-#inputMount > .code-input.white > input[type="text"] {
-  background-color: antiquewhite;
-  color: black;
-}
-
 #clueMount {
   display: flex;
   flex-direction: column;
@@ -762,7 +757,7 @@ footer.codebreaking {
 }
 
 #clueMount > span.title {
-  color: white;
+  color: black;
 }
 
 #mainMount > h3 {
