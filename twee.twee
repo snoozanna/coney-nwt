@@ -2006,7 +2006,7 @@ Enter the code to get to the final challenge:
 <<link "<img src = 'assets/img/play.png'>" >>
  <<replace "#audio">>
   <audio autoplay >
-   <source src="https://remote.co.com/NCP/Audio/Call_8_All_4_with_Sound_checked_1.mp3">
+   <source src="https://remote.co.com/NCP/Audio/NWT_2025_ending.mp3">
 </audio>
   <</replace>>
   <<replace "#note">><em>Playing...</em><</replace>>
@@ -2014,26 +2014,14 @@ Enter the code to get to the final challenge:
     <</append>>
 <</timed>>
 
-<<timed 96s>>
-  <<audio "ping1" "play">>
-    <<append "#msgMount">>
-    <p >Text me the word NATURE and I’ll make sure to call you back.</p>
-    <</append>>
-<</timed>>
 
-<<timed 98s>>
-  <<audio "ping1" "play">>
-    <<append "#msgMount">>
-    <p >My number is <a href="tel:+447400179362">07700165704</a>.</p>
-    <</append>>
-<</timed>>
-<<timed 100s>>
+<<timed 96s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
     <p >Then, that’s it on the NCP portal, thanks so much for your help today.</p>
     <</append>>
 <</timed>>
-<<timed 102s>>
+<<timed 99s>>
   <<audio "ping1" "play">>
     <<append "#msgMount">>
     <p class="final">I honestly couldn’t have done it without you.</p>
